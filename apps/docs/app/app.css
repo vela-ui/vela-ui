@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin 'tailwindcss-animate';
+@plugin "@vela-ui/theme" {
+  themes:
+    lofi --default,
+    dark --prefersdark,
+    cupcake;
+}

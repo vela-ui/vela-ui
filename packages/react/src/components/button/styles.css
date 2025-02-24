@@ -1,0 +1,4 @@
+.red {
+  @apply inline-flex shrink-0 cursor-pointer;
+  color: red;
+}

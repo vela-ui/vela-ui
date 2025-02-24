@@ -1,0 +1,44 @@
+{
+  "name": "@vela-ui/theme",
+  "version": "1.0.0",
+  "description": "Vela UI theme",
+  "keywords": [
+    "react",
+    "react-aria",
+    "react-aria-components",
+    "react-components",
+    "tailwind",
+    "tailwindcss",
+    "tailwindcss-v4",
+    "tailwindcss-ui"
+  ],
+  "homepage": "https://velaui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vela-ui/vela-ui.git",
+    "directory": "packages/theme"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "files": [
+    "base",
+    "components",
+    "functions/addPrefix.js",
+    "functions/plugin.js",
+    "functions/pluginOptionsHandler.js",
+    "functions/themeOrder.js",
+    "functions/variables.js",
+    "theme",
+    "utilities",
+    "imports.js",
+    "index.js"
+  ],
+  "scripts": {
+    "build": "node build.js"
+  }
+}
