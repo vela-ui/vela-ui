@@ -1,3 +1,4 @@
+import { Button } from "@vela-ui/react"
 import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
@@ -10,17 +11,25 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div className="flex flex-col gap-4 p-8">
-      <div className="flex gap-3" data-theme="cupcake">
-        <button className="vela-btn vela-btn-primary" data-theme="acid">
-          Default
-        </button>
-        <button className="vela-btn vela-btn-primary">Primary</button>
-        <button className="vela-btn vela-btn-secondary">Secondary</button>
-        <button className="vela-btn vela-btn-accent">Accent</button>
-        <button className="vela-btn vela-btn-info">Info</button>
-        <button className="vela-btn vela-btn-success">Success</button>
-        <button className="vela-btn vela-btn-warning">Warning</button>
-        <button className="vela-btn vela-btn-error">Error</button>
+      <div className="flex gap-3">
+        <Button>Default</Button>
+        <Button color="primary">Primary</Button>
+        <Button color="primary">Secondary</Button>
+        <Button color="accent">Accent</Button>
+        <Button color="info">Info</Button>
+        <Button color="success">Success</Button>
+        <Button color="warning">Warning</Button>
+        <Button color="error">Error</Button>
+      </div>
+      <div className="flex gap-3">
+        <button className="btn">Default</button>
+        <button className="btn btn-primary">Primary</button>
+        <button className="btn btn-secondary">Secondary</button>
+        <button className="btn btn-accent">Accent</button>
+        <button className="btn btn-info">Info</button>
+        <button className="btn btn-success">Success</button>
+        <button className="btn btn-warning">Warning</button>
+        <button className="btn btn-error">Error</button>
       </div>
       <div className="flex gap-3">
         <button className="btn btn-soft">Default</button>
@@ -51,13 +60,6 @@ export default function Home() {
         <button className="btn btn-dash btn-success">Success</button>
         <button className="btn btn-dash btn-warning">Warning</button>
         <button className="btn btn-dash btn-error">Error</button>
-      </div>
-      <div className="flex gap-3">
-        <button className="btn btn-xs">Xsmall</button>
-        <button className="btn btn-sm">Small</button>
-        <button className="btn">Medium</button>
-        <button className="btn btn-lg">Large</button>
-        <button className="btn btn-xl">Xlarge</button>
       </div>
     </div>
   )

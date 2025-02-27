@@ -1,3 +1,4 @@
+import { VelaUIProvider } from "@vela-ui/react"
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
 
 import type { Route } from "./+types/root"
@@ -26,7 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <VelaUIProvider>{children}</VelaUIProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

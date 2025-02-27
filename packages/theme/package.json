@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "description": "Vela UI theme",
   "keywords": [
-    "react",
-    "react-aria",
-    "react-aria-components",
-    "react-components",
+    "css",
+    "design-systems",
+    "ui-kit",
+    "ui-components",
     "tailwind",
     "tailwindcss",
-    "tailwindcss-v4",
-    "tailwindcss-ui"
+    "tailwindcss-v4"
   ],
   "homepage": "https://velaui.com",
   "repository": {

@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "Vela UI React components",
   "keywords": [
+    "javascript",
+    "typescript",
+    "ui-components",
     "react",
     "react-aria",
     "react-aria-components",
     "react-components",
     "tailwind",
     "tailwindcss",
-    "tailwindcss-v4",
-    "tailwindcss-ui"
+    "tailwindcss-v4"
   ],
   "homepage": "https://velaui.com",
   "repository": {
@@ -23,19 +25,7 @@
     "access": "public"
   },
   "sideEffects": false,
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./theme.css": "./dist/theme.css",
-    "./theme": "./dist/theme.css",
-    "./package.json": "./package.json"
-  },
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],
@@ -48,20 +38,22 @@
     "clean": "rimraf dist .turbo"
   },
   "devDependencies": {
-    "@vela-ui/eslint-config": "workspace:*",
     "@turbo/gen": "^2.4.0",
     "@types/node": "^22.13.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@vela-ui/eslint-config": "workspace:*",
     "eslint": "^9.20.0",
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@react-aria/utils": "^3.27.0",
+    "@react-types/shared": "^3.27.0",
     "clsx": "^2.1.1",
     "react": "^19.0.0",
+    "react-aria": "^3.37.0",
     "react-aria-components": "^1.6.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.0.1",
-    "tailwind-variants": "^0.3.1"
+    "tailwind-merge": "^3.0.1"
   }
 }

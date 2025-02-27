@@ -14,6 +14,6 @@
   ],
   "tailwindCSS.experimental.configFile": {
     "apps/docs/app/app.css": "apps/docs/app/**/*",
-    "apps/storybook/.storybook/style.css": "packages/react/**"
+    "apps/storybook/.storybook/style.css": ["packages/react/**", "packages/theme/src/**"]
   }
 }
