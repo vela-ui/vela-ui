@@ -1,2 +1,4 @@
 export * from "./button"
-export * from "./primitive"
+export * from "./loader"
+export * from "./provider"
+export * from "./types"

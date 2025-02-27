@@ -1,12 +1,12 @@
 import fs from "fs/promises"
-import { getFileNames } from "./getFileNames.js"
-import { cssToJs } from "./cssToJs.js"
 import { createDirectoryBasedOnFileNames } from "./createDirectoryBasedOnFileNames.js"
 import { createPluginFiles } from "./createPluginFiles.js"
+import { cssToJs } from "./cssToJs.js"
+import { getFileNames } from "./getFileNames.js"
 
-export const generatePlugins = async ({ type, srcDir, distDir }) => {
+export const generatePlugins = async ({ type, srcDir, distDir, files = [] }) => {
   await fs.mkdir(distDir, { recursive: true })
-  const cssFiles = await getFileNames(srcDir, ".css")
+  const cssFiles = files.length ? files : await getFileNames(srcDir, ".css")
 
   await Promise.all(
     cssFiles.map(async (cssFile) => {
