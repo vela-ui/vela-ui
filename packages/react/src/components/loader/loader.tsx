@@ -26,7 +26,7 @@ export const Loader = (props: LoaderProps) => {
   const globalContext = useProviderContext()
   const prefix = globalContext?.prefix
 
-  const loaderVariants = useMemo<ComponentVariantMap>(
+  const variantsConfig = useMemo<ComponentVariantMap>(
     () => ({
       base: prefix ? "vela-loading" : "loading",
       variant: {
@@ -60,12 +60,12 @@ export const Loader = (props: LoaderProps) => {
 
   const getClassNames = useMemo(
     () =>
-      generateClassNames(loaderVariants, {
+      generateClassNames(variantsConfig, {
         color,
         variant,
         size,
       }),
-    [color, variant, size, loaderVariants],
+    [color, variant, size, variantsConfig],
   )
 
   return (

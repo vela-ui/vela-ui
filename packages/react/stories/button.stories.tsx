@@ -14,7 +14,6 @@ const meta = {
       control: {
         type: "select",
       },
-      description: "",
       options: ["solid", "outline", "soft", "dash", "ghost", "link"],
     },
     color: {
