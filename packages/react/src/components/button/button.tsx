@@ -69,7 +69,7 @@ export const Button = (props: ButtonProps) => {
   const prefix = globalContext?.prefix
   // const addPrefix = (className = "") => addClassPrefix(prefix, className, matchClasses)
 
-  const buttonVariants = useMemo<ComponentVariantMap>(
+  const variantsConfig = useMemo<ComponentVariantMap>(
     () => ({
       base: prefix ? "vela-btn" : "btn",
       size: {
@@ -111,7 +111,7 @@ export const Button = (props: ButtonProps) => {
 
   const getClassNames = useMemo(
     () =>
-      generateClassNames(buttonVariants, {
+      generateClassNames(variantsConfig, {
         color,
         variant,
         size,
@@ -121,7 +121,7 @@ export const Button = (props: ButtonProps) => {
         isDisabled,
         isPending,
       }),
-    [color, variant, size, shape, active, fullWidth, isDisabled, isPending, buttonVariants],
+    [color, variant, size, shape, active, fullWidth, isDisabled, isPending, variantsConfig],
   )
 
   return (
