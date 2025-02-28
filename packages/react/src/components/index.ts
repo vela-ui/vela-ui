@@ -1,5 +1,6 @@
 export * from "./alert"
 export * from "./button"
+export * from "./link"
 export * from "./loader"
 export * from "./provider"
 export * from "./types"

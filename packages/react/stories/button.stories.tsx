@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, ButtonProps, componentColors, componentSizes } from "../src"
+import { Button, ButtonProps, componentColors, componentSizes, LinkButton } from "../src"
 
 const meta = {
   title: "Components/Button",
@@ -247,6 +247,16 @@ export const Shapes: Story = {
           <HeartIcon />
         </Button>
       </div>
+    </div>
+  ),
+}
+
+export const ButtonLink: Story = {
+  render: () => (
+    <div className="flex items-center gap-2">
+      <LinkButton color="primary" href="https://github.com/vela-ui/vela-ui" target="_blank">
+        Button Link
+      </LinkButton>
     </div>
   ),
 }
