@@ -1,0 +1,47 @@
+.modal-overlay {
+  @apply fixed top-0 left-0 z-50 flex h-dvh w-screen items-center justify-center bg-black/50;
+  height: var(--visual-viewport-height);
+
+  &[data-entering] {
+    animation: modal-fade 300ms;
+  }
+
+  &[data-exiting] {
+    animation: modal-fade 200ms reverse ease-in;
+  }
+}
+
+.modal {
+  @apply bg-base-100 mx-6 my-16 w-full max-w-[32rem] shadow-lg;
+  margin-block: var(--modal-margin, 4rem);
+  margin-inline: auto;
+  border-radius: var(--radius-box);
+
+  &[data-entering] {
+    animation: modal-scale 300ms;
+  }
+
+  &[data-exiting] {
+    animation: modal-scale 200ms reverse ease-in;
+  }
+}
+
+@keyframes modal-fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-scale {
+  0% {
+    transform: scale(var(--modal-scale, 0.9));
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

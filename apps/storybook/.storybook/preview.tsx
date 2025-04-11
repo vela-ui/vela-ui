@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react"
 import { ThemeProvider, VelaUIProvider } from "@vela-ui/react"
 import React from "react"
+import { useDarkMode } from "storybook-dark-mode"
 
 import "./style.css"
 
@@ -12,10 +13,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    darkMode: {
+      current: "light",
+      stylePreview: true,
+      darkClass: "dark",
+      lightClass: "light",
+      classTarget: "html",
+    },
   },
   decorators: [
-    (Story, { parameters, globals }) => {
-      const selectedTheme = globals.theme || "light"
+    (Story, { parameters }) => {
+      const selectedTheme = useDarkMode() ? "dark" : "light"
       return (
         <VelaUIProvider>
           <ThemeProvider defaultTheme={selectedTheme}>
@@ -25,20 +33,6 @@ const preview: Preview = {
       )
     },
   ],
-  globalTypes: {
-    theme: {
-      description: "Global theme for components",
-      toolbar: {
-        title: "Theme",
-        icon: "circlehollow",
-        items: ["light", "dark"],
-        dynamicTitle: true,
-      },
-    },
-  },
-  initialGlobals: {
-    theme: "light",
-  },
 }
 
 export default preview

@@ -20,8 +20,10 @@ const meta = {
         type: "select",
       },
       options: componentStatuses,
-      table: {
-        defaultValue: { summary: "default" },
+    },
+    hideIcon: {
+      control: {
+        type: "boolean",
       },
     },
   },
@@ -49,12 +51,7 @@ const Template = (args: AlertProps) => (
 )
 
 export const Default: Story = {
-  render: () => (
-    <>
-      <Alert className="mb-4">New software update available.</Alert>
-      <Template />
-    </>
-  ),
+  render: (args) => <Alert {...args}>New software update available.</Alert>,
 }
 
 export const Soft: Story = {

@@ -38,22 +38,23 @@
     "clean": "rimraf dist .turbo"
   },
   "devDependencies": {
-    "@turbo/gen": "^2.4.0",
-    "@types/node": "^22.13.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@turbo/gen": "^2.5.0",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.2",
     "@vela-ui/eslint-config": "workspace:*",
-    "eslint": "^9.20.0",
-    "typescript": "5.7.3"
+    "eslint": "^9.24.0",
+    "typescript": "5.8.3"
   },
   "dependencies": {
-    "@react-aria/utils": "^3.27.0",
-    "@react-types/shared": "^3.27.0",
+    "@react-aria/utils": "^3.28.1",
+    "@react-types/shared": "^3.28.0",
     "clsx": "^2.1.1",
-    "react": "^19.0.0",
-    "react-aria": "^3.37.0",
-    "react-aria-components": "^1.6.0",
-    "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.0.1"
+    "react": "^19.1.0",
+    "react-aria": "^3.38.1",
+    "react-aria-components": "^1.7.1",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.2.0",
+    "tailwind-variants": "^1.0.0"
   }
 }

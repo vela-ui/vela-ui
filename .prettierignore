@@ -8,3 +8,6 @@ pnpm-lock.yaml
 !plopfile.js
 !jest.config.js
 !tsup.config.ts
+
+# files
+packages/theme/functions/variables.css
