@@ -5,10 +5,8 @@ import { plugin } from "./functions/plugin.js"
 import { pluginOptionsHandler } from "./functions/pluginOptionsHandler.js"
 import variables from "./functions/variables.js"
 import { base, components, utilities } from "./imports.js"
-import packageJson from "./package.json" with { type: "json" }
+import { version } from "./package.json"
 import themesObject from "./theme/object.js"
-
-const version = packageJson.version
 
 export default plugin.withOptions(
   (options) => {

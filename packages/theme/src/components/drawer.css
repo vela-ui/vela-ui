@@ -1,0 +1,92 @@
+.drawer-overlay {
+  @apply fixed top-0 left-0 z-50 flex h-dvh w-screen items-center justify-center bg-black/50;
+  height: var(--visual-viewport-height);
+
+  &[data-entering] {
+    animation: drawer-fade 300ms;
+  }
+
+  &[data-exiting] {
+    animation: drawer-fade 200ms reverse ease-in;
+  }
+}
+
+.drawer {
+  @apply bg-base-100 shadow-lg;
+  --drawer-offset: 0rem;
+  border-radius: var(--drawer-radius, var(--radius-box));
+  margin: var(--drawer-offset);
+
+  &[data-entering] {
+    animation: drawer 300ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  &[data-exiting] {
+    animation: drawer 200ms cubic-bezier(0.32, 0.72, 0, 1) reverse;
+  }
+}
+
+.drawer-top {
+  @apply items-start;
+  --drawer-enter: translateY(-100%);
+
+  :where(.drawer) {
+    @apply h-auto w-full max-w-none;
+    max-height: calc(100vh - 5em);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.drawer-bottom {
+  @apply items-end;
+  --drawer-enter: translateY(100%);
+
+  :where(.drawer) {
+    @apply h-auto w-full max-w-none;
+    max-height: calc(100vh - 5em);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.drawer-start {
+  @apply justify-start;
+  --drawer-enter: translateX(-100%);
+
+  :where(.drawer) {
+    @apply max-h-none w-auto max-w-[32rem];
+    height: calc(100vh - var(--drawer-offset) * 2);
+    --drawer-radius: 0;
+  }
+}
+
+.drawer-end {
+  @apply justify-end;
+  --drawer-enter: translateX(100%);
+
+  :where(.drawer) {
+    @apply max-h-none w-auto max-w-[32rem];
+    height: calc(100vh - var(--drawer-offset) * 2);
+    --drawer-radius: 0;
+  }
+}
+
+@keyframes drawer-fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes drawer {
+  from {
+    transform: var(--drawer-enter);
+  }
+  to {
+    transform: translate(0);
+  }
+}

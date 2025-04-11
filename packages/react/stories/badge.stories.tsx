@@ -13,7 +13,7 @@ const meta = {
       control: {
         type: "select",
       },
-      options: ["solid", "outline", "soft", "dash", "ghost"],
+      options: ["outline", "soft", "dash", "ghost"],
     },
     color: {
       control: {
@@ -53,7 +53,6 @@ const HeartIcon = () => (
 
 const ColorBadgeTemplate = (args: BadgeProps) => (
   <div className="flex items-center gap-2">
-    <Badge {...args}>Default</Badge>
     {componentColors.map((color) => (
       <Badge key={color} {...args} color={color}>
         {color.charAt(0).toUpperCase() + color.slice(1)}
@@ -61,6 +60,10 @@ const ColorBadgeTemplate = (args: BadgeProps) => (
     ))}
   </div>
 )
+
+export const Default: Story = {
+  render: (args) => <Badge {...args}>Default</Badge>,
+}
 
 export const Colors: Story = {
   render: (args) => (

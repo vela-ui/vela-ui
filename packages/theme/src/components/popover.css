@@ -1,0 +1,92 @@
+.popover {
+  @apply rounded-box z-50 bg-clip-padding shadow-xs outline-none;
+  --popover-bg: var(--popover-color, var(--color-base-100));
+  --popover-fg: var(--color-base-content);
+  --popover-border: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  background: var(--popover-bg);
+  color: var(--popover-fg);
+  border-width: var(--border);
+  border-style: solid;
+  border-color: var(--popover-border);
+  transition:
+    transform 200ms,
+    opacity 200ms;
+
+  .popover-arrow svg {
+    @apply block;
+    fill: var(--popover-bg);
+    stroke: var(--popover-border);
+    stroke-width: 1px;
+  }
+
+  &[data-entering],
+  &[data-exiting] {
+    transform: var(--popover-origin);
+    opacity: 0;
+  }
+
+  &[data-placement="top"] {
+    --popover-origin: translateY(8px);
+  }
+
+  &[data-placement="bottom"] {
+    --popover-origin: translateY(-8px);
+    .popover-arrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement="right"] {
+    --popover-origin: translateX(-8px);
+    .popover-arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement="left"] {
+    --popover-origin: translateX(8px);
+    .popover-arrow svg {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.popover-primary {
+  --popover-color: var(--color-primary);
+  --popover-fg: var(--color-primary-content);
+}
+
+.popover-secondary {
+  --popover-color: var(--color-secondary);
+  --popover-fg: var(--color-secondary-content);
+}
+
+.popover-accent {
+  --popover-color: var(--color-accent);
+  --popover-fg: var(--color-accent-content);
+}
+
+.popover-neutral {
+  --popover-color: var(--color-neutral);
+  --popover-fg: var(--color-neutral-content);
+}
+
+.popover-info {
+  --popover-color: var(--color-info);
+  --popover-fg: var(--color-info-content);
+}
+
+.popover-success {
+  --popover-color: var(--color-success);
+  --popover-fg: var(--color-success-content);
+}
+
+.popover-warning {
+  --popover-color: var(--color-warning);
+  --popover-fg: var(--color-warning-content);
+}
+
+.popover-error {
+  --popover-color: var(--color-error);
+  --popover-fg: var(--color-error-content);
+}

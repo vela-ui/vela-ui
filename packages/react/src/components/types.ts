@@ -70,4 +70,5 @@ export interface ComponentVariantMap {
   shape?: Record<ComponentShape, string>
   position?: Record<ComponentPosition, string>
   direction?: Record<ComponentDirection, string>
+  [key: string]: Record<string, string> | string | undefined
 }

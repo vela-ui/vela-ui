@@ -5,7 +5,6 @@
     @apply outline-hidden;
   }
 
-  &:focus-visible:not([data-focused="true"]),
   &[data-focus-visible] {
     outline: 2px solid currentColor;
     outline-offset: 2px;
