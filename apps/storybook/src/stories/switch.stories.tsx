@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { componentColors, componentSizes, Switch } from "@vela-ui/react"
-import { CloseIcon, SuccessIcon } from "@vela-ui/react/src/icons"
+import { CloseIcon, componentColors, componentSizes, SuccessIcon, Switch } from "@vela-ui/react"
 
 const meta = {
   title: "Components/Switch",
