@@ -296,6 +296,9 @@ importers:
       '@vela-ui/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      eslint:
+        specifier: ^9.25.0
+        version: 9.25.0(jiti@2.4.2)
 
 packages:
 
