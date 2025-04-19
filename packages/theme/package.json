@@ -38,6 +38,7 @@
     "index.js"
   ],
   "scripts": {
+    "lint": "eslint functions --cache",
     "build": "node build.js"
   }
 }

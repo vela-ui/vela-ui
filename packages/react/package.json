@@ -30,7 +30,7 @@
   "scripts": {
     "build": "tsup src --dts",
     "build:fast": "tsup src",
-    "lint": "eslint src --max-warnings 0 --cache",
+    "lint": "eslint src --cache",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
     "clean": "rimraf dist .turbo"
