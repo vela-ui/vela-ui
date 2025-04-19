@@ -1,5 +1,3 @@
-"use client"
-
 import { useMemo } from "react"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "lint": "eslint .",
+    "lint": "eslint . --cache",
     "preview": "vite preview",
     "vite:dev": "vite",
     "vite:build": "tsc -b && vite build"
@@ -15,27 +15,28 @@
     "@vela-ui/react": "workspace:*",
     "@vela-ui/theme": "workspace:*",
     "react": "^19.1.0",
+    "react-aria-components": "^1.8.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
+    "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.11",
     "@storybook/addon-interactions": "^8.6.11",
     "@storybook/blocks": "^8.6.11",
     "@storybook/react": "^8.6.11",
     "@storybook/react-vite": "^8.6.11",
     "@storybook/test": "^8.6.11",
-    "@tailwindcss/vite": "^4.0.17",
-    "@types/react": "^19.0.12",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/react": "^19.1.2",
     "@types/react-dom": "^19.0.3",
     "@vela-ui/eslint-config": "workspace:*",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint-plugin-storybook": "^0.11.6",
+    "eslint-plugin-storybook": "^0.12.0",
     "storybook": "^8.6.11",
     "storybook-dark-mode": "^4.0.2",
-    "tailwindcss": "^4.0.17",
-    "tailwindcss-animate": "^1.0.7",
-    "typescript": "~5.7.2",
+    "tailwindcss": "^4.1.4",
+    "typescript": "~5.8.3",
     "vite": "^6.2.3"
   }
 }

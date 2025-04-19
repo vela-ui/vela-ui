@@ -4,12 +4,12 @@
   "description": "Vela UI theme",
   "keywords": [
     "css",
+    "theme",
+    "react",
     "design-systems",
     "ui-kit",
     "ui-components",
-    "tailwind",
-    "tailwindcss",
-    "tailwindcss-v4"
+    "tailwindcss"
   ],
   "homepage": "https://velaui.com",
   "repository": {

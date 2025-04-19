@@ -1,0 +1,115 @@
+.checkbox-wrapper {
+  @apply text-base-content/60 relative flex cursor-pointer items-center gap-2 text-sm select-none;
+
+  &[data-disabled] {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  &[data-focus-visible] .checkbox {
+    outline: 2px solid var(--input-color, currentColor);
+    outline-offset: 2px;
+  }
+
+  &[data-invalid] .checkbox {
+    @apply text-error-content;
+    --input-color: var(--color-error);
+  }
+
+  &[data-selected],
+  &[data-indeterminate] {
+    .checkbox {
+      background-color: var(--input-color, #0000);
+      box-shadow:
+        0 0 #0000 inset,
+        0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset,
+        0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1));
+    }
+  }
+}
+
+.checkbox {
+  @apply text-base-content rounded-selector inline-flex shrink-0 items-center justify-center overflow-hidden p-[0.1875rem];
+  border: var(--border) solid
+    var(--input-color, color-mix(in oklab, var(--color-base-content) 20%, #0000));
+  box-shadow:
+    0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset,
+    0 0 #0000 inset,
+    0 0 #0000;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s;
+  --size: calc(var(--size-selector, 0.25rem) * 6);
+  width: var(--size);
+  height: var(--size);
+  background-size: auto, calc(var(--noise) * 100%);
+  background-image: none, var(--fx-noise);
+
+  svg {
+    @apply size-full;
+  }
+}
+
+.checkbox-primary {
+  @apply text-primary-content;
+  --input-color: var(--color-primary);
+}
+
+.checkbox-secondary {
+  @apply text-secondary-content;
+  --input-color: var(--color-secondary);
+}
+
+.checkbox-accent {
+  @apply text-accent-content;
+  --input-color: var(--color-accent);
+}
+
+.checkbox-neutral {
+  @apply text-neutral-content;
+  --input-color: var(--color-neutral);
+}
+
+.checkbox-info {
+  @apply text-info-content;
+  --input-color: var(--color-info);
+}
+
+.checkbox-success {
+  @apply text-success-content;
+  --input-color: var(--color-success);
+}
+
+.checkbox-warning {
+  @apply text-warning-content;
+  --input-color: var(--color-warning);
+}
+
+.checkbox-error {
+  @apply text-error-content;
+  --input-color: var(--color-error);
+}
+
+.checkbox-xs {
+  @apply p-[0.1rem];
+  --size: calc(var(--size-selector, 0.25rem) * 4);
+}
+
+.checkbox-sm {
+  @apply p-[0.125rem];
+  --size: calc(var(--size-selector, 0.25rem) * 5);
+}
+
+.checkbox-md {
+  @apply p-[0.1875rem];
+  --size: calc(var(--size-selector, 0.25rem) * 6);
+}
+
+.checkbox-lg {
+  @apply p-[0.25rem];
+  --size: calc(var(--size-selector, 0.25rem) * 7);
+}
+
+.checkbox-xl {
+  @apply p-[0.3125rem];
+  --size: calc(var(--size-selector, 0.25rem) * 8);
+}

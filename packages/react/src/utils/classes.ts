@@ -25,32 +25,3 @@ export function addClassPrefix(prefix = "", className: string, matchClasses: str
     })
     .join(" ")
 }
-
-export const generateClassNames = <T extends Record<string, any>>(
-  variantsConfig: Record<string, any>,
-  props: T,
-): string => {
-  const classes: string[] = []
-
-  if (variantsConfig.base) {
-    classes.push(variantsConfig.base)
-  }
-
-  Object.entries(props).forEach(([key, value]) => {
-    if (value === undefined || value === null) return
-
-    const variantConfig = variantsConfig[key]
-    if (!variantConfig) return
-
-    if (typeof variantConfig === "string" && value === true) {
-      classes.push(variantConfig)
-    } else if (typeof variantConfig === "object" && typeof value === "string") {
-      const variantClass = variantConfig[value]
-      if (variantClass) {
-        classes.push(variantClass)
-      }
-    }
-  })
-
-  return classes.filter(Boolean).join(" ")
-}

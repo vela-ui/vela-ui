@@ -1,0 +1,118 @@
+.switch {
+  @apply text-base-content relative inline-flex max-w-fit cursor-pointer touch-none items-center justify-start gap-2.5 select-none;
+
+  &[data-disabled] {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  &[data-focus-visible] .switch-track {
+    outline: 2px solid var(--input-color, currentColor);
+    outline-offset: 2px;
+  }
+
+  &[data-selected] {
+    .switch-track {
+      --input-color: var(--color-neutral);
+    }
+
+    .switch-thumb {
+      margin-inline-start: var(--thumb-size);
+    }
+
+    &.switch-neutral .switch-track {
+      --input-color: var(--color-neutral);
+    }
+
+    &.switch-primary .switch-track {
+      --input-color: var(--color-primary);
+    }
+
+    &.switch-secondary .switch-track {
+      --input-color: var(--color-secondary);
+    }
+
+    &.switch-accent .switch-track {
+      --input-color: var(--color-accent);
+    }
+
+    &.switch-info .switch-track {
+      --input-color: var(--color-info);
+    }
+
+    &.switch-success .switch-track {
+      --input-color: var(--color-success);
+    }
+
+    &.switch-warning .switch-track {
+      --input-color: var(--color-warning);
+    }
+
+    &.switch-error .switch-track {
+      --input-color: var(--color-error);
+    }
+  }
+
+  &.switch-xs {
+    font-size: 0.75rem;
+
+    .switch-track {
+      --size: calc(var(--size-selector, 0.25rem) * 4);
+    }
+  }
+
+  &.switch-sm {
+    font-size: 0.875rem;
+
+    .switch-track {
+      --size: calc(var(--size-selector, 0.25rem) * 5);
+    }
+  }
+
+  &.switch-md {
+    font-size: 0.875rem;
+
+    .switch-track {
+      --size: calc(var(--size-selector, 0.25rem) * 6);
+    }
+  }
+
+  &.switch-lg {
+    font-size: 1rem;
+
+    .switch-track {
+      --size: calc(var(--size-selector, 0.25rem) * 7);
+    }
+  }
+
+  &.switch-xl {
+    font-size: 1.125rem;
+
+    .switch-track {
+      --size: calc(var(--size-selector, 0.25rem) * 8);
+    }
+  }
+}
+
+.switch-track {
+  @apply relative inline-flex shrink-0 items-center justify-start overflow-hidden rounded-full;
+  background-color: var(--input-color, var(--color-base-300));
+  color: var(--color-base-content);
+  padding: var(--switch-p);
+  transition: background-color 0.2s ease;
+  --switch-p: calc(var(--size) * 0.125);
+  --size: calc(var(--size-selector, 0.25rem) * 6);
+  --thumb-size: calc(var(--size) - var(--switch-p) * 2);
+  width: calc((var(--size) * 2) - var(--switch-p) * 2);
+  height: var(--size);
+}
+
+.switch-thumb {
+  @apply rounded-full bg-white;
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  transition: margin-inline-start 0.2s ease;
+
+  & svg {
+    @apply size-full text-black;
+  }
+}

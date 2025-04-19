@@ -45,10 +45,10 @@
     }
   }
 
-  &:focus-visible:not([data-focused="true"]),
   &[data-focus-visible] {
     outline-width: 2px;
     outline-style: solid;
+    isolation: isolate;
   }
 
   &:active:not(.btn-active) {
