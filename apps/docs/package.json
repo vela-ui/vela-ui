@@ -1,6 +1,7 @@
 {
-  "name": "docs",
+  "name": "@vela-ui/docs",
   "private": true,
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "react-router build",
