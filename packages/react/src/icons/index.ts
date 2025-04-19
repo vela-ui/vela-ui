@@ -1,5 +1,7 @@
+export * from "./check"
 export * from "./close"
 export * from "./error"
 export * from "./info"
+export * from "./minus"
 export * from "./success"
 export * from "./warning"

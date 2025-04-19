@@ -1,15 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "ui": "tui",
+  "ui": "stream",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["build/**", "dist/**"]
-    },
-    "build:fast": {
-      "outputs": ["dist/**"],
-      "dependsOn": ["^build:fast"]
+      "outputs": ["theme/**", "dist/**", "storybook-static/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

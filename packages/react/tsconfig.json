@@ -1,5 +1,24 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["**/*"],
+  "include": [
+    "**/*",
+    "../../apps/storybook/src/stories/badge.stories.tsx",
+    "../../apps/storybook/src/stories/button.stories.tsx",
+    "../../apps/storybook/src/stories/checkbox-group.stories.tsx",
+    "../../apps/storybook/src/stories/checkbox.stories.tsx",
+    "../../apps/storybook/src/stories/dialog.stories.tsx",
+    "../../apps/storybook/src/stories/drawer.stories.tsx",
+    "../../apps/storybook/src/stories/input.stories.tsx",
+    "../../apps/storybook/src/stories/link.stories.tsx",
+    "../../apps/storybook/src/stories/loading.stories.tsx",
+    "../../apps/storybook/src/stories/popover.stories.tsx",
+    "../../apps/storybook/src/stories/radio-group.stories.tsx",
+    "../../apps/storybook/src/stories/skeleton.stories.tsx",
+    "../../apps/storybook/src/stories/slider.stories.tsx",
+    "../../apps/storybook/src/stories/switch.stories.tsx",
+    "../../apps/storybook/src/stories/tabs.stories.tsx",
+    "../../apps/storybook/src/stories/textarea.stories.tsx",
+    "../../apps/storybook/src/stories/tooltip.stories.tsx"
+  ],
   "exclude": ["node_modules", "dist"]
 }

@@ -76,7 +76,6 @@ const Button = (props: ButtonProps) => {
     size,
     shape,
     fullWidth,
-    isActive,
     isDisabled,
     isPending,
     dataTheme,
@@ -92,12 +91,11 @@ const Button = (props: ButtonProps) => {
         variant,
         size,
         shape,
-        isActive,
         fullWidth,
         isDisabled,
         isPending,
       }),
-    [color, variant, size, shape, isActive, fullWidth, isDisabled, isPending],
+    [color, variant, size, shape, fullWidth, isDisabled, isPending],
   )
 
   return (
