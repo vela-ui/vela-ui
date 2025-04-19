@@ -40,5 +40,8 @@
   "scripts": {
     "lint": "eslint functions --cache",
     "build": "node build.js"
+  },
+  "devDependencies": {
+    "@vela-ui/eslint-config": "workspace:*"
   }
 }
