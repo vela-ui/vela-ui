@@ -23,7 +23,9 @@
     "access": "public"
   },
   "sideEffects": false,
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -54,5 +56,13 @@
     "react-dom": "^19.1.0",
     "tailwind-merge": "^3.2.0",
     "tailwind-variants": "^1.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
   }
 }
