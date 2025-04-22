@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 1.0.2
+
+### Patch Changes
+
+- [#15](https://github.com/vela-ui/vela-ui/pull/15) [`989819a`](https://github.com/vela-ui/vela-ui/commit/989819a4d58ad6335d2c2854a3e1deb558fbc220) Thanks [@bobbychan](https://github.com/bobbychan)! - add clean package
+
 ## 1.0.1
 
 ### Patch Changes
