@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 1.0.3
+
+### Patch Changes
+
+- [#17](https://github.com/vela-ui/vela-ui/pull/17) [`0676d79`](https://github.com/vela-ui/vela-ui/commit/0676d79600e24517e3cc8fb5e75c534526384001) Thanks [@bobbychan](https://github.com/bobbychan)! - fix modal style
+
 ## 1.0.2
 
 ### Patch Changes
