@@ -4,6 +4,7 @@ import { Button, Dialog } from "@vela-ui/react"
 const meta = {
   title: "Components/Dialog",
   component: Dialog,
+  tags: ["autodocs"],
   argTypes: {
     size: {
       control: {
@@ -17,24 +18,17 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Story />
-      </div>
-    ),
-  ],
 } satisfies Meta<typeof Dialog>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-const Template = () => {
-  return (
+export const Default: Story = {
+  render: () => (
     <Dialog.Trigger>
       <Button>Delete</Button>
-      <Dialog placement="bottom">
+      <Dialog placement="top">
         <Dialog.Content role="alertdialog">
           <Dialog.Header>
             <Dialog.Title>Delete file</Dialog.Title>
@@ -47,11 +41,6 @@ const Template = () => {
             ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
             hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
             ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
           </div>
           <Dialog.Footer>
             <Button slot="close" variant="outline">
@@ -65,9 +54,5 @@ const Template = () => {
         </Dialog.Content>
       </Dialog>
     </Dialog.Trigger>
-  )
-}
-
-export const Default: Story = {
-  render: Template,
+  ),
 }

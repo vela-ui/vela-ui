@@ -23,7 +23,7 @@ const Content = ({ role = "dialog", className, ...props }: AriaDialogProps) => {
   return (
     <AriaDialog
       role={role}
-      className={cn("relative flex w-full flex-col p-6 outline-none", className)}
+      className={cn("relative flex h-full w-full flex-col p-6 outline-none", className)}
       {...props}
     />
   )

@@ -4,6 +4,7 @@ import { Button, Drawer } from "@vela-ui/react"
 const meta = {
   title: "Components/Drawer",
   component: Drawer,
+  tags: ["autodocs"],
   argTypes: {
     placement: {
       control: {
@@ -17,13 +18,6 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <div className="flex h-screen w-screen items-center justify-center">
-        <Story />
-      </div>
-    ),
-  ],
 } satisfies Meta<typeof Drawer>
 
 export default meta

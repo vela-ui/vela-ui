@@ -12,7 +12,7 @@
 }
 
 .modal {
-  @apply bg-base-100 mx-6 my-16 w-full max-w-[32rem] shadow-lg;
+  @apply bg-base-100 w-11/12 max-w-[32rem] shadow-lg;
   margin-block: var(--modal-margin, 4rem);
   margin-inline: auto;
   border-radius: var(--radius-box);

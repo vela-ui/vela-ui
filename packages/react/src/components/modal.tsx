@@ -55,7 +55,7 @@ const modalVariants = tv({
         base: "max-w-5xl",
       },
       full: {
-        base: "m-0 h-dvh max-w-full rounded-none",
+        base: "my-0 h-dvh max-w-full rounded-none",
       },
     },
     placement: {
