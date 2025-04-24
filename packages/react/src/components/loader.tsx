@@ -61,7 +61,6 @@ const Loader = (props: LoaderProps) => {
     <span
       ref={ref}
       role="presentation"
-      data-slot="loading"
       data-theme={dataTheme}
       className={getClassNames}
       {...otherProps}

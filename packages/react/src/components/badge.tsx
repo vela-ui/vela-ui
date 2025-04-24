@@ -53,15 +53,7 @@ const Badge = (props: BadgeProps) => {
     [color, variant, size, className],
   )
 
-  return (
-    <span
-      ref={ref}
-      data-slot="badge"
-      data-theme={dataTheme}
-      className={getClassNames}
-      {...otherProps}
-    />
-  )
+  return <span ref={ref} data-theme={dataTheme} className={getClassNames} {...otherProps} />
 }
 
 export { Badge }

@@ -87,14 +87,7 @@ const Alert = (props: AlertProps) => {
   )
 
   return (
-    <div
-      ref={ref}
-      role="alert"
-      data-slot="alert"
-      data-theme={dataTheme}
-      className={getClassNames}
-      {...otherProps}
-    >
+    <div ref={ref} role="alert" data-theme={dataTheme} className={getClassNames} {...otherProps}>
       {!hideIcon &&
         (customIcon || (
           <IconComponent className={cn("size-6 shrink-0 fill-current", iconClassName)} />

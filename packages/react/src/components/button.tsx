@@ -56,6 +56,7 @@ const buttonVariants = tv({
 })
 
 interface ButtonProps extends AriaButtonProps, VariantProps<typeof buttonVariants> {
+  ref?: React.Ref<HTMLButtonElement>
   dataTheme?: DataTheme
   /**
    * Loader to display when pending.
@@ -70,6 +71,7 @@ interface ButtonProps extends AriaButtonProps, VariantProps<typeof buttonVariant
 
 const Button = (props: ButtonProps) => {
   const {
+    ref,
     className,
     color,
     variant,
@@ -81,6 +83,7 @@ const Button = (props: ButtonProps) => {
     dataTheme,
     loaderPlacement = "start",
     loader = <Loader size={size} />,
+    children,
     ...otherProps
   } = props
 
@@ -100,7 +103,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <AriaButton
-      data-slot="button"
+      ref={ref}
       data-theme={dataTheme}
       className={composeRenderProps(className, (className) => cn(getClassNames, className))}
       isDisabled={isDisabled}
@@ -110,7 +113,7 @@ const Button = (props: ButtonProps) => {
       {(values) => (
         <>
           {isPending && loaderPlacement === "start" && loader}
-          {typeof props.children === "function" ? props.children(values) : props.children}
+          {typeof children === "function" ? children(values) : children}
           {isPending && loaderPlacement === "end" && loader}
         </>
       )}
