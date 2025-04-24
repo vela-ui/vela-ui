@@ -16,24 +16,34 @@ import { Description, FieldError, Label } from "./field"
 import { DataTheme } from "./types"
 
 interface RadioGroupProps extends Omit<AriaRadioGroupProps, "children"> {
+  ref?: React.Ref<HTMLDivElement>
   children?: React.ReactNode
   label?: string
   description?: string
   errorMessage?: string | ((validation: AriaValidationResult) => string)
 }
 
-const RadioGroup = ({ className, ...props }: RadioGroupProps) => {
+const RadioGroup = ({
+  ref,
+  className,
+  label,
+  description,
+  errorMessage,
+  children,
+  ...props
+}: RadioGroupProps) => {
   return (
     <AriaRadioGroup
+      ref={ref}
       className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
       {...props}
     >
-      {props.label && <Label>{props.label}</Label>}
+      {label && <Label>{label}</Label>}
       <div className="flex gap-2 select-none group-data-[orientation=horizontal]:flex-wrap group-data-[orientation=vertical]:flex-col">
-        {props.children}
+        {children}
       </div>
-      {props.description && <Description>{props.description}</Description>}
-      <FieldError>{props.errorMessage}</FieldError>
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
     </AriaRadioGroup>
   )
 }
@@ -62,14 +72,16 @@ const radioVariants = tv({
 })
 
 interface RadioProps extends AriaRadioProps, VariantProps<typeof radioVariants> {
+  ref?: React.Ref<HTMLLabelElement>
   dataTheme?: DataTheme
 }
 
-const Radio = ({ className, color, size, children, dataTheme, ...props }: RadioProps) => (
+const Radio = ({ ref, className, color, size, children, dataTheme, ...props }: RadioProps) => (
   <AriaRadio
-    {...props}
+    ref={ref}
     data-theme={dataTheme}
     className={composeRenderProps(className, (className) => cn("radio-wrapper", className))}
+    {...props}
   >
     <>
       <div

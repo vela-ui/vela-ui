@@ -1,10 +1,14 @@
 "use client"
 
-import type { FormProps } from "react-aria-components"
+import type { FormProps as AriaFormProps } from "react-aria-components"
 import { Form as AriaForm } from "react-aria-components"
 
-const Form = (props: FormProps) => {
-  return <AriaForm {...props} />
+interface FormProps extends AriaFormProps {
+  ref?: React.RefObject<HTMLFormElement>
+}
+
+const Form = ({ ref, ...props }: FormProps) => {
+  return <AriaForm ref={ref} {...props} />
 }
 
 export { Form }

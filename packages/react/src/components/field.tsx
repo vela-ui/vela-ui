@@ -109,6 +109,7 @@ const inputVariants = tv({
 interface InputProps
   extends Omit<AriaInputProps, "color" | "size">,
     VariantProps<typeof inputVariants> {
+  ref?: React.Ref<HTMLInputElement>
   dataTheme?: DataTheme
   /**
    * Element to be rendered in the left side of the input.
@@ -121,6 +122,7 @@ interface InputProps
 }
 
 const Input = ({
+  ref,
   className,
   color,
   size,
@@ -148,7 +150,7 @@ const Input = ({
         })}
       >
         {startContent}
-        <AriaInput className={className} {...props} />
+        <AriaInput ref={ref} className={className} {...props} />
         {endContent}
       </div>
     )
@@ -156,6 +158,7 @@ const Input = ({
 
   return (
     <AriaInput
+      ref={ref}
       data-theme={dataTheme}
       className={composeRenderProps(className, (className) => cn(getClassNames, className))}
       {...props}
@@ -192,11 +195,13 @@ const textAreaVariants = tv({
 interface TextAreaProps
   extends Omit<AriaTextAreaProps, "color">,
     VariantProps<typeof textAreaVariants> {
+  ref?: React.Ref<HTMLTextAreaElement>
   dataTheme?: DataTheme
 }
 
-const TextArea = ({ className, color, size, dataTheme, ...props }: TextAreaProps) => (
+const TextArea = ({ ref, className, color, size, dataTheme, ...props }: TextAreaProps) => (
   <AriaTextArea
+    ref={ref}
     data-theme={dataTheme}
     className={composeRenderProps(className, (className) =>
       textAreaVariants({

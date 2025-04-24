@@ -36,6 +36,7 @@ type SwitchThumbIconProps = {
 }
 
 interface SwitchProps extends AriaSwitchProps, VariantProps<typeof switchVariants> {
+  ref?: React.Ref<HTMLLabelElement>
   dataTheme?: DataTheme
   /**
    * The icon to be displayed inside the thumb.
@@ -44,6 +45,7 @@ interface SwitchProps extends AriaSwitchProps, VariantProps<typeof switchVariant
 }
 
 const Switch = ({
+  ref,
   className,
   color,
   size,
@@ -53,6 +55,7 @@ const Switch = ({
   ...props
 }: SwitchProps) => (
   <AriaSwitch
+    ref={ref}
     data-theme={dataTheme}
     className={composeRenderProps(className, (className) =>
       switchVariants({

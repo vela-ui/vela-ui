@@ -76,9 +76,6 @@ const ColorButtonTemplate = (args: ButtonProps) => (
 export const Colors: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
-      <Button {...args} color="neutral">
-        Neutral
-      </Button>
       <ColorButtonTemplate {...args} />
     </div>
   ),

@@ -17,21 +17,31 @@ import { Description, FieldError, Label } from "./field"
 import { DataTheme } from "./types"
 
 interface CheckboxGroupProps extends AriaCheckboxGroupProps {
+  ref?: React.Ref<HTMLDivElement>
   label?: string
   description?: string
   errorMessage?: string | ((validation: AriaValidationResult) => string)
 }
 
-const CheckboxGroup = ({ className, ...props }: CheckboxGroupProps) => {
+const CheckboxGroup = ({
+  ref,
+  className,
+  label,
+  description,
+  errorMessage,
+  children,
+  ...props
+}: CheckboxGroupProps) => {
   return (
     <AriaCheckboxGroup
+      ref={ref}
       className={composeTailwindRenderProps(className, "flex flex-col gap-2")}
       {...props}
     >
-      {props.label && <Label>{props.label}</Label>}
-      {props.children as React.ReactNode}
-      {props.description && <Description>{props.description}</Description>}
-      <FieldError>{props.errorMessage}</FieldError>
+      {label && <Label>{label}</Label>}
+      {children as React.ReactNode}
+      {description && <Description>{description}</Description>}
+      <FieldError>{errorMessage}</FieldError>
     </AriaCheckboxGroup>
   )
 }
@@ -60,14 +70,24 @@ const checkboxVariants = tv({
 })
 
 interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
+  ref?: React.Ref<HTMLLabelElement>
   dataTheme?: DataTheme
 }
 
-const Checkbox = ({ className, color, size, children, dataTheme, ...props }: CheckboxProps) => (
+const Checkbox = ({
+  ref,
+  className,
+  color,
+  size,
+  children,
+  dataTheme,
+  ...props
+}: CheckboxProps) => (
   <AriaCheckbox
-    {...props}
+    ref={ref}
     data-theme={dataTheme}
     className={composeRenderProps(className, (className) => cn("checkbox-wrapper", className))}
+    {...props}
   >
     {(renderProps) => (
       <>

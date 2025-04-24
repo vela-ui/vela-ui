@@ -11,11 +11,13 @@ import { DataTheme } from "./types"
 interface LinkButtonProps
   extends AriaLinkProps,
     Omit<VariantProps<typeof buttonVariants>, "isPending" | "isActive"> {
+  ref?: React.Ref<HTMLAnchorElement>
   dataTheme?: DataTheme
 }
 
 const LinkButton = (props: LinkButtonProps) => {
   const {
+    ref,
     className,
     color,
     variant,
@@ -42,7 +44,7 @@ const LinkButton = (props: LinkButtonProps) => {
 
   return (
     <AriaLink
-      data-slot="link"
+      ref={ref}
       data-theme={dataTheme}
       className={composeRenderProps(className, (className) => cn(getClassNames, className))}
       {...otherProps}

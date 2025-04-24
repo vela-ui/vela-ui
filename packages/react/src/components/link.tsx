@@ -29,11 +29,12 @@ const linkVariants = tv({
 })
 
 interface LinkProps extends AriaLinkProps, VariantProps<typeof linkVariants> {
+  ref?: React.Ref<HTMLAnchorElement>
   dataTheme?: DataTheme
 }
 
 const Link = (props: LinkProps) => {
-  const { className, color, underline, dataTheme, ...otherProps } = props
+  const { ref, className, color, underline, dataTheme, ...otherProps } = props
 
   const getClassNames = useMemo(
     () =>
@@ -46,7 +47,7 @@ const Link = (props: LinkProps) => {
 
   return (
     <AriaLink
-      data-slot="link"
+      ref={ref}
       data-theme={dataTheme}
       className={cn(getClassNames, className)}
       {...otherProps}
