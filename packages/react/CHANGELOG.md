@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 1.0.4
+
+### Patch Changes
+
+- [#19](https://github.com/vela-ui/vela-ui/pull/19) [`641f2ce`](https://github.com/vela-ui/vela-ui/commit/641f2ce91fc0b909225a8828c2fb2d0a6f3ea905) Thanks [@bobbychan](https://github.com/bobbychan)! - add ref to components
+
 ## 1.0.3
 
 ### Patch Changes
