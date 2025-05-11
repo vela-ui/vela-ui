@@ -24,6 +24,7 @@
   border-style: solid;
   border-color: var(--btn-border);
   text-shadow: 0 0.5px oklch(100% 0 0 / calc(var(--depth) * 0.15));
+  touch-action: manipulation;
   box-shadow:
     0 0.5px 0 0.5px oklch(100% 0 0 / calc(var(--depth) * 6%)) inset,
     var(--btn-shadow);
@@ -187,6 +188,24 @@
     --btn-border: var(--btn-color);
     --btn-noise: none;
   }
+
+  @media (hover: none) {
+    &:hover:not(
+        .btn-active,
+        :active,
+        :focus-visible,
+        :disabled,
+        [disabled],
+        .btn-disabled,
+        :checked
+      ) {
+      --btn-shadow: "";
+      --btn-bg: #0000;
+      --btn-fg: var(--btn-color);
+      --btn-border: var(--btn-color);
+      --btn-noise: none;
+    }
+  }
 }
 
 .btn-dash {
@@ -207,6 +226,25 @@
     --btn-border: var(--btn-color);
     --btn-noise: none;
   }
+
+  @media (hover: none) {
+    &:hover:not(
+        .btn-active,
+        :active,
+        :focus-visible,
+        :disabled,
+        [disabled],
+        .btn-disabled,
+        :checked
+      ) {
+      --btn-shadow: "";
+      border-style: dashed;
+      --btn-bg: #0000;
+      --btn-fg: var(--btn-color);
+      --btn-border: var(--btn-color);
+      --btn-noise: none;
+    }
+  }
 }
 
 .btn-soft {
@@ -224,6 +262,24 @@
       var(--color-base-100)
     );
     --btn-noise: none;
+  }
+
+  @media (hover: none) {
+    &:hover:not(.btn-active, :active, :focus-visible, :disabled, [disabled], .btn-disabled) {
+      --btn-shadow: "";
+      --btn-fg: var(--btn-color, var(--color-base-content));
+      --btn-bg: color-mix(
+        in oklab,
+        var(--btn-color, var(--color-base-content)) 8%,
+        var(--color-base-100)
+      );
+      --btn-border: color-mix(
+        in oklab,
+        var(--btn-color, var(--color-base-content)) 10%,
+        var(--color-base-100)
+      );
+      --btn-noise: none;
+    }
   }
 }
 
@@ -267,6 +323,10 @@
   @apply rounded-full px-0;
   width: var(--size);
   height: var(--size);
+}
+
+.btn-wide {
+  @apply w-full max-w-64;
 }
 
 .btn-block {

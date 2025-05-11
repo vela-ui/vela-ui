@@ -35,6 +35,7 @@
     "theme",
     "utilities",
     "imports.js",
+    "add.js",
     "index.js"
   ],
   "scripts": {
