@@ -1,8 +1,18 @@
 @import "tailwindcss";
-@plugin "@vela-ui/theme" {
+/* @plugin "@vela-ui/theme" {
   themes:
     light --default,
     dark --prefersdark,
     cupcake;
+} */
+@plugin "@vela-ui/theme" {
+}
+@plugin "@vela-ui/theme/add.js" {
+  name: "light";
+  default: true;
+  --color-primary: blue;
+  --color-secondary: green;
+  --color-primary-content: #e0e7ff;
+  --color-base-content: #1b1718;
 }
 @source "../node_modules/@vela-ui/react";
