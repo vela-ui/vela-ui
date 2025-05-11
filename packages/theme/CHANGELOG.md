@@ -1,5 +1,11 @@
 # @vela-ui/theme
 
+## 1.0.3
+
+### Patch Changes
+
+- [#21](https://github.com/vela-ui/vela-ui/pull/21) [`bb98513`](https://github.com/vela-ui/vela-ui/commit/bb98513dbdd05972fe11bcc18960bb6adf4d218c) Thanks [@bobbychan](https://github.com/bobbychan)! - prevent double-tap zoom on buttons on mobile
+
 ## 1.0.2
 
 ### Patch Changes
