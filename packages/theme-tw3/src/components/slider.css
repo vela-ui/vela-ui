@@ -1,0 +1,120 @@
+.slider {
+  @apply relative isolate flex touch-none flex-col gap-1;
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 6);
+  --slider-track-size: calc(var(--slider-thumb-size) * 0.5);
+  --slider-color: theme(colors.base-content);
+  --slider-track-bg: theme(colors.base-300);
+  @supports (color: color-mix(in oklab, black, black)) {
+    --slider-track-bg: color-mix(in oklab, currentColor 10%, #0000);
+  }
+}
+
+.slider-output {
+  @apply text-sm;
+}
+
+.slider-control {
+  @apply relative inline-flex items-center;
+}
+
+.slider-track {
+  @apply flex-1 cursor-pointer rounded-full;
+  background-color: var(--slider-track-bg);
+}
+
+.slider-filler {
+  @apply absolute h-full rounded-full;
+  background-color: var(--slider-color);
+}
+
+.slider-thumb {
+  @apply z-20 flex items-center justify-center rounded-full outline-none;
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
+  border: 2px solid var(--slider-color);
+  background-color: theme(colors.base-100);
+}
+
+.slider-horizontal {
+  .slider-control {
+    @apply w-full flex-row;
+    min-height: var(--slider-thumb-size);
+  }
+
+  .slider-track {
+    height: var(--slider-track-size);
+  }
+
+  .slider-thumb {
+    @apply top-1/2;
+  }
+}
+
+.slider-vertical {
+  @apply inline-flex;
+
+  .slider-control {
+    @apply h-full flex-col;
+    min-width: var(--slider-thumb-size);
+  }
+
+  .slider-track {
+    width: var(--slider-track-size);
+  }
+
+  .slider-thumb {
+    @apply left-1/2;
+  }
+}
+
+.slider-neutral {
+  --slider-color: theme(colors.neutral);
+}
+
+.slider-primary {
+  --slider-color: theme(colors.primary);
+}
+
+.slider-secondary {
+  --slider-color: theme(colors.secondary);
+}
+
+.slider-accent {
+  --slider-color: theme(colors.accent);
+}
+
+.slider-info {
+  --slider-color: theme(colors.info);
+}
+
+.slider-success {
+  --slider-color: theme(colors.success);
+}
+
+.slider-warning {
+  --slider-color: theme(colors.warning);
+}
+
+.slider-error {
+  --slider-color: theme(colors.error);
+}
+
+.slider-xs {
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 4);
+}
+
+.slider-sm {
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 5);
+}
+
+.slider-md {
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 6);
+}
+
+.slider-lg {
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 7);
+}
+
+.slider-xl {
+  --slider-thumb-size: calc(var(--size-selector, 0.25rem) * 8);
+}

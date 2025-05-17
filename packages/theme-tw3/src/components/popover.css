@@ -1,0 +1,92 @@
+.popover {
+  @apply rounded-box z-50 bg-clip-padding shadow-sm outline-none;
+  --popover-bg: var(--popover-color, theme(colors.base-100));
+  --popover-fg: theme(colors.base-content);
+  --popover-border: color-mix(in oklab, theme(colors.base-content) 10%, transparent);
+  background: var(--popover-bg);
+  color: var(--popover-fg);
+  border-width: var(--border);
+  border-style: solid;
+  border-color: var(--popover-border);
+  transition:
+    transform 200ms,
+    opacity 200ms;
+
+  .popover-arrow svg {
+    @apply block;
+    fill: var(--popover-bg);
+    stroke: var(--popover-border);
+    stroke-width: 1px;
+  }
+
+  &[data-entering],
+  &[data-exiting] {
+    transform: var(--popover-origin);
+    opacity: 0;
+  }
+
+  &[data-placement="top"] {
+    --popover-origin: translateY(8px);
+  }
+
+  &[data-placement="bottom"] {
+    --popover-origin: translateY(-8px);
+    .popover-arrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement="right"] {
+    --popover-origin: translateX(-8px);
+    .popover-arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement="left"] {
+    --popover-origin: translateX(8px);
+    .popover-arrow svg {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.popover-primary {
+  --popover-color: theme(colors.primary);
+  --popover-fg: theme(colors.primary-content);
+}
+
+.popover-secondary {
+  --popover-color: theme(colors.secondary);
+  --popover-fg: theme(colors.secondary-content);
+}
+
+.popover-accent {
+  --popover-color: theme(colors.accent);
+  --popover-fg: theme(colors.accent-content);
+}
+
+.popover-neutral {
+  --popover-color: theme(colors.neutral);
+  --popover-fg: theme(colors.neutral-content);
+}
+
+.popover-info {
+  --popover-color: theme(colors.info);
+  --popover-fg: theme(colors.info-content);
+}
+
+.popover-success {
+  --popover-color: theme(colors.success);
+  --popover-fg: theme(colors.success-content);
+}
+
+.popover-warning {
+  --popover-color: theme(colors.warning);
+  --popover-fg: theme(colors.warning-content);
+}
+
+.popover-error {
+  --popover-color: theme(colors.error);
+  --popover-fg: theme(colors.error-content);
+}

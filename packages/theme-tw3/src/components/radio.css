@@ -11,7 +11,7 @@
   }
 
   &[data-invalid] .radio {
-    --input-color: var(--color-error);
+    --input-color: theme("colors.error");
   }
 
   &[data-selected] .radio {
@@ -41,12 +41,12 @@
 
 .radio {
   @apply relative shrink-0 rounded-full p-1 align-middle;
-  border: var(--border) solid var(--input-color, var(--color-base-content));
+  border: var(--border) solid var(--input-color, theme(colors.base-content));
   box-shadow: 0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset;
   --size: calc(var(--size-selector, 0.25rem) * 6);
   width: var(--size);
   height: var(--size);
-  color: var(--input-color, var(--color-base-content));
+  color: var(--input-color, theme(colors.base-content));
   &:before {
     @apply block size-full rounded-full;
     --tw-content: "";
@@ -57,35 +57,35 @@
 }
 
 .radio-primary {
-  --input-color: var(--color-primary);
+  --input-color: theme(colors.primary);
 }
 
 .radio-secondary {
-  --input-color: var(--color-secondary);
+  --input-color: theme(colors.secondary);
 }
 
 .radio-accent {
-  --input-color: var(--color-accent);
+  --input-color: theme(colors.accent);
 }
 
 .radio-neutral {
-  --input-color: var(--color-neutral);
+  --input-color: theme(colors.neutral);
 }
 
 .radio-info {
-  --input-color: var(--color-info);
+  --input-color: theme(colors.info);
 }
 
 .radio-success {
-  --input-color: var(--color-success);
+  --input-color: theme(colors.success);
 }
 
 .radio-warning {
-  --input-color: var(--color-warning);
+  --input-color: theme(colors.warning);
 }
 
 .radio-error {
-  --input-color: var(--color-error);
+  --input-color: theme(colors.error);
 }
 
 .radio-xs {

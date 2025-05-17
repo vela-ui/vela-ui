@@ -1,0 +1,56 @@
+:root,
+[data-theme] {
+  background-color: var(--root-bg, theme(colors.base-100));
+  color: theme(colors.base-content);
+}
+
+@supports not (color: oklch(0% 0 0)) {
+  :root {
+    color-scheme: light;
+    --fallback-primary: #491eff;
+    --fallback-primary-content: #d4dbff;
+    --fallback-secondary: #ff41c7;
+    --fallback-secondary-content: #fff9fc;
+    --fallback-accent: #00cfbd;
+    --fallback-accent-content: #00100d;
+    --fallback-neutral: #2b3440;
+    --fallback-neutral-content: #d7dde4;
+    --fallback-base-100: #ffffff;
+    --fallback-base-200: #e5e6e6;
+    --fallback-base-300: #e5e6e6;
+    --fallback-base-content: #1f2937;
+    --fallback-info: #00b3f0;
+    --fallback-info-content: #000000;
+    --fallback-success: #00ca92;
+    --fallback-success-content: #000000;
+    --fallback-warning: #ffc22d;
+    --fallback-warning-content: #000000;
+    --fallback-error: #ff6f70;
+    --fallback-error-content: : #000000;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --fallback-primary: #7582ff;
+      --fallback-primary-content: #050617;
+      --fallback-secondary: #ff71cf;
+      --fallback-secondary-content: #190211;
+      --fallback-accent: #00c7b5;
+      --fallback-accent-content: #000e0c;
+      --fallback-neutral: #2a323c;
+      --fallback-neutral-content: #a6adbb;
+      --fallback-base-100: #1d232a;
+      --fallback-base-200: #191e24;
+      --fallback-base-300: #15191e;
+      --fallback-base-content: #a6adbb;
+      --fallback-info: #00b3f0;
+      --fallback-info-content: #000000;
+      --fallback-success: #00ca92;
+      --fallback-success-content: #000000;
+      --fallback-warning: #ffc22d;
+      --fallback-warning-content: #000000;
+      --fallback-error: #ff6f70;
+      --fallback-error-content: #000000;
+    }
+  }
+}

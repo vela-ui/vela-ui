@@ -1,0 +1,104 @@
+.link {
+  @apply cursor-pointer underline;
+
+  &:focus {
+    @apply outline-none;
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+.link-hover {
+  @apply no-underline hover:underline;
+}
+
+.link-active {
+  @apply no-underline active:underline;
+}
+
+.link-none {
+  @apply no-underline;
+}
+
+.link-primary {
+  @apply text-primary;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.primary) 80%, #000);
+    }
+  }
+}
+
+.link-secondary {
+  @apply text-secondary;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.secondary) 80%, #000);
+    }
+  }
+}
+
+.link-accent {
+  @apply text-accent;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.accent) 80%, #000);
+    }
+  }
+}
+
+.link-neutral {
+  @apply text-neutral;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.neutral) 80%, #000);
+    }
+  }
+}
+
+.link-success {
+  @apply text-success;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.success) 80%, #000);
+    }
+  }
+}
+
+.link-info {
+  @apply text-info;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.info) 80%, #000);
+    }
+  }
+}
+
+.link-warning {
+  @apply text-warning;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.warning) 80%, #000);
+    }
+  }
+}
+
+.link-error {
+  @apply text-error;
+
+  @media (hover: hover) {
+    &:hover {
+      color: color-mix(in oklab, theme(colors.error) 80%, #000);
+    }
+  }
+}

@@ -20,6 +20,7 @@ export const config = [
       sourceType: "module",
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
     },
   },

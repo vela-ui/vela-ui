@@ -83,15 +83,17 @@ const Radio = ({ ref, className, color, size, children, dataTheme, ...props }: R
     className={composeRenderProps(className, (className) => cn("radio-wrapper", className))}
     {...props}
   >
-    <>
-      <div
-        className={radioVariants({
-          color,
-          size,
-        })}
-      />
-      {children}
-    </>
+    {composeRenderProps(children, (children) => (
+      <>
+        <div
+          className={radioVariants({
+            color,
+            size,
+          })}
+        />
+        {children}
+      </>
+    ))}
   </AriaRadio>
 )
 
