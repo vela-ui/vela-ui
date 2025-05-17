@@ -1,0 +1,47 @@
+.skeleton {
+  @apply bg-base-300 rounded-box pointer-events-none relative text-transparent shadow-none select-none motion-reduce:transition-none;
+
+  &[data-loaded] {
+    @apply animate-none;
+
+    .skeleton-content {
+      @apply opacity-100;
+    }
+  }
+}
+
+.skeleton-content {
+  @apply opacity-0 transition-opacity duration-300 motion-reduce:transition-none;
+}
+
+.skeleton-pulse {
+  @apply animate-pulse;
+  animation-duration: var(--duration, 1.2s);
+}
+
+.skeleton-shine {
+  will-change: background-position;
+  --animate-from: 200%;
+  --animate-to: -200%;
+  --start-color: theme(colors.base-200);
+  --end-color: theme(colors.base-300);
+  background-image: linear-gradient(
+    270deg,
+    var(--start-color),
+    var(--end-color),
+    var(--end-color),
+    var(--start-color)
+  );
+  background-size: 400% 100%;
+  animation: skeleton var(--duration, 5s) ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  from {
+    background-position: var(--animate-from, 1rem) 0;
+  }
+
+  to {
+    background-position: var(--animate-to, 0) 0;
+  }
+}

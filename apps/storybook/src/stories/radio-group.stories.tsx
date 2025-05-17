@@ -31,6 +31,68 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-2">
+      <RadioGroup {...args}>
+        <Radio value="soccer" size="xs">
+          Soccer
+        </Radio>
+        <Radio value="baseball" size="sm">
+          Baseball
+        </Radio>
+        <Radio value="football" size="md">
+          Football
+        </Radio>
+        <Radio value="tennis" size="lg">
+          Tennis
+        </Radio>
+        <Radio value="golf" size="xl">
+          Golf
+        </Radio>
+      </RadioGroup>
+    </div>
+  ),
+}
+
+export const Colors: Story = {
+  args: {
+    label: "Choose your favorite color",
+    orientation: "horizontal",
+    defaultValue: "neutral",
+  },
+  render: (args) => (
+    <div className="flex flex-col gap-2">
+      <RadioGroup {...args}>
+        <Radio value="primary" color="primary">
+          primary
+        </Radio>
+        <Radio value="secondary" color="secondary">
+          secondary
+        </Radio>
+        <Radio value="accent" color="accent">
+          accent
+        </Radio>
+        <Radio value="neutral" color="neutral">
+          neutral
+        </Radio>
+        <Radio value="info" color="info">
+          info
+        </Radio>
+        <Radio value="success" color="success">
+          success
+        </Radio>
+        <Radio value="warning" color="warning">
+          warning
+        </Radio>
+        <Radio value="error" color="error">
+          error
+        </Radio>
+      </RadioGroup>
+    </div>
+  ),
+}
+
 export const Validation: Story = {
   args: {
     isRequired: true,

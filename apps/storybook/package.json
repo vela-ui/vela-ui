@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@vela-ui/react": "workspace:*",
-    "@vela-ui/theme": "workspace:*",
+    "@vela-ui/theme-tw3": "workspace:*",
     "react": "^19.1.0",
     "react-aria-components": "^1.8.0",
     "react-dom": "^19.1.0"
@@ -32,11 +32,13 @@
     "@types/react-dom": "^19.0.3",
     "@vela-ui/eslint-config": "workspace:*",
     "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.25.0",
     "eslint-plugin-storybook": "^0.12.0",
+    "postcss": "^8.5.3",
     "storybook": "^8.6.12",
     "storybook-dark-mode": "^4.0.2",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^3",
     "typescript": "~5.8.3",
     "vite": "^6.2.3"
   }

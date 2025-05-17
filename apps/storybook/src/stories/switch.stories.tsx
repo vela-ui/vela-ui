@@ -36,6 +36,12 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: "Wi-Fi",
+  },
+}
+
+export const Custom: Story = {
+  args: {
+    children: "Wi-Fi",
     thumbIcon: (props) => (props.isSelected ? <SuccessIcon /> : <CloseIcon />),
   },
 }

@@ -9,11 +9,15 @@
       "mode": "auto"
     }
   ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "tailwindCSS.experimental.configFile": {
-    "apps/docs/app/app.css": "apps/docs/app/**/*",
-    "apps/storybook/.storybook/style.css": ["packages/react/**", "packages/theme/src/**"]
+    "apps/docs/app/app.css": ["apps/docs/app/**/*", "packages/react/**", "packages/theme/src/**"],
+    "apps/storybook/tailwind.config.js": ["apps/storybook/**/*"],
+    "packages/theme-tw3/src/components/tailwind.config.js": ["packages/theme-tw3/src/**/*"]
   }
 }

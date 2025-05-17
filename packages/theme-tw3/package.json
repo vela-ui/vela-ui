@@ -1,0 +1,54 @@
+{
+  "name": "@vela-ui/theme-tw3",
+  "version": "1.0.0",
+  "description": "Vela UI theme for TailwindCSS 3",
+  "keywords": [
+    "css",
+    "theme",
+    "react",
+    "design-systems",
+    "ui-kit",
+    "ui-components",
+    "tailwindcss"
+  ],
+  "homepage": "https://velaui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vela-ui/vela-ui.git",
+    "directory": "packages/theme-tw3"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "files": [
+    "base",
+    "components",
+    "functions/addPrefix.js",
+    "functions/plugin.js",
+    "functions/pluginOptionsHandler.js",
+    "functions/themeOrder.js",
+    "functions/variables.js",
+    "theme",
+    "utilities",
+    "imports.js",
+    "add.js",
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint functions --cache",
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "@vela-ui/eslint-config": "workspace:*",
+    "eslint": "^9.25.0",
+    "postcss": "8.5.3",
+    "postcss-cli": "11.0.1",
+    "postcss-import": "16.1.0",
+    "postcss-js": "4.0.1",
+    "tailwindcss": "^3"
+  }
+}
