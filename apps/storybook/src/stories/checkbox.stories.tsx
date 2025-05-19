@@ -93,3 +93,19 @@ export const Colors: Story = {
     </div>
   ),
 }
+
+export const Indeterminate: Story = {
+  render: (args) => (
+    <Checkbox {...args} isIndeterminate>
+      Indeterminate
+    </Checkbox>
+  ),
+}
+
+export const Disabled: Story = {
+  render: (args) => (
+    <Checkbox {...args} isDisabled>
+      Disabled
+    </Checkbox>
+  ),
+}

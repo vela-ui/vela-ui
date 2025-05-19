@@ -1,8 +1,8 @@
 .checkbox-wrapper {
-  @apply text-base-content/60 relative flex cursor-pointer items-center gap-2 text-sm select-none;
+  @apply text-base-content relative flex cursor-pointer items-center gap-2 text-sm select-none;
 
   &[data-disabled] {
-    @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-30;
   }
 
   &[data-focus-visible] .checkbox {
@@ -15,20 +15,46 @@
     --input-color: var(--color-error);
   }
 
-  &[data-selected],
-  &[data-indeterminate] {
+  &[data-selected] {
     .checkbox {
       background-color: var(--input-color, #0000);
       box-shadow:
         0 0 #0000 inset,
         0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset,
         0 1px oklch(0% 0 0 / calc(var(--depth) * 0.1));
+
+      &:before {
+        clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 0%, 70% 0%, 70% 100%);
+        @apply opacity-100;
+      }
+      @media (forced-colors: active) {
+        &:before {
+          @apply rotate-0 bg-transparent [--tw-content:"✔︎"] [clip-path:none];
+        }
+      }
+      @media print {
+        &:before {
+          @apply rotate-0 bg-transparent;
+          --tw-content: "✔︎";
+          clip-path: none;
+        }
+      }
+    }
+  }
+
+  &[data-indeterminate] {
+    .checkbox {
+      &:before {
+        @apply rotate-0 opacity-100;
+        translate: 0 -35%;
+        clip-path: polygon(20% 100%, 20% 80%, 50% 80%, 50% 80%, 80% 80%, 80% 100%);
+      }
     }
   }
 }
 
 .checkbox {
-  @apply text-base-content rounded-selector inline-flex shrink-0 items-center justify-center overflow-hidden p-[0.1875rem];
+  @apply text-base-content rounded-selector inline-flex shrink-0 items-center justify-center overflow-hidden p-1;
   border: var(--border) solid
     var(--input-color, color-mix(in oklab, var(--color-base-content) 20%, #0000));
   box-shadow:
@@ -90,26 +116,26 @@
 }
 
 .checkbox-xs {
-  @apply p-[0.1rem];
+  @apply p-[0.125rem];
   --size: calc(var(--size-selector, 0.25rem) * 4);
 }
 
 .checkbox-sm {
-  @apply p-[0.125rem];
+  @apply p-[0.1875rem];
   --size: calc(var(--size-selector, 0.25rem) * 5);
 }
 
 .checkbox-md {
-  @apply p-[0.1875rem];
+  @apply p-[0.25rem];
   --size: calc(var(--size-selector, 0.25rem) * 6);
 }
 
 .checkbox-lg {
-  @apply p-[0.25rem];
+  @apply p-[0.3125rem];
   --size: calc(var(--size-selector, 0.25rem) * 7);
 }
 
 .checkbox-xl {
-  @apply p-[0.3125rem];
+  @apply p-[0.375rem];
   --size: calc(var(--size-selector, 0.25rem) * 8);
 }
