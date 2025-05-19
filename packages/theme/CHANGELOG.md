@@ -1,5 +1,11 @@
 # @vela-ui/theme
 
+## 1.0.5
+
+### Patch Changes
+
+- [#25](https://github.com/vela-ui/vela-ui/pull/25) [`252272d`](https://github.com/vela-ui/vela-ui/commit/252272d3448c0c88920f3c8d5f508c5a81dc380d) Thanks [@bobbychan](https://github.com/bobbychan)! - adjust radio and checkbox style
+
 ## 1.0.4
 
 ### Patch Changes
