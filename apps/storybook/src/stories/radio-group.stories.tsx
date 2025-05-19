@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, Radio, RadioGroup } from "@vela-ui/react"
+import { Button, Label, Radio, RadioGroup } from "@vela-ui/react"
 import { Form } from "react-aria-components"
 
 const meta = {
@@ -11,12 +11,11 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {},
   args: {
-    label: "Favorite sport",
     isDisabled: false,
     isRequired: false,
-    description: "",
     children: (
       <>
+        <Label>Favorite sport</Label>
         <Radio value="soccer">Soccer</Radio>
         <Radio value="baseball">Baseball</Radio>
         <Radio value="basketball">Basketball</Radio>
@@ -57,13 +56,13 @@ export const Sizes: Story = {
 
 export const Colors: Story = {
   args: {
-    label: "Choose your favorite color",
     orientation: "horizontal",
     defaultValue: "neutral",
   },
   render: (args) => (
     <div className="flex flex-col gap-2">
       <RadioGroup {...args}>
+        <Label>Choose your favorite color</Label>
         <Radio value="primary" color="primary">
           primary
         </Radio>
@@ -104,5 +103,13 @@ export const Validation: Story = {
         Submit
       </Button>
     </Form>
+  ),
+}
+
+export const Disabled: Story = {
+  render: (args) => (
+    <RadioGroup {...args} isDisabled>
+      <Radio value="soccer">Soccer</Radio>
+    </RadioGroup>
   ),
 }

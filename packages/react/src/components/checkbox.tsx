@@ -7,42 +7,23 @@ import type {
 import {
   Checkbox as AriaCheckbox,
   CheckboxGroup as AriaCheckboxGroup,
-  ValidationResult as AriaValidationResult,
   composeRenderProps,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { CheckIcon, MinusIcon } from "../icons"
 import { cn, composeTailwindRenderProps } from "../utils/classes"
-import { Description, FieldError, Label } from "./field"
 import { DataTheme } from "./types"
 
 interface CheckboxGroupProps extends AriaCheckboxGroupProps {
   ref?: React.Ref<HTMLDivElement>
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: AriaValidationResult) => string)
 }
 
-const CheckboxGroup = ({
-  ref,
-  className,
-  label,
-  description,
-  errorMessage,
-  children,
-  ...props
-}: CheckboxGroupProps) => {
+const CheckboxGroup = ({ ref, className, ...props }: CheckboxGroupProps) => {
   return (
     <AriaCheckboxGroup
       ref={ref}
-      className={composeTailwindRenderProps(className, "flex flex-col gap-2")}
+      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
       {...props}
-    >
-      {label && <Label>{label}</Label>}
-      {children as React.ReactNode}
-      {description && <Description>{description}</Description>}
-      <FieldError>{errorMessage}</FieldError>
-    </AriaCheckboxGroup>
+    />
   )
 }
 
@@ -71,11 +52,13 @@ const checkboxVariants = tv({
 
 interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
   ref?: React.Ref<HTMLLabelElement>
+  wrapperClassName?: string
   dataTheme?: DataTheme
 }
 
 const Checkbox = ({
   ref,
+  wrapperClassName,
   className,
   color,
   size,
@@ -86,26 +69,25 @@ const Checkbox = ({
   <AriaCheckbox
     ref={ref}
     data-theme={dataTheme}
-    className={composeRenderProps(className, (className) => cn("checkbox-wrapper", className))}
+    className={composeRenderProps(wrapperClassName, (className) =>
+      cn("checkbox-wrapper", className),
+    )}
     {...props}
   >
-    {(renderProps) => (
+    {composeRenderProps(children, (children) => (
       <>
         <div
-          className={checkboxVariants({
-            color,
-            size,
-          })}
-        >
-          {renderProps.isIndeterminate ? (
-            <MinusIcon aria-hidden />
-          ) : renderProps.isSelected ? (
-            <CheckIcon aria-hidden strokeWidth={3} />
-          ) : null}
-        </div>
+          className={cn(
+            checkboxVariants({
+              color,
+              size,
+            }),
+            className,
+          )}
+        />
         {children}
       </>
-    )}
+    ))}
   </AriaCheckbox>
 )
 

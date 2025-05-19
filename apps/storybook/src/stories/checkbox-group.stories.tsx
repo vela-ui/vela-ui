@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, Checkbox, CheckboxGroup, CheckboxGroupProps } from "@vela-ui/react"
+import { Button, Checkbox, CheckboxGroup, CheckboxGroupProps, Label } from "@vela-ui/react"
 import { Form } from "react-aria-components"
 
 const meta = {
@@ -11,12 +11,11 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {},
   args: {
-    label: "Cities",
     isDisabled: false,
     isRequired: false,
-    description: "",
     children: (
       <>
+        <Label>Cities</Label>
         <Checkbox value="sf">San Francisco</Checkbox>
         <Checkbox value="ny">New York</Checkbox>
         <Checkbox value="sydney">Sydney</Checkbox>
