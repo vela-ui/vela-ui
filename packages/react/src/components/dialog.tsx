@@ -12,7 +12,7 @@ import {
   Text as AriaText,
 } from "react-aria-components"
 import { CloseIcon } from "../icons"
-import { cn } from "../utils/classes"
+import { cn } from "../lib/utils"
 import { Button } from "./button"
 import type { ModalProps as DialogProps } from "./modal"
 import { Modal } from "./modal"

@@ -10,18 +10,3 @@ export function composeTailwindRenderProps<T>(
 ): string | ((v: T) => string) {
   return composeRenderProps(className, (className) => twMerge(tailwind, className))
 }
-
-export function addClassPrefix(prefix = "", className: string, matchClasses: string[]): string {
-  if (!className || !prefix) {
-    return className || ""
-  }
-  return className
-    .split(" ")
-    .map((cls) => {
-      if (matchClasses.some((match) => cls === match || cls.startsWith(match + "-"))) {
-        return `${prefix}${cls}`
-      }
-      return cls
-    })
-    .join(" ")
-}

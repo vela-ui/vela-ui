@@ -3,6 +3,7 @@
 import type {
   CheckboxGroupProps as AriaCheckboxGroupProps,
   CheckboxProps as AriaCheckboxProps,
+  ValidationResult,
 } from "react-aria-components"
 import {
   Checkbox as AriaCheckbox,
@@ -10,81 +11,85 @@ import {
   composeRenderProps,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { cn, composeTailwindRenderProps } from "../utils/classes"
-import { DataTheme } from "./types"
+import { CheckIcon, MinusIcon } from "../icons"
+import { focusRing } from "../lib/classes"
+import { composeTailwindRenderProps } from "../lib/utils"
+import { Description, FieldError, Label } from "./field"
 
 interface CheckboxGroupProps extends AriaCheckboxGroupProps {
-  ref?: React.Ref<HTMLDivElement>
+  label?: string
+  description?: string
+  errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-const CheckboxGroup = ({ ref, className, ...props }: CheckboxGroupProps) => {
+const CheckboxGroup = ({
+  className,
+  children,
+  label,
+  description,
+  errorMessage,
+  ...props
+}: CheckboxGroupProps) => {
   return (
     <AriaCheckboxGroup
-      ref={ref}
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
+      className={composeTailwindRenderProps(className, "flex flex-col gap-2")}
       {...props}
-    />
+    >
+      {composeRenderProps(children, (children) => (
+        <>
+          {label && <Label>{label}</Label>}
+          {children}
+          {description && <Description>{description}</Description>}
+          <FieldError>{errorMessage}</FieldError>
+        </>
+      ))}
+    </AriaCheckboxGroup>
   )
 }
 
 const checkboxVariants = tv({
-  base: "checkbox",
+  base: "group flex items-center gap-2 text-sm transition",
   variants: {
-    color: {
-      neutral: "checkbox-neutral",
-      primary: "checkbox-primary",
-      secondary: "checkbox-secondary",
-      accent: "checkbox-accent",
-      info: "checkbox-info",
-      success: "checkbox-success",
-      warning: "checkbox-warning",
-      error: "checkbox-error",
-    },
-    size: {
-      xs: "checkbox-xs",
-      sm: "checkbox-sm",
-      md: "checkbox-md",
-      lg: "checkbox-lg",
-      xl: "checkbox-xl",
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
     },
   },
 })
 
-interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
-  ref?: React.Ref<HTMLLabelElement>
-  wrapperClassName?: string
-  dataTheme?: DataTheme
-}
+const checkboxIndicatorVariants = tv({
+  extend: focusRing,
+  base: "peer border-input dark:bg-input/30 size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow [&_svg]:size-3.5",
+  variants: {
+    isSelected: {
+      true: "bg-primary text-primary-foreground border-primary",
+    },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
+    },
+  },
+})
 
-const Checkbox = ({
-  ref,
-  wrapperClassName,
-  className,
-  color,
-  size,
-  children,
-  dataTheme,
-  ...props
-}: CheckboxProps) => (
+interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {}
+
+const Checkbox = ({ className, children, ...props }: CheckboxProps) => (
   <AriaCheckbox
-    ref={ref}
-    data-theme={dataTheme}
-    className={composeRenderProps(wrapperClassName, (className) =>
-      cn("checkbox-wrapper", className),
+    data-slot="checkbox"
+    className={composeRenderProps(className, (className, renderProps) =>
+      checkboxVariants({ ...renderProps, className }),
     )}
     {...props}
   >
-    {composeRenderProps(children, (children) => (
+    {composeRenderProps(children, (children, { isSelected, isIndeterminate, ...renderProps }) => (
       <>
         <div
-          className={cn(
-            checkboxVariants({
-              color,
-              size,
-            }),
-            className,
-          )}
-        />
+          data-slot="checkbox-indicator"
+          className={checkboxIndicatorVariants({
+            isSelected: isSelected || isIndeterminate,
+            ...renderProps,
+          })}
+        >
+          {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
+        </div>
         {children}
       </>
     ))}

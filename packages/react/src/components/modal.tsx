@@ -9,7 +9,7 @@ import {
 } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { cn } from "../utils/classes"
+import { cn } from "../lib/utils"
 
 const modalVariants = tv({
   slots: {

@@ -1,59 +1,71 @@
 "use client"
 
-import { useMemo } from "react"
-import { Link as AriaLink, LinkProps as AriaLinkProps } from "react-aria-components"
+import {
+  Link as AriaLink,
+  LinkProps as AriaLinkProps,
+  composeRenderProps,
+} from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { cn } from "../utils/classes"
-import { DataTheme } from "./types"
+import { buttonVariants } from "./button"
 
 const linkVariants = tv({
-  base: "link",
+  base: "underline-offset-4 outline-0 outline-offset-2 outline-current focus-visible:outline-2",
   variants: {
-    color: {
-      neutral: "link-neutral",
-      primary: "link-primary",
-      secondary: "link-secondary",
-      accent: "link-accent",
-      info: "link-success",
-      success: "link-info",
-      warning: "link-warning",
-      error: "link-error",
+    variant: {
+      hover: "hover:underline",
+      underline: "underline",
+      none: "no-underline",
     },
-    underline: {
-      none: "link-none",
-      hover: "link-hover",
-      active: "link-active",
+    isDisabled: {
+      true: "pointer-events-none cursor-default opacity-50",
     },
+  },
+  defaultVariants: {
+    variant: "hover",
   },
 })
 
 interface LinkProps extends AriaLinkProps, VariantProps<typeof linkVariants> {
   ref?: React.Ref<HTMLAnchorElement>
-  dataTheme?: DataTheme
 }
 
-const Link = (props: LinkProps) => {
-  const { ref, className, color, underline, dataTheme, ...otherProps } = props
-
-  const getClassNames = useMemo(
-    () =>
-      linkVariants({
-        color,
-        underline,
-      }),
-    [color, underline],
-  )
-
+const Link = ({ ref, className, variant, ...props }: LinkProps) => {
   return (
     <AriaLink
       ref={ref}
-      data-theme={dataTheme}
-      className={cn(getClassNames, className)}
-      {...otherProps}
+      data-slot="link"
+      className={composeRenderProps(className, (className, renderProps) =>
+        linkVariants({ ...renderProps, variant, className }),
+      )}
+      {...props}
     />
   )
 }
 
-export { Link }
-export type { LinkProps }
+interface LinkButtonProps
+  extends AriaLinkProps,
+    Omit<VariantProps<typeof buttonVariants>, "isPending"> {
+  ref?: React.Ref<HTMLAnchorElement>
+}
+
+const LinkButton = ({ ref, className, variant, size, ...props }: LinkButtonProps) => {
+  return (
+    <AriaLink
+      ref={ref}
+      data-slot="link"
+      className={composeRenderProps(className, (className, renderProps) =>
+        buttonVariants({
+          ...renderProps,
+          variant,
+          size,
+          className,
+        }),
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Link, LinkButton }
+export type { LinkButtonProps, LinkProps }

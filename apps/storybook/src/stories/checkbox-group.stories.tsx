@@ -37,9 +37,7 @@ export const Default: Story = {
 export const Validation: Story = (args: CheckboxGroupProps) => (
   <Form className="flex flex-col items-start gap-2">
     <CheckboxGroup {...args} />
-    <Button type="submit" color="primary">
-      Submit
-    </Button>
+    <Button type="submit">Submit</Button>
   </Form>
 )
 

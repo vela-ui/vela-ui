@@ -16,7 +16,7 @@ import {
   SliderStateContext,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { cn } from "../utils/classes"
+import { cn } from "../lib/utils"
 import { DataTheme } from "./types"
 
 const sliderVariants = tv({

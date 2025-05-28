@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { createContext } from "../../utils/context"
+import { createContext } from "../../lib/context"
 import { DataTheme } from "../types"
 
 export type ThemeProviderContextProps = {

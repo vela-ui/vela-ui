@@ -3,7 +3,7 @@
 import type { Href, RouterOptions } from "@react-types/shared"
 import { useMemo } from "react"
 import { I18nProvider, RouterProvider } from "react-aria-components"
-import { createContext } from "../../utils/context"
+import { createContext } from "../../lib/context"
 
 export type ProviderContextProps = {
   /**

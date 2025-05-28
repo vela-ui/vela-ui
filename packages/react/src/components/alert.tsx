@@ -1,101 +1,56 @@
-import { cloneElement, isValidElement, ReactNode, useMemo } from "react"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { ErrorIcon, InfoIcon, SuccessIcon, WarningIcon } from "../icons"
-import { cn } from "../utils/classes"
-import { DataTheme } from "./types"
+import { cn } from "../lib/utils"
 
 const alertVariants = tv({
-  base: "alert",
+  base: "relative grid w-full grid-cols-[0_1fr] items-start gap-y-0.5 rounded-lg border px-4 py-3 text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:gap-x-3 [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
   variants: {
     variant: {
-      outline: "alert-outline",
-      dash: "alert-dash",
-      soft: "alert-soft",
+      default: "bg-card text-card-foreground",
+      destructive:
+        "text-destructive bg-card *:data-[slot=alert-description]:text-destructive/90 [&>svg]:text-current",
     },
-    color: {
-      info: "alert-info",
-      success: "alert-success",
-      warning: "alert-warning",
-      error: "alert-error",
-    },
-    direction: {
-      vertical: "alert-vertical",
-      horizontal: "alert-horizontal",
-    },
-    responsive: {
-      true: "alert-vertical sm:alert-horizontal",
-    },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 })
 
-interface AlertProps
-  extends Omit<React.ComponentProps<"div">, "color">,
-    VariantProps<typeof alertVariants> {
-  ref?: React.Ref<HTMLDivElement>
-  dataTheme?: DataTheme
-  /**
-   * Icon to be displayed in the alert - overrides the default icon
-   */
-  icon?: ReactNode
-  /**
-   * Icon class name to be applied to the icon
-   */
-  iconClassName?: string
-  /**
-   * Whether the icon is hidden
-   */
-  hideIcon?: boolean
-}
+interface AlertProps extends React.ComponentProps<"div">, VariantProps<typeof alertVariants> {}
 
-const iconMap = {
-  info: InfoIcon,
-  success: SuccessIcon,
-  warning: WarningIcon,
-  error: ErrorIcon,
-} as const
-
-const Alert = (props: AlertProps) => {
-  const {
-    className,
-    iconClassName,
-    color,
-    variant,
-    direction,
-    responsive = false,
-    hideIcon = false,
-    icon,
-    dataTheme,
-    ref,
-    ...otherProps
-  } = props
-
-  const customIcon = icon && isValidElement(icon) ? cloneElement(icon) : null
-
-  const IconComponent = iconMap[color || "info"]
-
-  const getClassNames = useMemo(
-    () =>
-      alertVariants({
-        color,
-        variant,
-        direction,
-        responsive,
-        className,
-      }),
-    [color, variant, direction, responsive, className],
-  )
-
+function Alert({ className, variant, ...props }: AlertProps) {
   return (
-    <div ref={ref} role="alert" data-theme={dataTheme} className={getClassNames} {...otherProps}>
-      {!hideIcon &&
-        (customIcon || (
-          <IconComponent className={cn("size-6 shrink-0 fill-current", iconClassName)} />
-        ))}
-      {props.children}
-    </div>
+    <div
+      data-slot="alert"
+      role="alert"
+      className={alertVariants({ variant, className })}
+      {...props}
+    />
   )
 }
 
-export { Alert }
+function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-title"
+      className={cn("col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight", className)}
+      {...props}
+    />
+  )
+}
+
+function AlertDescription({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="alert-description"
+      className={cn(
+        "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Alert, AlertDescription, AlertTitle }
 export type { AlertProps }

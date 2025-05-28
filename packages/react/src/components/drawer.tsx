@@ -17,7 +17,7 @@ import {
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 import { CloseIcon } from "../icons"
-import { cn } from "../utils/classes"
+import { cn } from "../lib/utils"
 import { Button } from "./button"
 
 const drawerVariants = tv({

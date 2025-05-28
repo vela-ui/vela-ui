@@ -21,21 +21,22 @@ import {
   TextField,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { cn } from "../utils/classes"
-import { DataTheme } from "./types"
+import { focusRing } from "../lib/classes"
+import { cn } from "../lib/utils"
 
 const fieldVariants = tv({
   slots: {
-    label: "text-base-content w-fit cursor-default text-sm font-medium",
-    description: "text-base-content/60 text-[0.8125rem]",
-    fieldError: "text-error text-[0.8125rem] forced-colors:text-[Mark]",
+    label:
+      "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+    description: "text-muted-foreground text-sm",
+    fieldError: "text-destructive text-sm",
   },
 })
 
 const { label, description, fieldError } = fieldVariants()
 
 const Label = ({ className, ...props }: LabelProps) => (
-  <AriaLabel className={label({ className })} {...props} />
+  <AriaLabel data-slot="label" className={label({ className })} {...props} />
 )
 
 const Description = ({ className, ...props }: TextProps) => (
@@ -44,22 +45,23 @@ const Description = ({ className, ...props }: TextProps) => (
 
 const FieldError = ({ className, ...props }: FieldErrorProps) => (
   <AriaFieldError
-    className={composeRenderProps(className, (className) => cn(fieldError(), className))}
+    className={composeRenderProps(className, (className) => fieldError({ className }))}
     {...props}
   />
 )
 
 const fieldGroupVariants = tv({
-  base: "group rounded-field border-base-content/20 relative flex h-10 items-center overflow-hidden border",
+  extend: focusRing,
+  base: "group border-input relative flex h-10 items-center overflow-hidden rounded-lg border shadow-xs",
   variants: {
     isFocusWithin: {
-      true: "border-base-content forced-colors:border-[Highlight]",
+      true: "border-ring",
     },
     isInvalid: {
-      true: "border-error forced-colors:border-[Mark]",
+      true: "border-destructive",
     },
     isDisabled: {
-      true: "opacity-50 forced-colors:border-[GrayText]",
+      true: "opacity-50",
     },
   },
 })
@@ -110,7 +112,6 @@ interface InputProps
   extends Omit<AriaInputProps, "color" | "size">,
     VariantProps<typeof inputVariants> {
   ref?: React.Ref<HTMLInputElement>
-  dataTheme?: DataTheme
   /**
    * Element to be rendered in the left side of the input.
    */
@@ -121,16 +122,7 @@ interface InputProps
   endContent?: React.ReactNode
 }
 
-const Input = ({
-  ref,
-  className,
-  color,
-  size,
-  startContent,
-  endContent,
-  dataTheme,
-  ...props
-}: InputProps) => {
+const Input = ({ ref, className, color, size, startContent, endContent, ...props }: InputProps) => {
   const getClassNames = useMemo(
     () =>
       inputVariants({
@@ -143,7 +135,6 @@ const Input = ({
   if (startContent || endContent) {
     return (
       <div
-        data-theme={dataTheme}
         className={inputVariants({
           color,
           size,
@@ -159,7 +150,6 @@ const Input = ({
   return (
     <AriaInput
       ref={ref}
-      data-theme={dataTheme}
       className={composeRenderProps(className, (className) => cn(getClassNames, className))}
       {...props}
     />
@@ -196,13 +186,11 @@ interface TextAreaProps
   extends Omit<AriaTextAreaProps, "color">,
     VariantProps<typeof textAreaVariants> {
   ref?: React.Ref<HTMLTextAreaElement>
-  dataTheme?: DataTheme
 }
 
-const TextArea = ({ ref, className, color, size, dataTheme, ...props }: TextAreaProps) => (
+const TextArea = ({ ref, className, color, size, ...props }: TextAreaProps) => (
   <AriaTextArea
     ref={ref}
-    data-theme={dataTheme}
     className={composeRenderProps(className, (className) =>
       textAreaVariants({
         color,

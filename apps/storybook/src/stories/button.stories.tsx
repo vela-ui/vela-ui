@@ -1,32 +1,32 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, ButtonProps, componentColors, componentSizes, LinkButton } from "@vela-ui/react"
+import { Button, ButtonProps, LinkButton } from "@vela-ui/react"
+import { HeartIcon, Loader2 } from "lucide-react"
+
+const variants = ["default", "destructive", "outline", "secondary", "ghost", "link"] as const
+const sizes = ["default", "sm", "lg", "icon"] as const
 
 const meta = {
   title: "Components/Button",
   component: Button,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   args: {
-    size: "md",
-    loaderPlacement: "start",
+    size: "default",
   },
   argTypes: {
     variant: {
       control: {
         type: "select",
       },
-      options: ["solid", "outline", "soft", "dash", "ghost", "link"],
-    },
-    color: {
-      control: {
-        type: "select",
-      },
-      options: componentColors,
+      options: variants,
     },
     size: {
       control: {
         type: "select",
       },
-      options: componentSizes,
+      options: sizes,
     },
     isDisabled: {
       control: {
@@ -45,70 +45,26 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const HeartIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="2.5"
-    stroke="currentColor"
-    className="size-5"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-    />
-  </svg>
-)
-
-const ColorButtonTemplate = (args: ButtonProps) => (
+const ButtonTemplate = (args: ButtonProps) => (
   <div className="flex items-center gap-2">
-    <Button {...args}>Default</Button>
-    {componentColors.map((color) => (
-      <Button key={color} {...args} color={color}>
-        {color.charAt(0).toUpperCase() + color.slice(1)}
+    {variants.map((variant) => (
+      <Button key={variant} {...args} variant={variant}>
+        {variant.charAt(0).toUpperCase() + variant.slice(1)}
       </Button>
     ))}
   </div>
 )
 
-export const Colors: Story = {
-  render: (args) => (
-    <div className="flex items-center gap-2">
-      <ColorButtonTemplate {...args} />
-    </div>
-  ),
+export const Default: Story = {
+  args: {
+    children: "Button",
+  },
 }
 
 export const Variants: Story = {
-  args: {},
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Solid buttons</h3>
-        <ColorButtonTemplate />
-      </div>
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Soft buttons</h3>
-        <ColorButtonTemplate variant="soft" />
-      </div>
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Outline buttons</h3>
-        <ColorButtonTemplate variant="outline" />
-      </div>
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Dash buttons</h3>
-        <ColorButtonTemplate variant="dash" />
-      </div>
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Ghost buttons</h3>
-        <ColorButtonTemplate variant="ghost" />
-      </div>
-      <div>
-        <h3 className="mb-3 text-xl font-medium">Link buttons</h3>
-        <ColorButtonTemplate variant="link" />
-      </div>
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      <ButtonTemplate {...args} />
     </div>
   ),
 }
@@ -116,20 +72,14 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
-      <Button {...args} size="xs">
-        Xsmall
-      </Button>
       <Button {...args} size="sm">
         Small
       </Button>
-      <Button {...args} size="md">
+      <Button {...args} size="default">
         Medium
       </Button>
       <Button {...args} size="lg">
         Large
-      </Button>
-      <Button {...args} size="xl">
-        Xlarge
       </Button>
     </div>
   ),
@@ -139,111 +89,66 @@ export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
-  render: ColorButtonTemplate,
+  render: ButtonTemplate,
 }
 
 export const Pending: Story = {
   args: {
     isPending: true,
   },
+  render: ButtonTemplate,
+}
+
+export const WithIcon: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
-        {componentColors.map((color) => (
-          <Button key={color} {...args} color={color}>
-            {color.charAt(0).toUpperCase() + color.slice(1)}
-          </Button>
-        ))}
+        {variants
+          .filter((variant) => variant !== "link")
+          .map((variant) => (
+            <Button key={variant} variant={variant} {...args}>
+              <HeartIcon />
+              {variant.charAt(0).toUpperCase() + variant.slice(1)}
+            </Button>
+          ))}
       </div>
       <div className="flex items-center gap-2">
-        {componentColors.map((color) => (
-          <Button
-            key={color}
-            {...args}
-            color={color}
-            variant="outline"
-            loaderPlacement="end"
-            size="lg"
-          >
-            {color.charAt(0).toUpperCase() + color.slice(1)}
-          </Button>
-        ))}
+        {variants
+          .filter((variant) => variant !== "link")
+          .map((variant) => (
+            <Button key={variant} variant={variant} {...args}>
+              {variant.charAt(0).toUpperCase() + variant.slice(1)}
+              <HeartIcon />
+            </Button>
+          ))}
       </div>
       <div className="flex items-center gap-2">
-        {componentColors.map((color) => (
-          <Button key={color} {...args} color={color} variant="soft" size="xl" shape="square" />
-        ))}
+        {variants
+          .filter((variant) => variant !== "link")
+          .map((variant) => (
+            <Button key={variant} variant={variant} size="icon" {...args}>
+              <HeartIcon />
+            </Button>
+          ))}
       </div>
     </div>
   ),
 }
 
-export const WithIcons: Story = {
+export const Loading: Story = {
+  args: {
+    isPending: true,
+  },
   render: (args) => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        {componentColors.map((color) => (
-          <Button key={color} {...args} color={color}>
-            <HeartIcon />
-            {color.charAt(0).toUpperCase() + color.slice(1)}
-          </Button>
-        ))}
-      </div>
-      <div className="flex items-center gap-2">
-        {componentColors.map((color) => (
-          <Button key={color} {...args} color={color}>
-            {color.charAt(0).toUpperCase() + color.slice(1)}
-            <HeartIcon />
-          </Button>
-        ))}
-      </div>
-    </div>
-  ),
-}
-
-export const Shapes: Story = {
-  render: (args) => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Button {...args} color="primary" shape="square">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="primary" variant="soft" shape="square">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="primary" variant="outline" shape="square">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="primary" variant="dash" shape="square">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="primary" variant="ghost" shape="square">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="primary" variant="link" shape="square">
-          <HeartIcon />
-        </Button>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button {...args} color="secondary" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="secondary" variant="soft" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="secondary" variant="outline" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="secondary" variant="dash" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="secondary" variant="ghost" shape="circle">
-          <HeartIcon />
-        </Button>
-        <Button {...args} color="secondary" variant="link" shape="circle">
-          <HeartIcon />
-        </Button>
-      </div>
+    <div className="flex items-center gap-2">
+      <Button {...args}>
+        <Loader2 className="animate-spin" />
+        Please wait
+      </Button>
+      <Button {...args} variant="outline">
+        <Loader2 className="animate-spin" />
+        Please wait
+      </Button>
     </div>
   ),
 }
@@ -251,7 +156,7 @@ export const Shapes: Story = {
 export const ButtonLink: Story = {
   render: () => (
     <div className="flex items-center gap-2">
-      <LinkButton color="primary" href="https://github.com/vela-ui/vela-ui" target="_blank">
+      <LinkButton href="https://github.com/vela-ui/vela-ui" target="_blank">
         Button Link
       </LinkButton>
     </div>
