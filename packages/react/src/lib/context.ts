@@ -43,7 +43,6 @@ export function createContext<ContextType>(options: CreateContextOptions = {}) {
       const error = new Error(errorMessage)
 
       error.name = "ContextError"
-      // @ts-expect-error - Error.captureStackTrace is not defined in the type definitions
       Error.captureStackTrace?.(error, useContext)
       throw error
     }

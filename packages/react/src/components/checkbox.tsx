@@ -1,54 +1,13 @@
 "use client"
 
-import type {
-  CheckboxGroupProps as AriaCheckboxGroupProps,
-  CheckboxProps as AriaCheckboxProps,
-  ValidationResult,
-} from "react-aria-components"
-import {
-  Checkbox as AriaCheckbox,
-  CheckboxGroup as AriaCheckboxGroup,
-  composeRenderProps,
-} from "react-aria-components"
+import type { CheckboxProps as AriaCheckboxProps } from "react-aria-components"
+import { Checkbox as AriaCheckbox, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { CheckIcon, MinusIcon } from "../icons"
 import { focusRing } from "../lib/classes"
-import { composeTailwindRenderProps } from "../lib/utils"
-import { Description, FieldError, Label } from "./field"
-
-interface CheckboxGroupProps extends AriaCheckboxGroupProps {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: ValidationResult) => string)
-}
-
-const CheckboxGroup = ({
-  className,
-  children,
-  label,
-  description,
-  errorMessage,
-  ...props
-}: CheckboxGroupProps) => {
-  return (
-    <AriaCheckboxGroup
-      className={composeTailwindRenderProps(className, "flex flex-col gap-2")}
-      {...props}
-    >
-      {composeRenderProps(children, (children) => (
-        <>
-          {label && <Label>{label}</Label>}
-          {children}
-          {description && <Description>{description}</Description>}
-          <FieldError>{errorMessage}</FieldError>
-        </>
-      ))}
-    </AriaCheckboxGroup>
-  )
-}
 
 const checkboxVariants = tv({
-  base: "group flex items-center gap-2 text-sm transition",
+  base: "group relative flex items-center gap-2 text-sm transition",
   variants: {
     isDisabled: {
       true: "cursor-not-allowed opacity-50",
@@ -58,22 +17,32 @@ const checkboxVariants = tv({
 
 const checkboxIndicatorVariants = tv({
   extend: focusRing,
-  base: "peer border-input dark:bg-input/30 size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow [&_svg]:size-3.5",
+  base: "peer border-input dark:bg-input/30 flex shrink-0 items-center justify-center rounded-[4px] border shadow-xs transition-shadow [&_svg]:size-full",
   variants: {
+    size: {
+      sm: "size-4",
+      md: "size-5 p-0.5",
+      lg: "size-6 p-0.5",
+    },
     isSelected: {
-      true: "bg-primary text-primary-foreground border-primary",
+      true: "bg-primary dark:bg-primary text-primary-foreground border-primary",
     },
     isDisabled: {
       true: "cursor-not-allowed opacity-50",
     },
   },
+  defaultVariants: {
+    size: "sm",
+  },
 })
 
-interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {}
+interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
+  indicatorClassName?: string
+  size?: "sm" | "md" | "lg"
+}
 
-const Checkbox = ({ className, children, ...props }: CheckboxProps) => (
+const Checkbox = ({ className, children, indicatorClassName, size, ...props }: CheckboxProps) => (
   <AriaCheckbox
-    data-slot="checkbox"
     className={composeRenderProps(className, (className, renderProps) =>
       checkboxVariants({ ...renderProps, className }),
     )}
@@ -85,7 +54,9 @@ const Checkbox = ({ className, children, ...props }: CheckboxProps) => (
           data-slot="checkbox-indicator"
           className={checkboxIndicatorVariants({
             isSelected: isSelected || isIndeterminate,
+            size,
             ...renderProps,
+            className: indicatorClassName,
           })}
         >
           {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
@@ -96,5 +67,5 @@ const Checkbox = ({ className, children, ...props }: CheckboxProps) => (
   </AriaCheckbox>
 )
 
-export { Checkbox, CheckboxGroup }
-export type { CheckboxGroupProps, CheckboxProps }
+export { Checkbox }
+export type { CheckboxProps }

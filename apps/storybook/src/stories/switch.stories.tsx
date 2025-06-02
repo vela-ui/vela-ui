@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { CloseIcon, componentColors, componentSizes, SuccessIcon, Switch } from "@vela-ui/react"
+import { Switch } from "@vela-ui/react"
 
 const meta = {
   title: "Components/Switch",
@@ -9,21 +9,19 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: componentColors,
-    },
-    size: {
-      control: {
-        type: "select",
-      },
-      options: componentSizes,
-    },
     isDisabled: {
       control: {
         type: "boolean",
+      },
+    },
+    indicatorClassName: {
+      control: {
+        type: "text",
+      },
+    },
+    thumbClassName: {
+      control: {
+        type: "text",
       },
     },
   },
@@ -39,9 +37,34 @@ export const Default: Story = {
   },
 }
 
-export const Custom: Story = {
+export const Colors: Story = {
   args: {
-    children: "Wi-Fi",
-    thumbIcon: (props) => (props.isSelected ? <SuccessIcon /> : <CloseIcon />),
+    children: "Bluetooth",
+    defaultSelected: true,
+    indicatorClassName: "group-data-[selected=true]:bg-blue-500",
   },
+}
+
+export const Disabled: Story = {
+  args: {
+    children: "Bluetooth",
+    isDisabled: true,
+  },
+}
+
+export const Custom: Story = {
+  render: (args) => (
+    <Switch
+      {...args}
+      className="flex flex-row-reverse gap-6 rounded-lg border p-4 data-[selected=true]:border-blue-600"
+      indicatorClassName="group-data-[selected=true]:bg-blue-600"
+    >
+      <div className="flex flex-col gap-1">
+        <div className="font-medium">Share across devices</div>
+        <div className="text-muted-foreground text-sm font-normal">
+          Focus is shared across devices, and turns off when you leave the app.
+        </div>
+      </div>
+    </Switch>
+  ),
 }

@@ -1,28 +1,32 @@
 "use client"
 
-import { useMemo } from "react"
 import type {
   GroupProps as AriaGroupProps,
-  InputProps as AriaInputProps,
-  TextAreaProps as AriaTextAreaProps,
   FieldErrorProps,
   LabelProps,
   TextFieldProps,
   TextProps,
+  ValidationResult,
 } from "react-aria-components"
 import {
   FieldError as AriaFieldError,
   Group as AriaGroup,
-  Input as AriaInput,
   Label as AriaLabel,
   Text as AriaText,
-  TextArea as AriaTextArea,
+  TextField as AriaTextField,
   composeRenderProps,
-  TextField,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
-import { cn } from "../lib/utils"
+
+interface FieldProps {
+  label?: string
+  placeholder?: string
+  description?: string
+  errorMessage?: string | ((validation: ValidationResult) => string)
+  "aria-label"?: TextFieldProps["aria-label"]
+  "aria-labelledby"?: TextFieldProps["aria-labelledby"]
+}
 
 const fieldVariants = tv({
   slots: {
@@ -82,133 +86,7 @@ function FieldGroup({ className, ...props }: FieldGroupProps) {
   )
 }
 
-const inputVariants = tv({
-  base: "input",
-  variants: {
-    color: {
-      neutral: "input-neutral",
-      primary: "input-primary",
-      secondary: "input-secondary",
-      accent: "input-accent",
-      info: "input-info",
-      success: "input-success",
-      warning: "input-warning",
-      error: "input-error",
-    },
-    size: {
-      xs: "input-xs",
-      sm: "input-sm",
-      md: "input-md",
-      lg: "input-lg",
-      xl: "input-xl",
-    },
-    ghost: {
-      true: "input-ghost",
-    },
-  },
-})
+const TextField = AriaTextField
 
-interface InputProps
-  extends Omit<AriaInputProps, "color" | "size">,
-    VariantProps<typeof inputVariants> {
-  ref?: React.Ref<HTMLInputElement>
-  /**
-   * Element to be rendered in the left side of the input.
-   */
-  startContent?: React.ReactNode
-  /**
-   * Element to be rendered in the right side of the input.
-   */
-  endContent?: React.ReactNode
-}
-
-const Input = ({ ref, className, color, size, startContent, endContent, ...props }: InputProps) => {
-  const getClassNames = useMemo(
-    () =>
-      inputVariants({
-        color,
-        size,
-      }),
-    [color, size],
-  )
-
-  if (startContent || endContent) {
-    return (
-      <div
-        className={inputVariants({
-          color,
-          size,
-        })}
-      >
-        {startContent}
-        <AriaInput ref={ref} className={className} {...props} />
-        {endContent}
-      </div>
-    )
-  }
-
-  return (
-    <AriaInput
-      ref={ref}
-      className={composeRenderProps(className, (className) => cn(getClassNames, className))}
-      {...props}
-    />
-  )
-}
-
-const textAreaVariants = tv({
-  base: "textarea",
-  variants: {
-    color: {
-      neutral: "textarea-neutral",
-      primary: "textarea-primary",
-      secondary: "textarea-secondary",
-      accent: "textarea-accent",
-      info: "textarea-info",
-      success: "textarea-success",
-      warning: "textarea-warning",
-      error: "textarea-error",
-    },
-    size: {
-      xs: "textarea-xs",
-      sm: "textarea-sm",
-      md: "textarea-md",
-      lg: "textarea-lg",
-      xl: "textarea-xl",
-    },
-    ghost: {
-      true: "textarea-ghost",
-    },
-  },
-})
-
-interface TextAreaProps
-  extends Omit<AriaTextAreaProps, "color">,
-    VariantProps<typeof textAreaVariants> {
-  ref?: React.Ref<HTMLTextAreaElement>
-}
-
-const TextArea = ({ ref, className, color, size, ...props }: TextAreaProps) => (
-  <AriaTextArea
-    ref={ref}
-    className={composeRenderProps(className, (className) =>
-      textAreaVariants({
-        color,
-        size,
-        className,
-      }),
-    )}
-    {...props}
-  />
-)
-
-export { Description, FieldError, FieldGroup, Input, Label, TextArea, TextField }
-export type {
-  FieldErrorProps,
-  FieldGroupProps,
-  InputProps,
-  LabelProps,
-  TextAreaProps,
-  TextFieldProps,
-  TextProps,
-}
+export { Description, FieldError, FieldGroup, Label, TextField }
+export type { FieldErrorProps, FieldGroupProps, FieldProps, LabelProps, TextProps }

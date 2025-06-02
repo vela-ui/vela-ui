@@ -1,90 +1,89 @@
-import { cloneElement, ReactElement } from "react"
 import {
   Switch as AriaSwitch,
   SwitchProps as AriaSwitchProps,
   composeRenderProps,
 } from "react-aria-components"
-import { tv, VariantProps } from "tailwind-variants"
-import { DataTheme } from "./types"
+import { tv } from "tailwind-variants"
+import { focusRing } from "../lib/classes"
 
 const switchVariants = tv({
-  base: "switch",
+  base: "group relative inline-flex items-center gap-2 text-sm",
   variants: {
-    color: {
-      neutral: "switch-neutral",
-      primary: "switch-primary",
-      secondary: "switch-secondary",
-      accent: "switch-accent",
-      info: "switch-info",
-      success: "switch-success",
-      warning: "switch-warning",
-      error: "switch-error",
-    },
-    size: {
-      xs: "switch-xs",
-      sm: "switch-sm",
-      md: "switch-md",
-      lg: "switch-lg",
-      xl: "switch-xl",
+    isDisabled: {
+      true: "text-foreground/50 cursor-not-allowed",
     },
   },
 })
 
-type SwitchThumbIconProps = {
-  isSelected: boolean
-  className?: string
-}
+const switchIndicatorVariants = tv({
+  extend: focusRing,
+  base: "peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all",
+  variants: {
+    isSelected: {
+      true: "bg-primary text-primary-foreground",
+      false: "bg-input dark:bg-input/80",
+    },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
+    },
+  },
+})
 
-interface SwitchProps extends AriaSwitchProps, VariantProps<typeof switchVariants> {
+const switchThumbVariants = tv({
+  base: "bg-background pointer-events-none block size-4 rounded-full ring-0 transition-transform",
+  variants: {
+    isSelected: {
+      true: "dark:bg-primary-foreground translate-x-[calc(100%-2px)]",
+      false: "dark:bg-foreground translate-x-0",
+    },
+  },
+})
+
+interface SwitchProps extends AriaSwitchProps {
   ref?: React.Ref<HTMLLabelElement>
-  dataTheme?: DataTheme
-  /**
-   * The icon to be displayed inside the thumb.
-   */
-  thumbIcon?: React.ReactNode | ((props: SwitchThumbIconProps) => React.ReactNode)
+  thumbClassName?: string
+  indicatorClassName?: string
 }
 
 const Switch = ({
   ref,
   className,
-  color,
-  size,
-  dataTheme,
-  thumbIcon,
+  thumbClassName,
+  indicatorClassName,
   children,
   ...props
-}: SwitchProps) => (
-  <AriaSwitch
-    ref={ref}
-    data-theme={dataTheme}
-    className={composeRenderProps(className, (className) =>
-      switchVariants({
-        color,
-        size,
-        className,
-      }),
-    )}
-    {...props}
-  >
-    {(renderProps) => {
-      const clonedThumbIcon =
-        typeof thumbIcon === "function"
-          ? thumbIcon({
-              isSelected: renderProps.isSelected,
-            })
-          : thumbIcon && cloneElement(thumbIcon as ReactElement)
-
-      return (
-        <>
-          <div className="switch-track">
-            <div className="switch-thumb">{thumbIcon && clonedThumbIcon}</div>
-          </div>
-          {children}
-        </>
-      )
-    }}
-  </AriaSwitch>
-)
+}: SwitchProps) => {
+  return (
+    <AriaSwitch
+      ref={ref}
+      className={composeRenderProps(className, (className, renderProps) =>
+        switchVariants({ ...renderProps, className }),
+      )}
+      {...props}
+    >
+      {composeRenderProps(children, (children, renderProps) => {
+        return (
+          <>
+            <div
+              className={switchIndicatorVariants({
+                ...renderProps,
+                className: indicatorClassName,
+              })}
+            >
+              <div
+                className={switchThumbVariants({
+                  ...renderProps,
+                  className: thumbClassName,
+                })}
+              />
+            </div>
+            {children}
+          </>
+        )
+      })}
+    </AriaSwitch>
+  )
+}
 
 export { Switch }
 export type { SwitchProps }

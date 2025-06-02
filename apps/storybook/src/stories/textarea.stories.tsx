@@ -1,33 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { componentColors, componentSizes, TextArea } from "@vela-ui/react"
+import { Textarea } from "@vela-ui/react"
 
 const meta = {
-  title: "Components/TextArea",
-  component: TextArea,
+  title: "Components/Textarea",
+  component: Textarea,
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: componentColors,
-    },
-    size: {
-      control: {
-        type: "select",
-      },
-      options: componentSizes,
-    },
     disabled: {
       control: {
         type: "boolean",
       },
     },
   },
-} satisfies Meta<typeof TextArea>
+} satisfies Meta<typeof Textarea>
 
 export default meta
 
@@ -35,6 +22,15 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    placeholder: "vela@example.com",
+    placeholder: "Type your message here.",
+    className: " w-96",
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    placeholder: "Type your message here.",
+    disabled: true,
+    className: " w-96",
   },
 }

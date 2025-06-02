@@ -1,58 +1,76 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { createContext } from "../../lib/context"
-import { DataTheme } from "../types"
+import { createContext, useContext, useEffect, useState } from "react"
 
-export type ThemeProviderContextProps = {
-  theme: DataTheme
-  setTheme: (theme: DataTheme) => void
-}
+type Theme = "dark" | "light" | "system"
 
-export const [ThemeProviderContext, useTheme] = createContext<ThemeProviderContextProps>({
-  name: "ThemeProviderContext",
-  strict: false,
-})
-
-export interface ThemeProviderProps {
+type ThemeProviderProps = {
   children: React.ReactNode
-  defaultTheme?: DataTheme
+  defaultTheme?: Theme
   storageKey?: string
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+type ThemeProviderState = {
+  theme: Theme
+  setTheme: (theme: Theme) => void
+}
+
+const initialState: ThemeProviderState = {
+  theme: "system",
+  setTheme: () => null,
+}
+
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+
+function ThemeProvider({
   children,
-  defaultTheme = "light",
-  storageKey = "vela-theme",
+  defaultTheme = "system",
+  storageKey = "vela-ui-theme",
   ...props
-}) => {
-  const [theme, setTheme] = useState<DataTheme>(() => {
-    if (typeof window !== "undefined") {
-      return (localStorage?.getItem(storageKey) as DataTheme) || defaultTheme
-    }
-    return defaultTheme
-  })
+}: ThemeProviderProps) {
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
+  )
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const root = window.document.documentElement
-      root.setAttribute("data-theme", theme)
+    const root = window.document.documentElement
+
+    root.classList.remove("light", "dark")
+
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+
+      root.classList.add(systemTheme)
+      return
     }
+
+    root.classList.add(theme)
   }, [theme])
 
   const value = {
     theme,
-    setTheme: (value: DataTheme) => {
-      if (typeof window !== "undefined") {
-        localStorage.setItem(storageKey, value)
-      }
-      setTheme(value)
+    setTheme: (theme: Theme) => {
+      localStorage.setItem(storageKey, theme)
+      setTheme(theme)
     },
   }
 
   return (
-    <ThemeProviderContext {...props} value={value}>
+    <ThemeProviderContext.Provider {...props} value={value}>
       {children}
-    </ThemeProviderContext>
+    </ThemeProviderContext.Provider>
   )
 }
+
+const useTheme = () => {
+  const context = useContext(ThemeProviderContext)
+
+  if (context === undefined) throw new Error("useTheme must be used within a ThemeProvider")
+
+  return context
+}
+
+export { ThemeProvider, ThemeProviderContext, useTheme }
+export type { ThemeProviderProps, ThemeProviderState }
