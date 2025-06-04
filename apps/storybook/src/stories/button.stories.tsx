@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, ButtonProps, LinkButton } from "@vela-ui/react"
+import { Button, LinkButton } from "@vela-ui/react"
 import { HeartIcon, Loader2 } from "lucide-react"
 
 const variants = ["default", "destructive", "outline", "secondary", "ghost", "link"] as const
@@ -8,12 +8,8 @@ const sizes = ["default", "sm", "lg", "icon"] as const
 const meta = {
   title: "Components/Button",
   component: Button,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
-  },
-  args: {
-    size: "default",
   },
   argTypes: {
     variant: {
@@ -45,16 +41,6 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const ButtonTemplate = (args: ButtonProps) => (
-  <div className="flex items-center gap-2">
-    {variants.map((variant) => (
-      <Button key={variant} {...args} variant={variant}>
-        {variant.charAt(0).toUpperCase() + variant.slice(1)}
-      </Button>
-    ))}
-  </div>
-)
-
 export const Default: Story = {
   args: {
     children: "Button",
@@ -64,7 +50,11 @@ export const Default: Story = {
 export const Variants: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
-      <ButtonTemplate {...args} />
+      {variants.map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Button>
+      ))}
     </div>
   ),
 }
@@ -89,14 +79,30 @@ export const Disabled: Story = {
   args: {
     isDisabled: true,
   },
-  render: ButtonTemplate,
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      {variants.map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Button>
+      ))}
+    </div>
+  ),
 }
 
 export const Pending: Story = {
   args: {
     isPending: true,
   },
-  render: ButtonTemplate,
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      {variants.map((variant) => (
+        <Button key={variant} {...args} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Button>
+      ))}
+    </div>
+  ),
 }
 
 export const WithIcon: Story = {

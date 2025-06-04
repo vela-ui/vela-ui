@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Badge, BadgeProps, Button } from "@vela-ui/react"
+import { Badge, Button } from "@vela-ui/react"
 import { HeartIcon } from "lucide-react"
 
 const variants = ["default", "secondary", "destructive", "outline"] as const
@@ -7,7 +7,6 @@ const variants = ["default", "secondary", "destructive", "outline"] as const
 const meta = {
   title: "Components/Badge",
   component: Badge,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },
@@ -25,16 +24,6 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const BadgeTemplate = (args: BadgeProps) => (
-  <div className="flex items-center gap-2">
-    {variants.map((variant) => (
-      <Badge key={variant} {...args} variant={variant}>
-        {variant.charAt(0).toUpperCase() + variant.slice(1)}
-      </Badge>
-    ))}
-  </div>
-)
-
 export const Default: Story = {
   render: (args) => <Badge {...args}>Default</Badge>,
 }
@@ -42,7 +31,11 @@ export const Default: Story = {
 export const Variants: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
-      <BadgeTemplate {...args} />
+      {variants.map((variant) => (
+        <Badge key={variant} {...args} variant={variant}>
+          {variant.charAt(0).toUpperCase() + variant.slice(1)}
+        </Badge>
+      ))}
     </div>
   ),
 }
@@ -70,17 +63,6 @@ export const WithIcon: Story = {
   ),
 }
 
-export const Sizes: Story = {
-  render: (args) => (
-    <div className="flex items-center gap-2">
-      <Badge {...args} className="h-8 px-4 text-base [&>svg]:size-4">
-        <HeartIcon />
-        Large
-      </Badge>
-    </div>
-  ),
-}
-
 export const WithButton: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
@@ -88,6 +70,17 @@ export const WithButton: Story = {
         Inbox
         <Badge {...args}>+99</Badge>
       </Button>
+    </div>
+  ),
+}
+
+export const CustomStyles: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      <Badge {...args} className="h-8 px-4 text-base [&>svg]:size-4">
+        <HeartIcon />
+        Large
+      </Badge>
     </div>
   ),
 }

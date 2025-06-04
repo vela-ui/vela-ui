@@ -5,7 +5,6 @@ import { CircleAlertIcon, CircleCheckIcon } from "lucide-react"
 const meta = {
   title: "Components/Alert",
   component: Alert,
-  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: {

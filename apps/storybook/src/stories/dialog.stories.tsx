@@ -1,10 +1,23 @@
 import { Meta, StoryObj } from "@storybook/react"
-import { Button, Dialog } from "@vela-ui/react"
+import {
+  Button,
+  Dialog,
+  DialogCloseIcon,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Form,
+  Input,
+  Label,
+  TextField,
+} from "@vela-ui/react"
 
 const meta = {
   title: "Components/Dialog",
   component: Dialog,
-  tags: ["autodocs"],
   argTypes: {
     size: {
       control: {
@@ -25,34 +38,43 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => (
-    <Dialog.Trigger>
-      <Button>Delete</Button>
-      <Dialog placement="top">
-        <Dialog.Content role="alertdialog">
-          <Dialog.Header>
-            <Dialog.Title>Delete file</Dialog.Title>
-          </Dialog.Header>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam. Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-          </div>
-          <Dialog.Footer>
-            <Button slot="close" variant="outline">
-              Cancel
-            </Button>
-            <Button slot="close" color="primary" onPress={() => console.log("xxx")}>
-              Continue
-            </Button>
-          </Dialog.Footer>
-          <Dialog.CloseButton />
-        </Dialog.Content>
+  args: {
+    size: "sm",
+  },
+  render: (args) => (
+    <DialogTrigger>
+      <Button variant="outline">Open Dialog</Button>
+      <Dialog {...args} placement="top">
+        <DialogContent role="alertdialog">
+          <Form>
+            <DialogHeader>
+              <DialogTitle>Edit profile</DialogTitle>
+              <DialogDescription>
+                Make changes to your profile here. Click save when you&apos;re done.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4">
+              <TextField className="grid gap-3" isRequired autoFocus value="Pedro Duarte">
+                <Label>Name</Label>
+                <Input name="name" />
+              </TextField>
+              <TextField className="grid gap-3" value="@peduarte">
+                <Label>Username</Label>
+                <Input name="username" />
+              </TextField>
+            </div>
+            <DialogFooter>
+              <Button slot="close" variant="outline">
+                Cancel
+              </Button>
+              <Button slot="close" onPress={() => console.log("xxx")}>
+                Save changes
+              </Button>
+            </DialogFooter>
+          </Form>
+          <DialogCloseIcon />
+        </DialogContent>
       </Dialog>
-    </Dialog.Trigger>
+    </DialogTrigger>
   ),
 }

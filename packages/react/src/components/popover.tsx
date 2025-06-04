@@ -16,17 +16,19 @@ import { tv } from "tailwind-variants"
 import { cn } from "../lib/utils"
 
 const popoverVariants = tv({
-  base: "popover",
+  base: "bg-popover text-popover-foreground z-50 rounded-md border shadow-md outline-hidden",
   variants: {
-    color: {
-      neutral: "popover-neutral",
-      primary: "popover-primary",
-      secondary: "popover-secondary",
-      accent: "popover-accent",
-      info: "popover-info",
-      success: "popover-success",
-      warning: "popover-warning",
-      error: "popover-error",
+    isEntering: {
+      true: [
+        "animate-in fade-in-0 zoom-in-95 duration-200 ease-out",
+        "data-[placement=left]:slide-in-from-right-1 data-[placement=right]:slide-in-from-left-1 data-[placement=top]:slide-in-from-bottom-1 data-[placement=bottom]:slide-in-from-top-1",
+      ],
+    },
+    isExiting: {
+      true: [
+        "animate-out fade-out-0 zoom-out-95 duration-200 ease-in",
+        "data-[placement=left]:slide-out-to-right-1 data-[placement=right]:slide-out-to-left-1 data-[placement=top]:slide-out-to-bottom-1 data-[placement=bottom]:slide-out-to-top-1",
+      ],
     },
   },
 })
@@ -39,12 +41,12 @@ interface PopoverProps
    * @default false
    */
   showArrow?: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
-const Trigger = AriaDialogTrigger
+const PopoverTrigger = AriaDialogTrigger
 
-const Popover = ({ className, showArrow, color, children, ...props }: PopoverProps) => {
+const Popover = ({ className, showArrow, children, ...props }: PopoverProps) => {
   const popoverContext = useSlottedContext(PopoverContext)!
   const isSubmenu = popoverContext?.trigger === "SubmenuTrigger"
   let offset = showArrow ? 12 : 8
@@ -52,19 +54,24 @@ const Popover = ({ className, showArrow, color, children, ...props }: PopoverPro
 
   return (
     <AriaPopover
+      data-slot="popover"
       offset={offset}
       className={composeRenderProps(className, (className, renderProps) =>
         popoverVariants({
           ...renderProps,
-          color,
           className,
         }),
       )}
       {...props}
     >
       {showArrow && (
-        <OverlayArrow className="popover-arrow">
-          <svg width={12} height={12} viewBox="0 0 12 12">
+        <OverlayArrow className="group">
+          <svg
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            className="fill-popover stroke-border block stroke-1 group-data-[placement=bottom]:rotate-180 group-data-[placement=left]:-rotate-90 group-data-[placement=right]:rotate-90"
+          >
             <path d="M0 0 L6 6 L12 0" />
           </svg>
         </OverlayArrow>
@@ -74,12 +81,15 @@ const Popover = ({ className, showArrow, color, children, ...props }: PopoverPro
   )
 }
 
-function Content({ className, ...props }: AriaDialogProps) {
-  return <AriaDialog className={cn("p-4 outline-none", className)} {...props} />
+function PopoverContent({ className, ...props }: AriaDialogProps) {
+  return (
+    <AriaDialog
+      data-slot="popover-content"
+      className={cn("p-4 outline-hidden", className)}
+      {...props}
+    />
+  )
 }
 
-Popover.Trigger = Trigger
-Popover.Content = Content
-
-export { Popover }
+export { Popover, PopoverContent, PopoverTrigger }
 export type { PopoverProps }
