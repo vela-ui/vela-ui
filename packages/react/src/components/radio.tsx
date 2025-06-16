@@ -1,10 +1,6 @@
 "use client"
 
-import type {
-  RadioGroupProps as AriaRadioGroupProps,
-  RadioProps as AriaRadioProps,
-  ValidationResult,
-} from "react-aria-components"
+import type { ValidationResult } from "react-aria-components"
 import {
   Radio as AriaRadio,
   RadioGroup as AriaRadioGroup,
@@ -16,12 +12,11 @@ import { focusRing } from "../lib/classes"
 import { composeTailwindRenderProps } from "../lib/utils"
 import { Description, FieldError, Label } from "./field"
 
-interface RadioGroupProps extends AriaRadioGroupProps {
+type RadioGroupProps = React.ComponentProps<typeof AriaRadioGroup> & {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
-
 function RadioGroup({
   className,
   children,
@@ -80,16 +75,13 @@ const radioIndicatorVariants = tv({
   },
 })
 
-interface RadioProps extends AriaRadioProps {
-  ref?: React.Ref<HTMLLabelElement>
+type RadioProps = React.ComponentProps<typeof AriaRadio> & {
   indicatorClassName?: string
   size?: "sm" | "md" | "lg"
 }
-
-function Radio({ ref, className, children, indicatorClassName, size, ...props }: RadioProps) {
+function Radio({ className, children, indicatorClassName, size, ...props }: RadioProps) {
   return (
     <AriaRadio
-      ref={ref}
       className={composeRenderProps(className, (className, renderProps) =>
         radioVariants({ ...renderProps, className }),
       )}
