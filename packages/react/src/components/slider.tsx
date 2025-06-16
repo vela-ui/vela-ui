@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import type { SliderOutputProps, SliderThumbProps, SliderTrackProps } from "react-aria-components"
 import {
   Slider as AriaSlider,
   SliderOutput as AriaSliderOutput,
@@ -121,7 +120,7 @@ function SliderTrack({ className, ...props }: React.ComponentProps<typeof AriaSl
   )
 }
 
-function SliderRange({ className, style, ...props }: Omit<React.ComponentProps<"div">, "ref">) {
+function SliderRange({ className, style, ...props }: React.ComponentProps<"div">) {
   const state = React.useContext(SliderStateContext)!
 
   const { orientation, isDisabled, getThumbPercent, values } = state || {}
@@ -168,4 +167,4 @@ function SliderThumb({ className, ...props }: React.ComponentProps<typeof AriaSl
 }
 
 export { Slider, SliderOutput, SliderRange, SliderThumb, SliderTrack }
-export type { SliderOutputProps, SliderProps, SliderThumbProps, SliderTrackProps }
+export type { SliderProps }
