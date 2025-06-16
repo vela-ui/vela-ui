@@ -65,13 +65,11 @@ const { root, indicator, thumb } = switchVariants()
 interface SwitchProps
   extends React.ComponentProps<typeof AriaSwitch>,
     VariantProps<typeof switchVariants> {
-  ref?: React.Ref<HTMLLabelElement>
   thumbClassName?: string
   indicatorClassName?: string
 }
 
 function Switch({
-  ref,
   className,
   thumbClassName,
   indicatorClassName,
@@ -81,7 +79,6 @@ function Switch({
 }: SwitchProps) {
   return (
     <AriaSwitch
-      ref={ref}
       className={composeRenderProps(className, (className, renderProps) =>
         root({ ...renderProps, className }),
       )}

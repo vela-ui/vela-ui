@@ -18,7 +18,7 @@ const loaderVariants = tv({
   },
 })
 
-function Default({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+function Default({ className, ...props }: React.ComponentProps<"svg">) {
   return (
     <LoaderCircleIcon
       className={cn("size-4 animate-spin", className)}
@@ -28,11 +28,11 @@ function Default({ className, ...props }: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-const Ring = ({ className, ...props }: React.SVGProps<SVGSVGElement>) => (
+const Ring = ({ className, ...props }: React.ComponentProps<"svg">) => (
   <LoaderRingIcon className={cn("size-4 animate-spin", className)} data-slot="icon" {...props} />
 )
 
-function Spin({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+function Spin({ className, ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
       className={cn("size-4 stroke-current", className)}

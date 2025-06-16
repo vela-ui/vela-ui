@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const LoaderRingIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const LoaderRingIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"

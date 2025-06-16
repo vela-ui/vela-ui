@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const CircleIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const CircleIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"

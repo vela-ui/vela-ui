@@ -1,19 +1,14 @@
 "use client"
 
-import type {
-  ListBoxItemProps,
-  SectionProps,
-  SeparatorProps,
-  TextProps,
-} from "react-aria-components"
+import type { ListBoxItemProps, SectionProps, SeparatorProps } from "react-aria-components"
 import {
   ListBoxItem as AriaListBoxItem,
+  Text as AriaText,
   Collection,
   composeRenderProps,
   Header,
   ListBoxSection,
   Separator,
-  Text,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { tv, VariantProps } from "tailwind-variants"
@@ -87,26 +82,21 @@ function DropdownItem<T extends object>({ className, variant, ...props }: Dropdo
   )
 }
 
-interface DropdownLabelProps extends TextProps {
-  ref?: React.Ref<HTMLDivElement>
+type DropdownLabelProps = Omit<React.ComponentProps<typeof AriaText>, "slot">
+function DropdownLabel({ className, ...props }: DropdownLabelProps) {
+  return <AriaText slot="label" className={className} {...props} />
 }
 
-function DropdownLabel({ className, ref, ...props }: DropdownLabelProps) {
-  return <Text slot="label" ref={ref} className={className} {...props} />
+type DropdownDescriptionProps = Omit<React.ComponentProps<typeof AriaText>, "slot">
+function DropdownDescription({ className, ...props }: DropdownDescriptionProps) {
+  return (
+    <AriaText
+      slot="description"
+      className={twMerge("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  )
 }
-
-interface DropdownDescriptionProps extends TextProps {
-  ref?: React.Ref<HTMLDivElement>
-}
-
-const DropdownDescription = ({ className, ref, ...props }: DropdownDescriptionProps) => (
-  <Text
-    slot="description"
-    ref={ref}
-    className={twMerge("text-muted-foreground text-sm", className)}
-    {...props}
-  />
-)
 
 function DropdownSeparator({ className, ...props }: SeparatorProps) {
   return (

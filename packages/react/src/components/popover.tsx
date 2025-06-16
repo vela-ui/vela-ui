@@ -1,6 +1,5 @@
 "use client"
 
-import type { PopoverProps as AriaPopoverProps } from "react-aria-components"
 import {
   Dialog as AriaDialog,
   DialogProps as AriaDialogProps,
@@ -34,19 +33,18 @@ const popoverVariants = tv({
 })
 
 interface PopoverProps
-  extends Omit<AriaPopoverProps, "children">,
+  extends React.ComponentProps<typeof AriaPopover>,
     VariantProps<typeof popoverVariants> {
   /**
    * Whether the element should render an arrow.
    * @default false
    */
   showArrow?: boolean
-  children?: React.ReactNode
 }
 
 const PopoverTrigger = AriaDialogTrigger
 
-const Popover = ({ className, showArrow, children, ...props }: PopoverProps) => {
+const Popover = ({ className, showArrow, ...props }: PopoverProps) => {
   const popoverContext = useSlottedContext(PopoverContext)!
   const isSubmenu = popoverContext?.trigger === "SubmenuTrigger"
   let offset = showArrow ? 12 : 8
@@ -64,19 +62,23 @@ const Popover = ({ className, showArrow, children, ...props }: PopoverProps) => 
       )}
       {...props}
     >
-      {showArrow && (
-        <OverlayArrow className="group">
-          <svg
-            width={12}
-            height={12}
-            viewBox="0 0 12 12"
-            className="fill-popover stroke-border block stroke-1 group-data-[placement=bottom]:rotate-180 group-data-[placement=left]:-rotate-90 group-data-[placement=right]:rotate-90"
-          >
-            <path d="M0 0 L6 6 L12 0" />
-          </svg>
-        </OverlayArrow>
-      )}
-      {children}
+      {composeRenderProps(props.children, (children) => (
+        <>
+          {showArrow && (
+            <OverlayArrow className="group">
+              <svg
+                width={12}
+                height={12}
+                viewBox="0 0 12 12"
+                className="fill-popover stroke-border block stroke-1 group-data-[placement=bottom]:rotate-180 group-data-[placement=left]:-rotate-90 group-data-[placement=right]:rotate-90"
+              >
+                <path d="M0 0 L6 6 L12 0" />
+              </svg>
+            </OverlayArrow>
+          )}
+          {children}
+        </>
+      ))}
     </AriaPopover>
   )
 }

@@ -1,4 +1,3 @@
-import type { TextAreaProps as AriaTextAreaProps } from "react-aria-components"
 import { TextArea as AriaTextArea, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
@@ -12,15 +11,12 @@ const textAreaVariants = tv({
 })
 
 interface TextareaProps
-  extends Omit<AriaTextAreaProps, "color">,
-    VariantProps<typeof textAreaVariants> {
-  ref?: React.Ref<HTMLTextAreaElement>
-}
+  extends Omit<React.ComponentProps<typeof AriaTextArea>, "color">,
+    VariantProps<typeof textAreaVariants> {}
 
-function Textarea({ ref, className, ...props }: TextareaProps) {
+function Textarea({ className, ...props }: TextareaProps) {
   return (
     <AriaTextArea
-      ref={ref}
       data-slot="textarea"
       className={composeRenderProps(className, (className, renderProps) =>
         textAreaVariants({

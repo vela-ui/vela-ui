@@ -1,10 +1,6 @@
 "use client"
 
-import type {
-  TabListProps as AriaTabListProps,
-  TabPanelProps,
-  TabProps,
-} from "react-aria-components"
+import type { TabListProps as AriaTabListProps } from "react-aria-components"
 import {
   Tab as AriaTab,
   TabList as AriaTabList,
@@ -107,9 +103,7 @@ const [TabsProvider, useTabsContext] = createContext<VariantProps<typeof tabsVar
   name: "TabsContext",
 })
 
-interface TabsProps
-  extends React.ComponentProps<typeof AriaTabs>,
-    VariantProps<typeof tabsVariants> {}
+type TabsProps = React.ComponentProps<typeof AriaTabs> & VariantProps<typeof tabsVariants>
 function Tabs({
   className,
   variant = "default",
@@ -136,7 +130,6 @@ function Tabs({
 type TabListProps<T> = AriaTabListProps<T>
 function TabList<T extends object>({ className, ...props }: TabListProps<T>) {
   const { orientation, variant, fitted } = useTabsContext()
-
   return (
     <AriaTabList
       data-slot="tab-list"
@@ -148,9 +141,9 @@ function TabList<T extends object>({ className, ...props }: TabListProps<T>) {
   )
 }
 
+type TabProps = React.ComponentProps<typeof AriaTab>
 function Tab({ className, ...props }: TabProps) {
   const { orientation, variant, size, fitted } = useTabsContext()
-
   return (
     <AriaTab
       data-slot="tab"
@@ -169,9 +162,9 @@ function Tab({ className, ...props }: TabProps) {
   )
 }
 
+type TabPanelProps = React.ComponentProps<typeof AriaTabPanel>
 function TabPanel({ className, ...props }: TabPanelProps) {
   const { orientation, variant, size } = useTabsContext()
-
   return (
     <AriaTabPanel
       data-slot="tab-panel"

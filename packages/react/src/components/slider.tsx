@@ -73,10 +73,7 @@ const [SliderProvider, useSliderContext] = createContext<VariantProps<typeof sli
   name: "SliderContext",
 })
 
-interface SliderProps
-  extends React.ComponentProps<typeof AriaSlider>,
-    VariantProps<typeof sliderVariants> {}
-
+type SliderProps = React.ComponentProps<typeof AriaSlider> & VariantProps<typeof sliderVariants>
 function Slider({ className, size, children, ...props }: SliderProps) {
   return (
     <AriaSlider
@@ -96,7 +93,7 @@ function Slider({ className, size, children, ...props }: SliderProps) {
   )
 }
 
-function SliderOutput({ className, ...props }: SliderOutputProps) {
+function SliderOutput({ className, ...props }: React.ComponentProps<typeof AriaSliderOutput>) {
   return (
     <AriaSliderOutput
       data-slot="slider-output"
@@ -111,9 +108,8 @@ function SliderOutput({ className, ...props }: SliderOutputProps) {
   )
 }
 
-function SliderTrack({ className, ...props }: SliderTrackProps) {
+function SliderTrack({ className, ...props }: React.ComponentProps<typeof AriaSliderTrack>) {
   const { orientation, size } = useSliderContext()
-
   return (
     <AriaSliderTrack
       data-slot="slider-track"
@@ -125,7 +121,7 @@ function SliderTrack({ className, ...props }: SliderTrackProps) {
   )
 }
 
-function SliderRange({ className, ...props }: React.ComponentProps<"div">) {
+function SliderRange({ className, style, ...props }: Omit<React.ComponentProps<"div">, "ref">) {
   const state = React.useContext(SliderStateContext)!
 
   const { orientation, isDisabled, getThumbPercent, values } = state || {}
@@ -146,14 +142,14 @@ function SliderRange({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="slider-range"
-      style={getStyle()}
+      style={{ ...getStyle(), ...style }}
       className={range({ orientation, isDisabled, className })}
       {...props}
     />
   )
 }
 
-function SliderThumb({ className, ...props }: SliderThumbProps) {
+function SliderThumb({ className, ...props }: React.ComponentProps<typeof AriaSliderThumb>) {
   const { size } = useSliderContext()
 
   return (

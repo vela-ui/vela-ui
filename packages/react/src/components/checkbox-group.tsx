@@ -1,14 +1,11 @@
 "use client"
 
-import type {
-  CheckboxGroupProps as AriaCheckboxGroupProps,
-  ValidationResult,
-} from "react-aria-components"
+import type { ValidationResult } from "react-aria-components"
 import { CheckboxGroup as AriaCheckboxGroup, composeRenderProps } from "react-aria-components"
 import { composeTailwindRenderProps } from "../lib/utils"
 import { Description, FieldError, Label } from "./field"
 
-interface CheckboxGroupProps extends AriaCheckboxGroupProps {
+interface CheckboxGroupProps extends React.ComponentProps<typeof AriaCheckboxGroup> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)

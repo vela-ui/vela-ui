@@ -1,6 +1,5 @@
 "use client"
 
-import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
@@ -40,18 +39,18 @@ const buttonVariants = tv({
   },
 })
 
-interface ButtonProps extends AriaButtonProps, VariantProps<typeof buttonVariants> {
-  ref?: React.Ref<HTMLButtonElement>
+interface ButtonProps
+  extends React.ComponentProps<typeof AriaButton>,
+    VariantProps<typeof buttonVariants> {
   /**
    * Loader to display when pending.
    */
   loader?: React.ReactNode | null
 }
 
-function Button({ ref, className, variant, size, loader = <Loader />, ...props }: ButtonProps) {
+function Button({ className, variant, size, loader = <Loader />, ...props }: ButtonProps) {
   return (
     <AriaButton
-      ref={ref}
       data-slot="button"
       className={composeRenderProps(className, (className, renderProps) =>
         buttonVariants({

@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const CheckIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const CheckIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"

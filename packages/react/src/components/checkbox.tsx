@@ -1,6 +1,5 @@
 "use client"
 
-import type { CheckboxProps as AriaCheckboxProps } from "react-aria-components"
 import { Checkbox as AriaCheckbox, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { CheckIcon, MinusIcon } from "../icons"
@@ -36,7 +35,9 @@ const checkboxIndicatorVariants = tv({
   },
 })
 
-interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
+interface CheckboxProps
+  extends React.ComponentProps<typeof AriaCheckbox>,
+    VariantProps<typeof checkboxVariants> {
   indicatorClassName?: string
   size?: "sm" | "md" | "lg"
 }

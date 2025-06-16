@@ -53,7 +53,9 @@ const drawerVariants = tv({
   },
 })
 
-interface DrawerProps extends ModalOverlayProps, VariantProps<typeof drawerVariants> {
+interface DrawerProps
+  extends React.ComponentProps<typeof AriaModalOverlay>,
+    VariantProps<typeof drawerVariants> {
   overlayClassName?: ModalOverlayProps["className"]
 }
 const Drawer = ({

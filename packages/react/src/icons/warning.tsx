@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const WarningIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const WarningIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="currentColor"

@@ -1,6 +1,5 @@
 "use client"
 
-import type { InputProps as AriaInputProps } from "react-aria-components"
 import { Input as AriaInput, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
@@ -28,9 +27,8 @@ const inputVariants = tv({
 })
 
 interface InputProps
-  extends Omit<AriaInputProps, "color" | "size">,
+  extends Omit<React.ComponentProps<typeof AriaInput>, "color" | "size">,
     VariantProps<typeof inputVariants> {
-  ref?: React.Ref<HTMLInputElement>
   /**
    * Element to be rendered in the left side of the input.
    */
@@ -41,7 +39,7 @@ interface InputProps
   endContent?: React.ReactNode
 }
 
-function Input({ ref, className, size, startContent, endContent, ...props }: InputProps) {
+function Input({ className, size, startContent, endContent, ...props }: InputProps) {
   if (startContent || endContent) {
     return (
       <div className="relative">
@@ -51,7 +49,6 @@ function Input({ ref, className, size, startContent, endContent, ...props }: Inp
           </div>
         )}
         <AriaInput
-          ref={ref}
           data-slot="input"
           className={composeRenderProps(className, (className, renderProps) =>
             inputVariants({
@@ -74,7 +71,6 @@ function Input({ ref, className, size, startContent, endContent, ...props }: Inp
   }
   return (
     <AriaInput
-      ref={ref}
       data-slot="input"
       className={composeRenderProps(className, (className, renderProps) =>
         inputVariants({

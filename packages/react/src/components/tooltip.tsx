@@ -1,6 +1,5 @@
 "use client"
 
-import type { TooltipProps as AriaTooltipProps } from "react-aria-components"
 import {
   Tooltip as AriaTooltip,
   TooltipTrigger as AriaTooltipTrigger,
@@ -26,19 +25,18 @@ const tooltipVariants = tv({
 })
 
 interface TooltipProps
-  extends Omit<AriaTooltipProps, "children">,
+  extends React.ComponentProps<typeof AriaTooltip>,
     VariantProps<typeof tooltipVariants> {
   /**
    * Whether the element should render an arrow.
    * @default false
    */
   showArrow?: boolean
-  children: React.ReactNode
 }
 
 const TooltipTrigger = AriaTooltipTrigger
 
-function Tooltip({ className, showArrow, offset = 10, children, ...props }: TooltipProps) {
+function Tooltip({ className, showArrow, offset = 10, ...props }: TooltipProps) {
   return (
     <AriaTooltip
       data-slot="tooltip"
@@ -51,19 +49,23 @@ function Tooltip({ className, showArrow, offset = 10, children, ...props }: Tool
       )}
       {...props}
     >
-      {showArrow && (
-        <OverlayArrow className="group">
-          <svg
-            width={12}
-            height={12}
-            viewBox="0 0 12 12"
-            className="fill-primary stroke-border block stroke-1 group-data-[placement=bottom]:rotate-180 group-data-[placement=left]:-rotate-90 group-data-[placement=right]:rotate-90"
-          >
-            <path d="M0 0 L6 6 L12 0" />
-          </svg>
-        </OverlayArrow>
-      )}
-      {children}
+      {composeRenderProps(props.children, (children) => (
+        <>
+          {showArrow && (
+            <OverlayArrow className="group">
+              <svg
+                width={12}
+                height={12}
+                viewBox="0 0 12 12"
+                className="fill-primary stroke-border block stroke-1 group-data-[placement=bottom]:rotate-180 group-data-[placement=left]:-rotate-90 group-data-[placement=right]:rotate-90"
+              >
+                <path d="M0 0 L6 6 L12 0" />
+              </svg>
+            </OverlayArrow>
+          )}
+          {children}
+        </>
+      ))}
     </AriaTooltip>
   )
 }

@@ -1,6 +1,5 @@
 "use client"
 
-import type { SeparatorProps } from "react-aria-components"
 import { Separator as AriaSeparator } from "react-aria-components"
 import { tv } from "tailwind-variants"
 
@@ -17,7 +16,11 @@ const separatorVariants = tv({
   },
 })
 
-function Separator({ orientation, className, ...props }: SeparatorProps) {
+function Separator({
+  orientation,
+  className,
+  ...props
+}: React.ComponentProps<typeof AriaSeparator>) {
   return (
     <AriaSeparator
       data-slot="separator"
@@ -28,4 +31,3 @@ function Separator({ orientation, className, ...props }: SeparatorProps) {
 }
 
 export { Separator }
-export type { SeparatorProps }

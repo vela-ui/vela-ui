@@ -1,13 +1,6 @@
 "use client"
 
-import type {
-  GroupProps as AriaGroupProps,
-  FieldErrorProps,
-  LabelProps,
-  TextFieldProps,
-  TextProps,
-  ValidationResult,
-} from "react-aria-components"
+import type { TextFieldProps, TextProps, ValidationResult } from "react-aria-components"
 import {
   FieldError as AriaFieldError,
   Group as AriaGroup,
@@ -38,14 +31,17 @@ const fieldVariants = tv({
 
 const { label, description, fieldError } = fieldVariants()
 
+type LabelProps = React.ComponentProps<typeof AriaLabel>
 function Label({ className, ...props }: LabelProps) {
   return <AriaLabel data-slot="label" className={label({ className })} {...props} />
 }
 
-function Description({ className, ...props }: TextProps) {
+type DescriptionProps = Omit<React.ComponentProps<typeof AriaText>, "slot">
+function Description({ className, ...props }: DescriptionProps) {
   return <AriaText slot="description" className={description({ className })} {...props} />
 }
 
+type FieldErrorProps = React.ComponentProps<typeof AriaFieldError>
 function FieldError({ className, ...props }: FieldErrorProps) {
   return (
     <AriaFieldError
@@ -71,8 +67,8 @@ const fieldGroupVariants = tv({
   },
 })
 
-interface FieldGroupProps extends AriaGroupProps, VariantProps<typeof fieldGroupVariants> {}
-
+type FieldGroupProps = React.ComponentProps<typeof AriaGroup> &
+  VariantProps<typeof fieldGroupVariants>
 function FieldGroup({ className, ...props }: FieldGroupProps) {
   return (
     <AriaGroup
@@ -88,4 +84,11 @@ function FieldGroup({ className, ...props }: FieldGroupProps) {
 }
 
 export { Description, FieldError, FieldGroup, fieldVariants, Label, TextField }
-export type { FieldErrorProps, FieldGroupProps, FieldProps, LabelProps, TextProps }
+export type {
+  DescriptionProps,
+  FieldErrorProps,
+  FieldGroupProps,
+  FieldProps,
+  LabelProps,
+  TextProps,
+}

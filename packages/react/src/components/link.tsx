@@ -1,10 +1,6 @@
 "use client"
 
-import {
-  Link as AriaLink,
-  LinkProps as AriaLinkProps,
-  composeRenderProps,
-} from "react-aria-components"
+import { Link as AriaLink, composeRenderProps } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 import { buttonVariants } from "./button"
@@ -26,14 +22,10 @@ const linkVariants = tv({
   },
 })
 
-interface LinkProps extends AriaLinkProps, VariantProps<typeof linkVariants> {
-  ref?: React.Ref<HTMLAnchorElement>
-}
-
-function Link({ ref, className, variant, ...props }: LinkProps) {
+type LinkProps = React.ComponentProps<typeof AriaLink> & VariantProps<typeof linkVariants>
+function Link({ className, variant, ...props }: LinkProps) {
   return (
     <AriaLink
-      ref={ref}
       data-slot="link"
       className={composeRenderProps(className, (className, renderProps) =>
         linkVariants({ ...renderProps, variant, className }),
@@ -43,16 +35,11 @@ function Link({ ref, className, variant, ...props }: LinkProps) {
   )
 }
 
-interface LinkButtonProps
-  extends AriaLinkProps,
-    Omit<VariantProps<typeof buttonVariants>, "isPending"> {
-  ref?: React.Ref<HTMLAnchorElement>
-}
-
-function LinkButton({ ref, className, variant, size, ...props }: LinkButtonProps) {
+type LinkButtonProps = React.ComponentProps<typeof AriaLink> &
+  Omit<VariantProps<typeof buttonVariants>, "isPending">
+function LinkButton({ className, variant, size, ...props }: LinkButtonProps) {
   return (
     <AriaLink
-      ref={ref}
       data-slot="link"
       className={composeRenderProps(className, (className, renderProps) =>
         buttonVariants({

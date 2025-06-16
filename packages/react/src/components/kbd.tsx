@@ -7,7 +7,7 @@ const KbdVariants = tv({
   base: "text-muted-foreground inline-flex min-w-5 items-center justify-center rounded-sm border p-1 font-sans text-xs leading-none tracking-widest",
 })
 
-type KbdProps = React.HTMLAttributes<HTMLElement>
+type KbdProps = React.ComponentProps<typeof Keyboard>
 
 function Kbd({ className, ...props }: KbdProps) {
   return <Keyboard className={KbdVariants({ className })} {...props} />

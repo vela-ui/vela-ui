@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const ChevronDownIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const ChevronDownIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"
