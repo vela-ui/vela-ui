@@ -1,6 +1,6 @@
 {
   "name": "@vela-ui/react",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0",
   "description": "Vela UI React components",
   "keywords": [
     "vela-ui",
@@ -10,7 +10,8 @@
     "react",
     "react-aria",
     "react-aria-components",
-    "tailwindcss"
+    "tailwindcss",
+    "shadcn"
   ],
   "homepage": "https://velaui.com",
   "repository": {
