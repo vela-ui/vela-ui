@@ -130,4 +130,9 @@ export {
   DropdownSection,
   DropdownSeparator,
 }
-export type { DropdownItemProps, DropdownLabelProps, DropdownSectionProps }
+export type {
+  DropdownDescriptionProps,
+  DropdownItemProps,
+  DropdownLabelProps,
+  DropdownSectionProps,
+}
