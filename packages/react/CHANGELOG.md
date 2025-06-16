@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 3.0.0
+
+### Major Changes
+
+- [#27](https://github.com/vela-ui/vela-ui/pull/27) [`5eb7ebe`](https://github.com/vela-ui/vela-ui/commit/5eb7ebe762beeadc77bc6324ef3f61a3819715e1) Thanks [@bobbychan](https://github.com/bobbychan)! - rewrite components by referring to the shadcn-ui style
+
 ## 1.0.6
 
 ### Patch Changes
