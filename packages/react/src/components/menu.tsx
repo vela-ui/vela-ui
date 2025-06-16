@@ -10,10 +10,10 @@ import {
   MenuItem as AriaMenuItem,
   MenuSection as AriaMenuSection,
   MenuTrigger as AriaMenuTrigger,
-  SubmenuTrigger as AriaSubmenuTrigger,
   Collection,
   Header,
   Keyboard,
+  SubmenuTrigger,
   composeRenderProps,
 } from "react-aria-components"
 import { VariantProps } from "tailwind-variants"
@@ -28,8 +28,6 @@ import {
 import { Popover, PopoverProps } from "./popover"
 
 const MenuTrigger = AriaMenuTrigger
-
-const SubmenuTrigger = AriaSubmenuTrigger
 
 const MenuSeparator = DropdownSeparator
 
@@ -99,13 +97,12 @@ function MenuItem({ className, children, variant, ...props }: MenuItemProps) {
 }
 
 interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
-  ref?: React.Ref<HTMLDivElement>
   title?: string
 }
 
-function MenuSection<T extends object>({ className, ref, ...props }: MenuSectionProps<T>) {
+function MenuSection<T extends object>({ className, ...props }: MenuSectionProps<T>) {
   return (
-    <AriaMenuSection ref={ref} className={className} {...props}>
+    <AriaMenuSection className={className} {...props}>
       {"title" in props && (
         <Header className="px-2 py-1.5 text-sm font-medium">{props.title}</Header>
       )}
