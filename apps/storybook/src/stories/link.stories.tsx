@@ -16,7 +16,6 @@ const colors = [
 const meta = {
   title: "Components/Link",
   component: Link,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },

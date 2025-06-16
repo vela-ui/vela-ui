@@ -22,7 +22,7 @@ const badgeVariants = tv({
 
 interface BadgeProps extends React.ComponentProps<"span">, VariantProps<typeof badgeVariants> {}
 
-const Badge = ({ className, variant, ...props }: BadgeProps) => {
+function Badge({ className, variant, ...props }: BadgeProps) {
   return (
     <span
       data-slot="badge"

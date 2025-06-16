@@ -30,7 +30,7 @@ interface LinkProps extends AriaLinkProps, VariantProps<typeof linkVariants> {
   ref?: React.Ref<HTMLAnchorElement>
 }
 
-const Link = ({ ref, className, variant, ...props }: LinkProps) => {
+function Link({ ref, className, variant, ...props }: LinkProps) {
   return (
     <AriaLink
       ref={ref}
@@ -49,7 +49,7 @@ interface LinkButtonProps
   ref?: React.Ref<HTMLAnchorElement>
 }
 
-const LinkButton = ({ ref, className, variant, size, ...props }: LinkButtonProps) => {
+function LinkButton({ ref, className, variant, size, ...props }: LinkButtonProps) {
   return (
     <AriaLink
       ref={ref}

@@ -1,53 +1,60 @@
 "use client"
 
-import { useMemo } from "react"
-import type {
-  DialogProps as AriaDialogProps,
-  HeadingProps as AriaHeadingProps,
-  ModalOverlayProps,
-} from "react-aria-components"
+import type { ModalOverlayProps } from "react-aria-components"
 import {
-  Dialog as AriaDialog,
-  DialogTrigger as AriaDialogTrigger,
-  Heading as AriaHeading,
   Modal as AriaModal,
   ModalOverlay as AriaModalOverlay,
   composeRenderProps,
 } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { CloseIcon } from "../icons"
-import { cn } from "../lib/utils"
-import { Button } from "./button"
+import {
+  DialogCloseIcon,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "."
+
+const drawerOverlayVariants = tv({
+  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50",
+  variants: {
+    isEntering: {
+      true: "animate-in fade-in duration-300 ease-out",
+    },
+    isExiting: {
+      true: "animate-out fade-out duration-200 ease-in",
+    },
+  },
+})
 
 const drawerVariants = tv({
-  slots: {
-    base: "drawer",
-    overlay: "drawer-overlay",
-  },
+  base: "bg-background fixed z-50 flex h-auto flex-col shadow-lg transition ease-in-out",
   variants: {
     placement: {
-      top: {
-        overlay: "drawer-top",
-      },
-      bottom: {
-        overlay: "drawer-bottom",
-      },
-      start: {
-        overlay: "drawer-start",
-      },
-      end: {
-        overlay: "drawer-end",
-      },
+      top: "data-[entering]:slide-in-from-top data-[exiting]:slide-out-to-top inset-x-0 top-0 border-b",
+      bottom:
+        "data-[entering]:slide-in-from-bottom data-[exiting]:slide-out-to-bottom inset-x-0 bottom-0 border-t",
+      left: "data-[entering]:slide-in-from-left data-[exiting]:slide-out-to-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
+      right:
+        "data-[entering]:slide-in-from-right data-[exiting]:slide-out-to-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
+    },
+    isEntering: {
+      true: "animate-in duration-300",
+    },
+    isExiting: {
+      true: "animate-out duration-200",
     },
   },
   defaultVariants: {
-    placement: "end",
+    placement: "right",
   },
 })
 
 interface DrawerProps extends ModalOverlayProps, VariantProps<typeof drawerVariants> {
-  overlayClassName?: string
+  overlayClassName?: ModalOverlayProps["className"]
 }
 const Drawer = ({
   className,
@@ -56,91 +63,52 @@ const Drawer = ({
   placement,
   ...props
 }: DrawerProps) => {
-  const slots = useMemo(
-    () =>
-      drawerVariants({
-        placement,
-      }),
-    [placement],
-  )
-
   return (
     <AriaModalOverlay
+      data-slot="drawer-overlay"
+      style={{
+        height: "var(--visual-viewport-height)",
+      }}
       isDismissable={isDismissable}
-      className={composeRenderProps(overlayClassName, (className) =>
-        cn(slots.overlay(), className),
+      className={composeRenderProps(overlayClassName, (className, renderProps) =>
+        drawerOverlayVariants({ ...renderProps, className }),
       )}
       {...props}
     >
       <AriaModal
+        data-slot="drawer"
         isDismissable={isDismissable}
-        className={composeRenderProps(className, (className) => cn(slots.base(), className))}
+        className={composeRenderProps(className, (className, renderProps) =>
+          drawerVariants({ ...renderProps, placement, className }),
+        )}
         {...props}
       />
     </AriaModalOverlay>
   )
 }
 
-const Content = ({ role = "dialog", className, ...props }: AriaDialogProps) => {
-  return (
-    <AriaDialog
-      role={role}
-      className={cn("relative flex h-full w-full flex-col p-6 outline-none", className)}
-      {...props}
-    />
-  )
+const DrawerTrigger = DialogTrigger
+
+const DrawerContent = DialogContent
+
+const DrawerHeader = DialogHeader
+
+const DrawerFooter = DialogFooter
+
+const DrawerTitle = DialogTitle
+
+const DrawerDescription = DialogDescription
+
+const DrawerCloseIcon = DialogCloseIcon
+
+export {
+  Drawer,
+  DrawerCloseIcon,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
 }
-
-const Trigger = AriaDialogTrigger
-
-const Title = ({ className, ...props }: AriaHeadingProps) => (
-  <AriaHeading
-    slot="title"
-    className={cn("text-lg leading-none font-semibold", className)}
-    {...props}
-  />
-)
-
-const Body = ({ className, ...props }: React.ComponentProps<"div">) => (
-  <div className={cn("flex-1 overflow-auto", className)} {...props} />
-)
-
-const Header = ({ className, ...props }: React.ComponentProps<"div">) => {
-  return <div className={cn("mb-4", className)} {...props} />
-}
-
-const Footer = ({ className, ...props }: React.ComponentProps<"div">) => {
-  return <div className={cn("mt-4 flex flex-row justify-end gap-2.5", className)} {...props} />
-}
-
-const CloseButton = ({
-  className,
-  size = "sm",
-  shape = "circle",
-  variant = "ghost",
-  ...props
-}: React.ComponentProps<typeof Button>) => (
-  <Button
-    aria-label="Close"
-    slot="close"
-    className={cn("absolute top-2 right-2", className)}
-    shape={shape}
-    variant={variant}
-    size={size}
-    {...props}
-  >
-    <CloseIcon className="size-4.5" />
-    <span className="sr-only">Close</span>
-  </Button>
-)
-
-Drawer.Content = Content
-Drawer.Trigger = Trigger
-Drawer.Header = Header
-Drawer.Title = Title
-Drawer.Body = Body
-Drawer.Footer = Footer
-Drawer.CloseButton = CloseButton
-
-export { Drawer }
 export type { DrawerProps }

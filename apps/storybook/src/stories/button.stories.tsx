@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, LinkButton } from "@vela-ui/react"
-import { HeartIcon, Loader2 } from "lucide-react"
+import { Button, LinkButton, Loader } from "@vela-ui/react"
+import { HeartIcon } from "lucide-react"
 
 const variants = ["default", "destructive", "outline", "secondary", "ghost", "link"] as const
 const sizes = ["default", "sm", "lg", "icon"] as const
@@ -65,9 +65,7 @@ export const Sizes: Story = {
       <Button {...args} size="sm">
         Small
       </Button>
-      <Button {...args} size="default">
-        Medium
-      </Button>
+      <Button {...args}>Medium</Button>
       <Button {...args} size="lg">
         Large
       </Button>
@@ -141,30 +139,31 @@ export const WithIcon: Story = {
   ),
 }
 
-export const Loading: Story = {
-  args: {
-    isPending: true,
-  },
-  render: (args) => (
-    <div className="flex items-center gap-2">
-      <Button {...args}>
-        <Loader2 className="animate-spin" />
-        Please wait
-      </Button>
-      <Button {...args} variant="outline">
-        <Loader2 className="animate-spin" />
-        Please wait
-      </Button>
-    </div>
-  ),
-}
-
 export const ButtonLink: Story = {
   render: () => (
     <div className="flex items-center gap-2">
       <LinkButton href="https://github.com/vela-ui/vela-ui" target="_blank">
         Button Link
       </LinkButton>
+    </div>
+  ),
+}
+
+export const CustomLoader: Story = {
+  args: {
+    isPending: true,
+  },
+  render: (args) => (
+    <div className="flex items-center gap-2">
+      <Button {...args} loader={<Loader />}>
+        Please wait
+      </Button>
+      <Button {...args} variant="outline" loader={<Loader variant="ring" />}>
+        Please wait
+      </Button>
+      <Button {...args} variant="outline" loader={<Loader variant="spin" />}>
+        Please wait
+      </Button>
     </div>
   ),
 }

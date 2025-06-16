@@ -8,7 +8,7 @@ interface SkeletonProps extends React.ComponentProps<"div"> {
   isLoaded?: boolean
 }
 
-const Skeleton = ({ className, isLoaded, children, ...props }: SkeletonProps) => {
+function Skeleton({ className, isLoaded, children, ...props }: SkeletonProps) {
   return (
     <div
       className={cn(

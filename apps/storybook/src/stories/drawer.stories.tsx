@@ -1,10 +1,18 @@
 import { Meta, StoryObj } from "@storybook/react"
-import { Button, Drawer } from "@vela-ui/react"
+import {
+  Button,
+  Drawer,
+  DrawerCloseIcon,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@vela-ui/react"
 
 const meta = {
   title: "Components/Drawer",
   component: Drawer,
-  tags: ["autodocs"],
   argTypes: {
     placement: {
       control: {
@@ -39,60 +47,58 @@ const content = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
 
 export const Default: Story = {
   render: (args) => (
-    <Drawer.Trigger>
-      <Button>Open Drawer</Button>
+    <DrawerTrigger>
+      <Button variant="outline">Open Drawer</Button>
       <Drawer {...args}>
-        <Drawer.Content role="alertdialog">
-          <Drawer.Header>
-            <Drawer.Title>Drawer Title</Drawer.Title>
-          </Drawer.Header>
-          <Drawer.Body>
+        <DrawerContent role="alertdialog">
+          <DrawerHeader>
+            <DrawerTitle>Drawer Title</DrawerTitle>
+          </DrawerHeader>
+          <div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua.
-          </Drawer.Body>
-          <Drawer.Footer>
+          </div>
+          <DrawerFooter>
             <Button slot="close" variant="outline">
               Cancel
             </Button>
-            <Button slot="close" color="primary">
-              Save
-            </Button>
-          </Drawer.Footer>
-          <Drawer.CloseButton />
-        </Drawer.Content>
+            <Button slot="close">Save</Button>
+          </DrawerFooter>
+          <DrawerCloseIcon />
+        </DrawerContent>
       </Drawer>
-    </Drawer.Trigger>
+    </DrawerTrigger>
   ),
 }
 
 export const Placements: Story = {
   render: (args) => {
-    const placements = ["top", "bottom", "start", "end"] as const
+    const placements = ["top", "bottom", "left", "right"] as const
 
     return (
       <div className="flex items-center gap-4">
         {placements.map((placement) => (
           <div key={placement}>
-            <Drawer.Trigger>
+            <DrawerTrigger>
               <Button>Open ({placement})</Button>
               <Drawer {...args} placement={placement} className="[--drawer-offset:0.5rem]">
-                <Drawer.Content role="alertdialog">
-                  <Drawer.Header>
-                    <Drawer.Title>Delete file</Drawer.Title>
-                  </Drawer.Header>
-                  <Drawer.Body>{content}</Drawer.Body>
-                  <Drawer.Footer>
+                <DrawerContent role="alertdialog">
+                  <DrawerHeader>
+                    <DrawerTitle>Delete file</DrawerTitle>
+                  </DrawerHeader>
+                  <div>{content}</div>
+                  <DrawerFooter>
                     <Button slot="close" variant="outline">
                       Cancel
                     </Button>
-                    <Button slot="close" color="primary" onPress={() => console.log("xxx")}>
+                    <Button slot="close" onPress={() => console.log("xxx")}>
                       Continue
                     </Button>
-                  </Drawer.Footer>
-                  <Drawer.CloseButton />
-                </Drawer.Content>
+                  </DrawerFooter>
+                  <DrawerCloseIcon />
+                </DrawerContent>
               </Drawer>
-            </Drawer.Trigger>
+            </DrawerTrigger>
           </div>
         ))}
       </div>

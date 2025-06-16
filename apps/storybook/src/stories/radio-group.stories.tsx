@@ -52,7 +52,7 @@ export const Validation: Story = {
     isRequired: true,
   },
   render: (args) => (
-    <Form className="flex flex-col items-start gap-2">
+    <Form className="flex flex-col items-start gap-4">
       <RadioGroup {...args} />
       <Button type="submit">Submit</Button>
     </Form>

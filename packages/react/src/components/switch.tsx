@@ -1,63 +1,89 @@
-import {
-  Switch as AriaSwitch,
-  SwitchProps as AriaSwitchProps,
-  composeRenderProps,
-} from "react-aria-components"
-import { tv } from "tailwind-variants"
-import { focusRing } from "../lib/classes"
+import { Switch as AriaSwitch, composeRenderProps } from "react-aria-components"
+import { tv, VariantProps } from "tailwind-variants"
 
 const switchVariants = tv({
-  base: "group relative inline-flex items-center gap-2 text-sm",
+  slots: {
+    root: "group relative inline-flex touch-none items-center justify-start gap-2 text-sm",
+    indicator:
+      "inline-flex shrink-0 cursor-pointer rounded-full shadow-xs transition-all outline-none",
+    thumb:
+      "bg-background pointer-events-none block scale-80 rounded-full ring-0 transition-transform",
+  },
   variants: {
+    size: {
+      sm: {
+        indicator: "h-4 w-8",
+        thumb: "size-4 group-data-[selected=true]:translate-x-4",
+      },
+      md: {
+        indicator: "h-5 w-10",
+        thumb: "size-5 group-data-[selected=true]:translate-x-5",
+      },
+      lg: {
+        indicator: "h-6 w-12",
+        thumb: "size-6 group-data-[selected=true]:translate-x-6",
+      },
+      xl: {
+        indicator: "h-7 w-14",
+        thumb: "size-7 group-data-[selected=true]:translate-x-7",
+      },
+    },
+    isFocusVisible: {
+      true: {
+        indicator: "ring-ring/50 ring-[3px]",
+      },
+    },
+    isInvalid: {
+      true: {
+        indicator: "ring-destructive/20 dark:ring-destructive/40",
+      },
+    },
     isDisabled: {
-      true: "text-foreground/50 cursor-not-allowed",
+      true: {
+        root: "text-foreground/50 cursor-not-allowed",
+        indicator: "cursor-not-allowed opacity-50",
+      },
     },
-  },
-})
-
-const switchIndicatorVariants = tv({
-  extend: focusRing,
-  base: "peer inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all",
-  variants: {
     isSelected: {
-      true: "bg-primary text-primary-foreground",
-      false: "bg-input dark:bg-input/80",
+      true: {
+        indicator: "bg-primary text-primary-foreground",
+        thumb: "dark:bg-primary-foreground translate-x-5",
+      },
+      false: {
+        indicator: "bg-input dark:bg-input/80",
+        thumb: "dark:bg-foreground",
+      },
     },
-    isDisabled: {
-      true: "cursor-not-allowed opacity-50",
-    },
+  },
+  defaultVariants: {
+    size: "md",
   },
 })
 
-const switchThumbVariants = tv({
-  base: "bg-background pointer-events-none block size-4 rounded-full ring-0 transition-transform",
-  variants: {
-    isSelected: {
-      true: "dark:bg-primary-foreground translate-x-[calc(100%-2px)]",
-      false: "dark:bg-foreground translate-x-0",
-    },
-  },
-})
+const { root, indicator, thumb } = switchVariants()
 
-interface SwitchProps extends AriaSwitchProps {
+interface SwitchProps
+  extends React.ComponentProps<typeof AriaSwitch>,
+    VariantProps<typeof switchVariants> {
   ref?: React.Ref<HTMLLabelElement>
   thumbClassName?: string
   indicatorClassName?: string
 }
 
-const Switch = ({
+function Switch({
   ref,
   className,
   thumbClassName,
   indicatorClassName,
+  size,
   children,
   ...props
-}: SwitchProps) => {
+}: SwitchProps) {
   return (
     <AriaSwitch
       ref={ref}
       className={composeRenderProps(className, (className, renderProps) =>
-        switchVariants({ ...renderProps, className }),
+        root({ ...renderProps, className }),
       )}
       {...props}
     >
@@ -65,14 +91,16 @@ const Switch = ({
         return (
           <>
             <div
-              className={switchIndicatorVariants({
+              className={indicator({
                 ...renderProps,
+                size,
                 className: indicatorClassName,
               })}
             >
               <div
-                className={switchThumbVariants({
+                className={thumb({
                   ...renderProps,
+                  size,
                   className: thumbClassName,
                 })}
               />

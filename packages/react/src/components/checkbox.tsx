@@ -41,31 +41,33 @@ interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxV
   size?: "sm" | "md" | "lg"
 }
 
-const Checkbox = ({ className, children, indicatorClassName, size, ...props }: CheckboxProps) => (
-  <AriaCheckbox
-    className={composeRenderProps(className, (className, renderProps) =>
-      checkboxVariants({ ...renderProps, className }),
-    )}
-    {...props}
-  >
-    {composeRenderProps(children, (children, { isSelected, isIndeterminate, ...renderProps }) => (
-      <>
-        <div
-          data-slot="checkbox-indicator"
-          className={checkboxIndicatorVariants({
-            isSelected: isSelected || isIndeterminate,
-            size,
-            ...renderProps,
-            className: indicatorClassName,
-          })}
-        >
-          {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
-        </div>
-        {children}
-      </>
-    ))}
-  </AriaCheckbox>
-)
+function Checkbox({ className, children, indicatorClassName, size, ...props }: CheckboxProps) {
+  return (
+    <AriaCheckbox
+      className={composeRenderProps(className, (className, renderProps) =>
+        checkboxVariants({ ...renderProps, className }),
+      )}
+      {...props}
+    >
+      {composeRenderProps(children, (children, { isSelected, isIndeterminate, ...renderProps }) => (
+        <>
+          <div
+            data-slot="checkbox-indicator"
+            className={checkboxIndicatorVariants({
+              isSelected: isSelected || isIndeterminate,
+              size,
+              ...renderProps,
+              className: indicatorClassName,
+            })}
+          >
+            {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
+          </div>
+          {children}
+        </>
+      ))}
+    </AriaCheckbox>
+  )
+}
 
 export { Checkbox }
 export type { CheckboxProps }

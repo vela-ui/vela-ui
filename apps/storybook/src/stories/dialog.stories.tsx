@@ -2,7 +2,6 @@ import { Meta, StoryObj } from "@storybook/react"
 import {
   Button,
   Dialog,
-  DialogCloseIcon,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -44,7 +43,7 @@ export const Default: Story = {
   render: (args) => (
     <DialogTrigger>
       <Button variant="outline">Open Dialog</Button>
-      <Dialog {...args} placement="top">
+      <Dialog {...args}>
         <DialogContent role="alertdialog">
           <Form>
             <DialogHeader>
@@ -72,7 +71,38 @@ export const Default: Story = {
               </Button>
             </DialogFooter>
           </Form>
-          <DialogCloseIcon />
+        </DialogContent>
+      </Dialog>
+    </DialogTrigger>
+  ),
+}
+
+export const Blur: Story = {
+  args: {
+    placement: "top",
+    size: "sm",
+    overlayClassName: "backdrop-blur-md backdrop-saturate-150",
+  },
+  render: (args) => (
+    <DialogTrigger>
+      <Button variant="outline">Open Dialog</Button>
+      <Dialog {...args}>
+        <DialogContent role="alertdialog">
+          <DialogHeader>
+            <DialogTitle>Modal Title</DialogTitle>
+          </DialogHeader>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
+            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
+          </div>
+          <DialogFooter>
+            <Button slot="close" variant="outline">
+              Cancel
+            </Button>
+            <Button slot="close" onPress={() => console.log("xxx")}>
+              Save
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </DialogTrigger>

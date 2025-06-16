@@ -17,7 +17,7 @@ const separatorVariants = tv({
   },
 })
 
-const Separator = ({ orientation, className, ...props }: SeparatorProps) => {
+function Separator({ orientation, className, ...props }: SeparatorProps) {
   return (
     <AriaSeparator
       data-slot="separator"

@@ -21,7 +21,6 @@ import { focusRing } from "../lib/classes"
 
 interface FieldProps {
   label?: string
-  placeholder?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
   "aria-label"?: TextFieldProps["aria-label"]
@@ -31,7 +30,7 @@ interface FieldProps {
 const fieldVariants = tv({
   slots: {
     label:
-      "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+      "group-data-[invalid]:text-destructive flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
     description: "text-muted-foreground text-sm",
     fieldError: "text-destructive text-sm",
   },
@@ -39,20 +38,22 @@ const fieldVariants = tv({
 
 const { label, description, fieldError } = fieldVariants()
 
-const Label = ({ className, ...props }: LabelProps) => (
-  <AriaLabel data-slot="label" className={label({ className })} {...props} />
-)
+function Label({ className, ...props }: LabelProps) {
+  return <AriaLabel data-slot="label" className={label({ className })} {...props} />
+}
 
-const Description = ({ className, ...props }: TextProps) => (
-  <AriaText slot="description" className={description({ className })} {...props} />
-)
+function Description({ className, ...props }: TextProps) {
+  return <AriaText slot="description" className={description({ className })} {...props} />
+}
 
-const FieldError = ({ className, ...props }: FieldErrorProps) => (
-  <AriaFieldError
-    className={composeRenderProps(className, (className) => fieldError({ className }))}
-    {...props}
-  />
-)
+function FieldError({ className, ...props }: FieldErrorProps) {
+  return (
+    <AriaFieldError
+      className={composeRenderProps(className, (className) => fieldError({ className }))}
+      {...props}
+    />
+  )
+}
 
 const fieldGroupVariants = tv({
   extend: focusRing,
@@ -88,5 +89,5 @@ function FieldGroup({ className, ...props }: FieldGroupProps) {
 
 const TextField = AriaTextField
 
-export { Description, FieldError, FieldGroup, Label, TextField }
+export { Description, FieldError, FieldGroup, fieldVariants, Label, TextField }
 export type { FieldErrorProps, FieldGroupProps, FieldProps, LabelProps, TextProps }

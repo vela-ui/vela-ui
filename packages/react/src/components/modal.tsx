@@ -35,7 +35,7 @@ const modalOverlayVariants = tv({
 })
 
 const modalVariants = tv({
-  base: "bg-background w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg",
+  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg",
   variants: {
     scrollBehavior: {
       inside: "max-h-[calc(100%-7.5rem)]",
@@ -65,55 +65,63 @@ const modalVariants = tv({
   },
 })
 
-const ModalOverlay = ({
+function ModalOverlay({
   className,
+  placement,
   scrollBehavior,
   ...props
-}: React.ComponentProps<typeof AriaModalOverlay> & VariantProps<typeof modalOverlayVariants>) => (
-  <AriaModalOverlay
-    data-slot="modal-overlay"
-    style={{
-      height: "var(--visual-viewport-height)",
-    }}
-    className={composeRenderProps(className, (className, renderProps) =>
-      modalOverlayVariants({ ...renderProps, scrollBehavior, className }),
-    )}
-    {...props}
-  />
-)
+}: React.ComponentProps<typeof AriaModalOverlay> & VariantProps<typeof modalOverlayVariants>) {
+  return (
+    <AriaModalOverlay
+      data-slot="modal-overlay"
+      style={{
+        height: "var(--visual-viewport-height)",
+      }}
+      className={composeRenderProps(className, (className, renderProps) =>
+        modalOverlayVariants({ ...renderProps, placement, scrollBehavior, className }),
+      )}
+      {...props}
+    />
+  )
+}
 
-const Modal = ({
+function Modal({
   className,
   size,
   scrollBehavior,
   ...props
-}: React.ComponentProps<typeof AriaModal> & VariantProps<typeof modalVariants>) => (
-  <AriaModal
-    data-slot="modal"
-    className={composeRenderProps(className, (className, renderProps) =>
-      modalVariants({ ...renderProps, size, scrollBehavior, className }),
-    )}
-    {...props}
-  />
-)
+}: React.ComponentProps<typeof AriaModal> & VariantProps<typeof modalVariants>) {
+  return (
+    <AriaModal
+      data-slot="modal"
+      className={composeRenderProps(className, (className, renderProps) =>
+        modalVariants({ ...renderProps, size, scrollBehavior, className }),
+      )}
+      {...props}
+    />
+  )
+}
 
 interface ModalContentProps extends ModalOverlayProps, VariantProps<typeof modalVariants> {
   isDismissable?: boolean
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "full"
   placement?: "top" | "center" | "bottom"
   scrollBehavior?: "inside" | "outside"
+  overlayClassName?: ModalOverlayProps["className"]
 }
-const ModalContent = ({
+function ModalContent({
   className,
+  overlayClassName,
   isDismissable = true,
   size,
   placement,
   scrollBehavior,
   ...props
-}: ModalContentProps) => {
+}: ModalContentProps) {
   return (
     <ModalOverlay
       isDismissable={isDismissable}
+      className={overlayClassName}
       placement={placement}
       scrollBehavior={scrollBehavior}
       {...props}

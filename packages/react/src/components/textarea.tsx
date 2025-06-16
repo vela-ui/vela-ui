@@ -17,19 +17,21 @@ interface TextareaProps
   ref?: React.Ref<HTMLTextAreaElement>
 }
 
-const Textarea = ({ ref, className, ...props }: TextareaProps) => (
-  <AriaTextArea
-    ref={ref}
-    data-slot="textarea"
-    className={composeRenderProps(className, (className, renderProps) =>
-      textAreaVariants({
-        ...renderProps,
-        className,
-      }),
-    )}
-    {...props}
-  />
-)
+function Textarea({ ref, className, ...props }: TextareaProps) {
+  return (
+    <AriaTextArea
+      ref={ref}
+      data-slot="textarea"
+      className={composeRenderProps(className, (className, renderProps) =>
+        textAreaVariants({
+          ...renderProps,
+          className,
+        }),
+      )}
+      {...props}
+    />
+  )
+}
 
 export { Textarea }
 export type { TextareaProps }

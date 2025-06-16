@@ -38,7 +38,7 @@ interface TooltipProps
 
 const TooltipTrigger = AriaTooltipTrigger
 
-const Tooltip = ({ className, showArrow, offset = 10, children, ...props }: TooltipProps) => {
+function Tooltip({ className, showArrow, offset = 10, children, ...props }: TooltipProps) {
   return (
     <AriaTooltip
       data-slot="tooltip"

@@ -5,7 +5,6 @@ import React from "react"
 const meta = {
   title: "Components/Skeleton",
   component: Skeleton,
-  tags: ["autodocs"],
   argTypes: {
     isLoaded: {
       control: {
@@ -33,7 +32,7 @@ const LoadedStateTemplate = (args: SkeletonProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="inline-flex flex-col items-center gap-3">
       <Skeleton {...args} isLoaded={isLoaded}>
         <img src="https://i.pravatar.cc/150?img=5" className="rounded-box size-32" />
       </Skeleton>

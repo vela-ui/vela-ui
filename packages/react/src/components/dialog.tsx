@@ -1,12 +1,12 @@
 "use client"
 
-import type { DialogProps as AriaDialogProps } from "react-aria-components"
 import {
   Button as AriaButton,
   Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
   Heading as AriaHeading,
   Text as AriaText,
+  composeRenderProps,
 } from "react-aria-components"
 import { CloseIcon } from "../icons"
 import { cn, composeTailwindRenderProps } from "../lib/utils"
@@ -17,14 +17,29 @@ const DialogTrigger = AriaDialogTrigger
 
 const Dialog = (props: DialogProps) => <ModalContent {...props} />
 
-const DialogContent = ({ role = "dialog", className, ...props }: AriaDialogProps) => {
+const DialogContent = ({
+  role = "dialog",
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof AriaDialog> & {
+  showCloseButton?: boolean
+}) => {
   return (
     <AriaDialog
       role={role}
       data-slot="dialog-content"
       className={cn("relative flex h-full w-full flex-col p-6 outline-hidden", className)}
       {...props}
-    />
+    >
+      {composeRenderProps(children, (children) => (
+        <>
+          {children}
+          {showCloseButton && <DialogCloseIcon />}
+        </>
+      ))}
+    </AriaDialog>
   )
 }
 

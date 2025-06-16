@@ -1,11 +1,9 @@
 "use client"
 
-import { cloneElement, isValidElement, ReactElement, ReactNode } from "react"
 import type {
   TabListProps as AriaTabListProps,
-  TabProps as AriaTabProps,
   TabPanelProps,
-  TabsProps,
+  TabProps,
 } from "react-aria-components"
 import {
   Tab as AriaTab,
@@ -15,110 +13,175 @@ import {
   composeRenderProps,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { cn } from "../lib/utils"
-import { DataTheme } from "./types"
+import { createContext } from "../lib/context"
 
-const Tabs = ({ className, ...props }: TabsProps) => (
-  <AriaTabs
-    className={composeRenderProps(className, (className) => cn("tabs", className))}
-    {...props}
-  />
-)
-
-const tabListVariants = tv({
-  base: "tab-list",
+const tabsVariants = tv({
+  slots: {
+    root: "group/tabs",
+    list: "relative isolate inline-flex",
+    tab: "text-foreground/75 relative inline-flex cursor-pointer items-center justify-center gap-2 px-3 py-1 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    panel: "",
+  },
   variants: {
     variant: {
-      box: "tab-list-box",
-      border: "tab-list-border",
-    },
-    color: {
-      neutral: "tab-list-neutral",
-      primary: "tab-list-primary",
-      secondary: "tab-list-secondary",
-      accent: "tab-list-accent",
-      info: "tab-list-info",
-      success: "tab-list-success",
-      warning: "tab-list-warning",
-      error: "tab-list-error",
+      default: {
+        list: "bg-muted text-muted-foreground rounded-lg p-1",
+        tab: "dark:text-muted-foreground data-[selected=true]:bg-background data-[selected=true]:dark:text-foreground data-[selected=true]:dark:border-input data-[selected=true]:dark:bg-input/30 rounded-md border border-transparent whitespace-nowrap transition-[color,box-shadow] data-[selected=true]:shadow-sm",
+      },
+      underline: {
+        list: "border-input flex",
+        tab: "data-[selected=true]:border-foreground data-[selected=true]:text-foreground border-transparent",
+      },
+      pills: {
+        tab: "data-[selected=true]:bg-muted data-[selected=true]:text-foreground rounded-md",
+      },
     },
     size: {
-      xs: "tab-list-xs",
-      sm: "tab-list-sm",
-      md: "tab-list-md",
-      lg: "tab-list-lg",
-      xl: "tab-list-xl",
+      sm: {
+        tab: "h-9 text-sm",
+      },
+      md: {
+        tab: "h-10 text-sm",
+      },
+      lg: {
+        tab: "h-11 text-base",
+      },
+    },
+    orientation: {
+      horizontal: {
+        root: "block",
+        list: "flex-row",
+        panel: "w-full pt-4",
+      },
+      vertical: {
+        root: "flex",
+        list: "flex-col",
+        panel: "ps-4",
+      },
+    },
+    fitted: {
+      true: {
+        list: "flex",
+        tab: "flex-1 justify-center text-center",
+      },
+    },
+    isDisabled: {
+      true: {
+        tab: "cursor-not-allowed opacity-50",
+      },
+    },
+    isFocusVisible: {
+      true: {
+        tab: "border-ring ring-ring/50 outline-ring ring-[3px] outline-1",
+        panel: "border-ring ring-ring/50 outline-ring ring-[3px] outline-1",
+      },
     },
   },
+  compoundVariants: [
+    {
+      orientation: "horizontal",
+      variant: "underline",
+      className: {
+        list: "border-b",
+        tab: "-mb-px border-b-2",
+      },
+    },
+    {
+      orientation: "vertical",
+      variant: "underline",
+      className: {
+        list: "border-r",
+        tab: "-mr-px border-r-2",
+      },
+    },
+  ],
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
 })
-interface TabListProps<T> extends AriaTabListProps<T>, VariantProps<typeof tabListVariants> {
-  dataTheme?: DataTheme
-}
-const TabList = <T extends object>({
+
+const { root, list, tab, panel } = tabsVariants()
+
+const [TabsProvider, useTabsContext] = createContext<VariantProps<typeof tabsVariants>>({
+  name: "TabsContext",
+})
+
+interface TabsProps
+  extends React.ComponentProps<typeof AriaTabs>,
+    VariantProps<typeof tabsVariants> {}
+function Tabs({
   className,
-  dataTheme,
-  variant,
-  color,
-  size,
+  variant = "default",
+  size = "md",
+  fitted = false,
+  children,
   ...props
-}: TabListProps<T>) => (
-  <AriaTabList
-    data-theme={dataTheme}
-    className={composeRenderProps(className, (className) =>
-      tabListVariants({
-        variant,
-        color,
-        size,
-        className,
-      }),
-    )}
-    {...props}
-  />
-)
-
-interface TabProps extends AriaTabProps {
-  indicator?: ReactNode
-}
-const Tab = ({ className, children, indicator, ...props }: TabProps) => {
-  const getIndicator = () => {
-    if (indicator && isValidElement(indicator)) {
-      return cloneElement(indicator as ReactElement<{ className?: string }>, {
-        className: cn(
-          "tab-indicator",
-          (indicator as ReactElement<{ className?: string }>).props.className,
-        ),
-      })
-    }
-    return <span className="tab-indicator" />
-  }
-
+}: TabsProps) {
   return (
-    <AriaTab
-      className={composeRenderProps(className, (className) => cn("tab", className))}
+    <AriaTabs
+      data-slot="tabs"
+      className={composeRenderProps(className, (className, { orientation }) =>
+        root({ orientation, className }),
+      )}
       {...props}
     >
-      {(renderProps) => (
-        <>
-          {renderProps.isSelected && getIndicator()}
-          <div className="tab-content">
-            {typeof children === "function" ? children(renderProps) : children}
-          </div>
-        </>
-      )}
-    </AriaTab>
+      {composeRenderProps(children, (children, { orientation }) => (
+        <TabsProvider value={{ orientation, variant, size, fitted }}>{children}</TabsProvider>
+      ))}
+    </AriaTabs>
   )
 }
 
-const TabPanel = ({ className, ...props }: TabPanelProps) => (
-  <AriaTabPanel
-    className={composeRenderProps(className, (className) => cn("tab-panel", className))}
-    {...props}
-  />
-)
+type TabListProps<T> = AriaTabListProps<T>
+function TabList<T extends object>({ className, ...props }: TabListProps<T>) {
+  const { orientation, variant, fitted } = useTabsContext()
 
-Tabs.List = TabList
-Tabs.Tab = Tab
-Tabs.Panel = TabPanel
+  return (
+    <AriaTabList
+      data-slot="tab-list"
+      className={composeRenderProps(className, (className) =>
+        list({ orientation, variant, fitted, className }),
+      )}
+      {...props}
+    />
+  )
+}
 
-export { Tabs }
+function Tab({ className, ...props }: TabProps) {
+  const { orientation, variant, size, fitted } = useTabsContext()
+
+  return (
+    <AriaTab
+      data-slot="tab"
+      className={composeRenderProps(className, (className, renderProps) =>
+        tab({
+          ...renderProps,
+          orientation,
+          variant,
+          size,
+          fitted,
+          className,
+        }),
+      )}
+      {...props}
+    />
+  )
+}
+
+function TabPanel({ className, ...props }: TabPanelProps) {
+  const { orientation, variant, size } = useTabsContext()
+
+  return (
+    <AriaTabPanel
+      data-slot="tab-panel"
+      className={composeRenderProps(className, (className, renderProps) =>
+        panel({ ...renderProps, orientation, variant, size, className }),
+      )}
+      {...props}
+    />
+  )
+}
+
+export { Tab, TabList, TabPanel, Tabs }
 export type { TabListProps, TabPanelProps, TabProps, TabsProps }

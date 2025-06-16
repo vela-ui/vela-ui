@@ -14,18 +14,18 @@ interface CheckboxGroupProps extends AriaCheckboxGroupProps {
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-const CheckboxGroup = ({
+function CheckboxGroup({
   className,
   children,
   label,
   description,
   errorMessage,
   ...props
-}: CheckboxGroupProps) => {
+}: CheckboxGroupProps) {
   return (
     <AriaCheckboxGroup
       data-slot="checkbox-group"
-      className={composeTailwindRenderProps(className, "flex flex-col gap-2")}
+      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
       {...props}
     >
       {composeRenderProps(children, (children) => (

@@ -22,14 +22,14 @@ interface RadioGroupProps extends AriaRadioGroupProps {
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-const RadioGroup = ({
+function RadioGroup({
   className,
   children,
   label,
   description,
   errorMessage,
   ...props
-}: RadioGroupProps) => {
+}: RadioGroupProps) {
   return (
     <AriaRadioGroup
       data-slot="radio-group"
@@ -86,33 +86,35 @@ interface RadioProps extends AriaRadioProps {
   size?: "sm" | "md" | "lg"
 }
 
-const Radio = ({ ref, className, children, indicatorClassName, size, ...props }: RadioProps) => (
-  <AriaRadio
-    ref={ref}
-    className={composeRenderProps(className, (className, renderProps) =>
-      radioVariants({ ...renderProps, className }),
-    )}
-    {...props}
-  >
-    {composeRenderProps(children, (children, { isSelected, ...renderProps }) => (
-      <>
-        <div
-          data-slot="radio-indicator"
-          className={radioIndicatorVariants({
-            size,
-            ...renderProps,
-            className: indicatorClassName,
-          })}
-        >
-          {isSelected ? (
-            <CircleIcon className="fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-          ) : null}
-        </div>
-        {children}
-      </>
-    ))}
-  </AriaRadio>
-)
+function Radio({ ref, className, children, indicatorClassName, size, ...props }: RadioProps) {
+  return (
+    <AriaRadio
+      ref={ref}
+      className={composeRenderProps(className, (className, renderProps) =>
+        radioVariants({ ...renderProps, className }),
+      )}
+      {...props}
+    >
+      {composeRenderProps(children, (children, { isSelected, ...renderProps }) => (
+        <>
+          <div
+            data-slot="radio-indicator"
+            className={radioIndicatorVariants({
+              size,
+              ...renderProps,
+              className: indicatorClassName,
+            })}
+          >
+            {isSelected ? (
+              <CircleIcon className="fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            ) : null}
+          </div>
+          {children}
+        </>
+      ))}
+    </AriaRadio>
+  )
+}
 
 export { Radio, RadioGroup }
 export type { RadioGroupProps, RadioProps }

@@ -7,8 +7,13 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
+    size: {
+      control: {
+        type: "select",
+        options: ["sm", "md", "lg", "xl"],
+      },
+    },
     isDisabled: {
       control: {
         type: "boolean",
@@ -35,6 +40,23 @@ export const Default: Story = {
   args: {
     children: "Wi-Fi",
   },
+}
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-4">
+      <Switch {...args} size="sm">
+        Small
+      </Switch>
+      <Switch {...args}>Medium</Switch>
+      <Switch {...args} size="lg">
+        Large
+      </Switch>
+      <Switch {...args} size="xl">
+        Extra Large
+      </Switch>
+    </div>
+  ),
 }
 
 export const Colors: Story = {

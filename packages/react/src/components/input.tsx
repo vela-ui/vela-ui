@@ -41,7 +41,7 @@ interface InputProps
   endContent?: React.ReactNode
 }
 
-const Input = ({ ref, className, size, startContent, endContent, ...props }: InputProps) => {
+function Input({ ref, className, size, startContent, endContent, ...props }: InputProps) {
   if (startContent || endContent) {
     return (
       <div className="relative">

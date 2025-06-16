@@ -7,7 +7,7 @@ interface FormProps extends AriaFormProps {
   ref?: React.RefObject<HTMLFormElement>
 }
 
-const Form = ({ ref, ...props }: FormProps) => {
+function Form({ ref, ...props }: FormProps) {
   return <AriaForm ref={ref} {...props} />
 }
 

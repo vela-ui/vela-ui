@@ -21,13 +21,13 @@ const popoverVariants = tv({
     isEntering: {
       true: [
         "animate-in fade-in-0 zoom-in-95 duration-200 ease-out",
-        "data-[placement=left]:slide-in-from-right-1 data-[placement=right]:slide-in-from-left-1 data-[placement=top]:slide-in-from-bottom-1 data-[placement=bottom]:slide-in-from-top-1",
+        "data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 data-[placement=bottom]:slide-in-from-top-2",
       ],
     },
     isExiting: {
       true: [
         "animate-out fade-out-0 zoom-out-95 duration-200 ease-in",
-        "data-[placement=left]:slide-out-to-right-1 data-[placement=right]:slide-out-to-left-1 data-[placement=top]:slide-out-to-bottom-1 data-[placement=bottom]:slide-out-to-top-1",
+        "data-[placement=left]:slide-out-to-right-2 data-[placement=right]:slide-out-to-left-2 data-[placement=top]:slide-out-to-bottom-2 data-[placement=bottom]:slide-out-to-top-2",
       ],
     },
   },
