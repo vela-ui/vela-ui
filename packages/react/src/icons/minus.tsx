@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const MinusIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const MinusIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"

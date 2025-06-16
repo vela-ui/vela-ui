@@ -1,60 +1,39 @@
-import { useMemo } from "react"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { DataTheme } from "./types"
+import { focusRing } from "../lib/classes"
 
 const badgeVariants = tv({
-  base: "badge",
+  extend: focusRing,
+  base: "inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow] [&>svg]:pointer-events-none [&>svg]:size-3",
   variants: {
-    size: {
-      xs: "badge-xs",
-      sm: "badge-sm",
-      md: "badge-md",
-      lg: "badge-lg",
-      xl: "badge-xl",
-    },
     variant: {
-      outline: "badge-outline",
-      soft: "badge-soft",
-      dash: "badge-dash",
-      ghost: "badge-ghost",
+      default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90 border-transparent",
+      secondary:
+        "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90 border-transparent",
+      destructive:
+        "bg-destructive [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 border-transparent text-white",
+      outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
     },
-    color: {
-      neutral: "badge-neutral",
-      primary: "badge-primary",
-      secondary: "badge-secondary",
-      accent: "badge-accent",
-      info: "badge-info",
-      success: "badge-success",
-      warning: "badge-warning",
-      error: "badge-error",
-    },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 })
 
-interface BadgeProps
-  extends Omit<React.ComponentProps<"span">, "color">,
-    VariantProps<typeof badgeVariants> {
-  ref?: React.Ref<HTMLSpanElement>
-  dataTheme?: DataTheme
-}
+interface BadgeProps extends React.ComponentProps<"span">, VariantProps<typeof badgeVariants> {}
 
-const Badge = (props: BadgeProps) => {
-  const { className, color, variant, size, dataTheme, ref, ...otherProps } = props
-
-  const getClassNames = useMemo(
-    () =>
-      badgeVariants({
-        color,
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <span
+      data-slot="badge"
+      className={badgeVariants({
         variant,
-        size,
         className,
-      }),
-    [color, variant, size, className],
+      })}
+      {...props}
+    />
   )
-
-  return <span ref={ref} data-theme={dataTheme} className={getClassNames} {...otherProps} />
 }
 
-export { Badge }
+export { Badge, badgeVariants }
 export type { BadgeProps }

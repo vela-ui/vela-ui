@@ -1,22 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { componentColors, componentSizes, Label, Slider } from "@vela-ui/react"
+import {
+  componentSizes,
+  Label,
+  Slider,
+  SliderOutput,
+  SliderRange,
+  SliderThumb,
+  SliderTrack,
+} from "@vela-ui/react"
 
 const meta = {
   title: "Components/Slider",
   component: Slider,
-  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   argTypes: {
     orientation: {
       control: {
         type: "select",
       },
       options: ["horizontal", "vertical"],
-    },
-    color: {
-      control: {
-        type: "select",
-      },
-      options: componentColors,
     },
     size: {
       control: {
@@ -44,15 +48,78 @@ export const Default: Story = {
     defaultValue: [50],
   },
   render: (args) => (
-    <Slider {...args}>
-      <div className="flex items-center justify-between">
-        <Label>Temperature</Label>
-        <Slider.Output />
-      </div>
-      <Slider.Track>
-        <Slider.Filler />
-        <Slider.Thumb />
-      </Slider.Track>
-    </Slider>
+    <div className="w-96">
+      <Slider {...args}>
+        <div className="flex items-center justify-between">
+          <Label>Temperature</Label>
+          <SliderOutput />
+        </div>
+        <SliderTrack>
+          <SliderRange />
+          <SliderThumb />
+        </SliderTrack>
+      </Slider>
+    </div>
+  ),
+}
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex w-96 flex-col gap-6">
+      <Slider {...args} size="sm">
+        <div className="flex items-center justify-between">
+          <Label>Size: sm</Label>
+          <SliderOutput />
+        </div>
+        <SliderTrack>
+          <SliderRange />
+          <SliderThumb />
+        </SliderTrack>
+      </Slider>
+      <Slider {...args} size="md">
+        <div className="flex items-center justify-between">
+          <Label>Size: md</Label>
+          <SliderOutput />
+        </div>
+        <SliderTrack>
+          <SliderRange />
+          <SliderThumb />
+        </SliderTrack>
+      </Slider>
+      <Slider {...args} size="lg">
+        <div className="flex items-center justify-between">
+          <Label>Size: lg</Label>
+          <SliderOutput />
+        </div>
+        <SliderTrack>
+          <SliderRange />
+          <SliderThumb />
+        </SliderTrack>
+      </Slider>
+    </div>
+  ),
+}
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+    minValue: 0,
+    maxValue: 100,
+    step: 1,
+    defaultValue: [50],
+  },
+  render: (args) => (
+    <div className="w-96">
+      <Slider {...args}>
+        <div className="flex items-center justify-between">
+          <Label>Temperature</Label>
+          <SliderOutput />
+        </div>
+        <SliderTrack>
+          <SliderRange />
+          <SliderThumb />
+        </SliderTrack>
+      </Slider>
+    </div>
   ),
 }

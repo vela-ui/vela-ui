@@ -1,99 +1,112 @@
 "use client"
 
-import type {
-  RadioGroupProps as AriaRadioGroupProps,
-  RadioProps as AriaRadioProps,
-} from "react-aria-components"
+import type { ValidationResult } from "react-aria-components"
 import {
   Radio as AriaRadio,
   RadioGroup as AriaRadioGroup,
   composeRenderProps,
 } from "react-aria-components"
-import { tv, VariantProps } from "tailwind-variants"
-import { cn } from "../utils/classes"
-import { DataTheme } from "./types"
+import { tv } from "tailwind-variants"
+import { CircleIcon } from "../icons"
+import { focusRing } from "../lib/classes"
+import { composeTailwindRenderProps } from "../lib/utils"
+import { Description, FieldError, Label } from "./field"
 
-interface RadioGroupProps extends AriaRadioGroupProps {
-  ref?: React.Ref<HTMLDivElement>
+type RadioGroupProps = React.ComponentProps<typeof AriaRadioGroup> & {
+  label?: string
+  description?: string
+  errorMessage?: string | ((validation: ValidationResult) => string)
 }
-
-const RadioGroup = ({ ref, className, ...props }: RadioGroupProps) => {
+function RadioGroup({
+  className,
+  children,
+  label,
+  description,
+  errorMessage,
+  ...props
+}: RadioGroupProps) {
   return (
     <AriaRadioGroup
-      ref={ref}
-      className={composeRenderProps(className, (className, renderProps) =>
-        cn(
-          "group flex flex-col flex-wrap gap-2",
-          renderProps.orientation === "horizontal" && "flex-row items-center",
-          className,
-        ),
-      )}
+      data-slot="radio-group"
+      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
       {...props}
-    />
+    >
+      {composeRenderProps(children, (children) => (
+        <>
+          {label && <Label>{label}</Label>}
+          <div
+            data-slot="radio-group-wrapper"
+            className="flex gap-2 select-none group-data-[orientation=horizontal]:flex-wrap group-data-[orientation=vertical]:flex-col"
+          >
+            {children}
+          </div>
+          {description && <Description>{description}</Description>}
+          <FieldError>{errorMessage}</FieldError>
+        </>
+      ))}
+    </AriaRadioGroup>
   )
 }
 
 const radioVariants = tv({
-  base: "radio",
+  base: "group flex items-center gap-2 text-sm transition",
   variants: {
-    color: {
-      neutral: "radio-neutral",
-      primary: "radio-primary",
-      secondary: "radio-secondary",
-      accent: "radio-accent",
-      info: "radio-info",
-      success: "radio-success",
-      warning: "radio-warning",
-      error: "radio-error",
-    },
-    size: {
-      xs: "radio-xs",
-      sm: "radio-sm",
-      md: "radio-md",
-      lg: "radio-lg",
-      xl: "radio-xl",
+    isDisabled: {
+      true: "text-foreground/50 cursor-not-allowed",
     },
   },
 })
 
-interface RadioProps extends AriaRadioProps, VariantProps<typeof radioVariants> {
-  ref?: React.Ref<HTMLLabelElement>
-  wrapperClassName?: string
-  dataTheme?: DataTheme
-}
+const radioIndicatorVariants = tv({
+  extend: focusRing,
+  base: "border-input text-primary dark:bg-input/30 relative flex aspect-square shrink-0 items-center justify-center rounded-full border shadow-xs transition-[color,box-shadow]",
+  variants: {
+    size: {
+      sm: "size-4 [&_svg]:size-2",
+      md: "size-5 [&_svg]:size-2.5",
+      lg: "size-6 [&_svg]:size-3",
+    },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+})
 
-const Radio = ({
-  ref,
-  wrapperClassName,
-  className,
-  color,
-  size,
-  children,
-  dataTheme,
-  ...props
-}: RadioProps) => (
-  <AriaRadio
-    ref={ref}
-    data-theme={dataTheme}
-    className={composeRenderProps(wrapperClassName, (className) => cn("radio-wrapper", className))}
-    {...props}
-  >
-    {composeRenderProps(children, (children) => (
-      <>
-        <div
-          className={cn(
-            radioVariants({
-              color,
+type RadioProps = React.ComponentProps<typeof AriaRadio> & {
+  indicatorClassName?: string
+  size?: "sm" | "md" | "lg"
+}
+function Radio({ className, children, indicatorClassName, size, ...props }: RadioProps) {
+  return (
+    <AriaRadio
+      className={composeRenderProps(className, (className, renderProps) =>
+        radioVariants({ ...renderProps, className }),
+      )}
+      {...props}
+    >
+      {composeRenderProps(children, (children, { isSelected, ...renderProps }) => (
+        <>
+          <div
+            data-slot="radio-indicator"
+            className={radioIndicatorVariants({
               size,
-            }),
-            className,
-          )}
-        />
-        {children}
-      </>
-    ))}
-  </AriaRadio>
-)
+              ...renderProps,
+              className: indicatorClassName,
+            })}
+          >
+            {isSelected ? (
+              <CircleIcon className="fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+            ) : null}
+          </div>
+          {children}
+        </>
+      ))}
+    </AriaRadio>
+  )
+}
 
 export { Radio, RadioGroup }
 export type { RadioGroupProps, RadioProps }

@@ -1,84 +1,109 @@
 "use client"
 
-import type {
-  DialogProps as AriaDialogProps,
-  HeadingProps as AriaHeadingProps,
-  TextProps as AriaTextProps,
-} from "react-aria-components"
 import {
+  Button as AriaButton,
   Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
   Heading as AriaHeading,
   Text as AriaText,
+  composeRenderProps,
 } from "react-aria-components"
 import { CloseIcon } from "../icons"
-import { cn } from "../utils/classes"
-import { Button } from "./button"
-import type { ModalProps as DialogProps } from "./modal"
-import { Modal } from "./modal"
+import { cn, composeTailwindRenderProps } from "../lib/utils"
+import type { ModalContentProps as DialogProps } from "./modal"
+import { ModalContent } from "./modal"
 
-const Dialog = (props: DialogProps) => <Modal {...props} />
+const DialogTrigger = AriaDialogTrigger
 
-const Content = ({ role = "dialog", className, ...props }: AriaDialogProps) => {
+const Dialog = (props: DialogProps) => <ModalContent {...props} />
+
+const DialogContent = ({
+  role = "dialog",
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof AriaDialog> & {
+  showCloseButton?: boolean
+}) => {
   return (
     <AriaDialog
       role={role}
-      className={cn("relative flex h-full w-full flex-col p-6 outline-none", className)}
+      data-slot="dialog-content"
+      className={cn("relative flex h-full w-full flex-col p-6 outline-hidden", className)}
+      {...props}
+    >
+      {composeRenderProps(children, (children) => (
+        <>
+          {children}
+          {showCloseButton && <DialogCloseIcon />}
+        </>
+      ))}
+    </AriaDialog>
+  )
+}
+
+const DialogHeader = ({ className, ...props }: React.ComponentProps<"div">) => {
+  return (
+    <div
+      data-slot="dialog-header"
+      className={cn("mb-4 flex flex-col gap-2 text-center sm:text-left", className)}
       {...props}
     />
   )
 }
 
-const Trigger = AriaDialogTrigger
+const DialogFooter = ({ className, ...props }: React.ComponentProps<"div">) => {
+  return (
+    <div
+      data-slot="dialog-footer"
+      className={cn("mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
+      {...props}
+    />
+  )
+}
 
-const Title = ({ className, ...props }: AriaHeadingProps) => (
+const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof AriaHeading>) => (
   <AriaHeading
     slot="title"
+    data-slot="dialog-title"
     className={cn("text-lg leading-none font-semibold", className)}
     {...props}
   />
 )
 
-const Description = ({ className, ...props }: AriaTextProps) => (
-  <AriaText slot="description" className={className} {...props} />
+const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof AriaText>) => (
+  <AriaText
+    slot="description"
+    data-slot="dialog-description"
+    className={cn("text-muted-foreground text-sm", className)}
+    {...props}
+  />
 )
 
-const Header = ({ className, ...props }: React.ComponentProps<"div">) => {
-  return <div className={cn("mb-4", className)} {...props} />
-}
-
-const Footer = ({ className, ...props }: React.ComponentProps<"div">) => {
-  return <div className={cn("mt-4 flex flex-row justify-end gap-2.5", className)} {...props} />
-}
-
-const CloseButton = ({
-  className,
-  size = "sm",
-  shape = "circle",
-  variant = "ghost",
-  ...props
-}: React.ComponentProps<typeof Button>) => (
-  <Button
+const DialogCloseIcon = ({ className, ...props }: React.ComponentProps<typeof AriaButton>) => (
+  <AriaButton
     aria-label="Close"
     slot="close"
-    className={cn("absolute top-2 right-2", className)}
-    shape={shape}
-    variant={variant}
-    size={size}
+    data-slot="dialog-close"
+    className={composeTailwindRenderProps(
+      className,
+      "ring-offset-background focus:ring-ring absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    )}
     {...props}
   >
-    <CloseIcon className="size-4.5" />
+    <CloseIcon />
     <span className="sr-only">Close</span>
-  </Button>
+  </AriaButton>
 )
 
-Dialog.Content = Content
-Dialog.Trigger = Trigger
-Dialog.Header = Header
-Dialog.Title = Title
-Dialog.Description = Description
-Dialog.Footer = Footer
-Dialog.CloseButton = CloseButton
-
-export { Dialog }
-export type { DialogProps }
+export {
+  Dialog,
+  DialogCloseIcon,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+}

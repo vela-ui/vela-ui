@@ -8,7 +8,6 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {},
   args: {
     isDisabled: false,
@@ -34,58 +33,14 @@ export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-2">
       <RadioGroup {...args}>
-        <Radio value="soccer" size="xs">
-          Soccer
+        <Radio value="small" size="sm">
+          Small
         </Radio>
-        <Radio value="baseball" size="sm">
-          Baseball
+        <Radio value="medium" size="md">
+          Medium
         </Radio>
-        <Radio value="football" size="md">
-          Football
-        </Radio>
-        <Radio value="tennis" size="lg">
-          Tennis
-        </Radio>
-        <Radio value="golf" size="xl">
-          Golf
-        </Radio>
-      </RadioGroup>
-    </div>
-  ),
-}
-
-export const Colors: Story = {
-  args: {
-    orientation: "horizontal",
-    defaultValue: "neutral",
-  },
-  render: (args) => (
-    <div className="flex flex-col gap-2">
-      <RadioGroup {...args}>
-        <Label>Choose your favorite color</Label>
-        <Radio value="primary" color="primary">
-          primary
-        </Radio>
-        <Radio value="secondary" color="secondary">
-          secondary
-        </Radio>
-        <Radio value="accent" color="accent">
-          accent
-        </Radio>
-        <Radio value="neutral" color="neutral">
-          neutral
-        </Radio>
-        <Radio value="info" color="info">
-          info
-        </Radio>
-        <Radio value="success" color="success">
-          success
-        </Radio>
-        <Radio value="warning" color="warning">
-          warning
-        </Radio>
-        <Radio value="error" color="error">
-          error
+        <Radio value="large" size="lg">
+          Large
         </Radio>
       </RadioGroup>
     </div>
@@ -97,11 +52,9 @@ export const Validation: Story = {
     isRequired: true,
   },
   render: (args) => (
-    <Form className="flex flex-col items-start gap-2">
+    <Form className="flex flex-col items-start gap-4">
       <RadioGroup {...args} />
-      <Button type="submit" color="primary">
-        Submit
-      </Button>
+      <Button type="submit">Submit</Button>
     </Form>
   ),
 }

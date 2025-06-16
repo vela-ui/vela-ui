@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Checkbox, componentColors, componentSizes } from "@vela-ui/react"
+import { Checkbox, cn } from "@vela-ui/react"
 
 const meta = {
   title: "Components/Checkbox",
@@ -7,19 +7,12 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: componentColors,
-    },
     size: {
       control: {
         type: "select",
+        options: ["sm", "md", "lg"],
       },
-      options: componentSizes,
     },
     isDisabled: {
       control: {
@@ -41,58 +34,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   render: (args) => <Checkbox {...args}>Checkbox</Checkbox>,
 }
-export const Sizes: Story = {
-  render: (args) => (
-    <div className="flex items-center gap-2">
-      <Checkbox {...args} size="xs">
-        Xsmall
-      </Checkbox>
-      <Checkbox {...args} size="sm">
-        Small
-      </Checkbox>
-      <Checkbox {...args} size="md">
-        Medium
-      </Checkbox>
-      <Checkbox {...args} size="lg">
-        Large
-      </Checkbox>
-      <Checkbox {...args} size="xl">
-        Xlarge
-      </Checkbox>
-    </div>
-  ),
-}
-
-export const Colors: Story = {
-  render: (args) => (
-    <div className="flex items-center gap-2">
-      <Checkbox {...args} color="primary">
-        primary
-      </Checkbox>
-      <Checkbox {...args} color="secondary">
-        secondary
-      </Checkbox>
-      <Checkbox {...args} color="accent">
-        accent
-      </Checkbox>
-      <Checkbox {...args} color="neutral">
-        neutral
-      </Checkbox>
-      <Checkbox {...args} color="info">
-        info
-      </Checkbox>
-      <Checkbox {...args} color="success">
-        success
-      </Checkbox>
-      <Checkbox {...args} color="warning">
-        warning
-      </Checkbox>
-      <Checkbox {...args} color="error">
-        error
-      </Checkbox>
-    </div>
-  ),
-}
 
 export const Indeterminate: Story = {
   render: (args) => (
@@ -106,6 +47,46 @@ export const Disabled: Story = {
   render: (args) => (
     <Checkbox {...args} isDisabled>
       Disabled
+    </Checkbox>
+  ),
+}
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-2">
+      <Checkbox {...args} size="sm">
+        Small
+      </Checkbox>
+      <Checkbox {...args} size="md">
+        Medium
+      </Checkbox>
+      <Checkbox {...args} size="lg">
+        Large
+      </Checkbox>
+    </div>
+  ),
+}
+
+export const Custom: Story = {
+  render: (args) => (
+    <Checkbox
+      {...args}
+      className={({ isSelected }) =>
+        cn(
+          "hover:bg-accent/50 flex items-start gap-3 rounded-lg border p-3 text-sm leading-none font-medium select-none",
+          {
+            "border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950 [&_[data-slot=checkbox-indicator]]:border-blue-600 [&_[data-slot=checkbox-indicator]]:bg-blue-600 [&_[data-slot=checkbox-indicator]]:text-white":
+              isSelected,
+          },
+        )
+      }
+    >
+      <div className="grid gap-1.5 font-normal">
+        <p className="text-sm leading-none font-medium">Enable notifications</p>
+        <p className="text-muted-foreground text-sm">
+          You can enable or disable notifications at any time.
+        </p>
+      </div>
     </Checkbox>
   ),
 }

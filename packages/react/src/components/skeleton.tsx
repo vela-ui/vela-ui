@@ -1,21 +1,6 @@
-import type { VariantProps } from "tailwind-variants"
-import { tv } from "tailwind-variants"
+import { cn } from "../lib/utils"
 
-const skeletonVariants = tv({
-  base: "skeleton",
-  variants: {
-    variant: {
-      pulse: "skeleton-pulse",
-      shine: "skeleton-shine",
-      none: "animate-none",
-    },
-  },
-  defaultVariants: {
-    variant: "pulse",
-  },
-})
-
-interface SkeletonProps extends React.ComponentProps<"div">, VariantProps<typeof skeletonVariants> {
+interface SkeletonProps extends React.ComponentProps<"div"> {
   /**
    * Whether the skeleton is loaded
    * @default false
@@ -23,17 +8,22 @@ interface SkeletonProps extends React.ComponentProps<"div">, VariantProps<typeof
   isLoaded?: boolean
 }
 
-const Skeleton = ({ className, variant, isLoaded, children, ...props }: SkeletonProps) => {
+function Skeleton({ className, isLoaded, children, ...props }: SkeletonProps) {
   return (
     <div
-      className={skeletonVariants({
-        variant,
+      className={cn(
+        "bg-accent group animate-pulse rounded-md data-[loaded=true]:animate-none",
         className,
-      })}
+      )}
+      data-slot="skeleton"
       data-loaded={isLoaded ? "true" : undefined}
       {...props}
     >
-      {children && <div className="skeleton-content">{children}</div>}
+      {children && (
+        <div className="opacity-0 transition-opacity duration-300 group-data-[loaded=true]:opacity-100 motion-reduce:transition-none">
+          {children}
+        </div>
+      )}
     </div>
   )
 }

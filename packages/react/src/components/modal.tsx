@@ -1,6 +1,5 @@
 "use client"
 
-import { useMemo } from "react"
 import type { ModalOverlayProps } from "react-aria-components"
 import {
   Modal as AriaModal,
@@ -9,78 +8,108 @@ import {
 } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { cn } from "../utils/classes"
 
-const modalVariants = tv({
-  slots: {
-    base: "modal",
-    overlay: "modal-overlay",
-  },
+const modalOverlayVariants = tv({
+  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50",
   variants: {
-    scrollBehavior: {
-      inside: {
-        base: "max-h-[calc(100%-7.5rem)]",
-        overlay: "overflow-hidden",
-      },
-      outside: {
-        overlay: "overflow-auto",
-      },
-    },
-    size: {
-      xs: {
-        base: "max-w-xs",
-      },
-      sm: {
-        base: "max-w-sm",
-      },
-      md: {
-        base: "max-w-md",
-      },
-      lg: {
-        base: "max-w-lg",
-      },
-      xl: {
-        base: "max-w-xl",
-      },
-      "2xl": {
-        base: "max-w-2xl",
-      },
-      "3xl": {
-        base: "max-w-3xl",
-      },
-      "4xl": {
-        base: "max-w-4xl",
-      },
-      "5xl": {
-        base: "max-w-5xl",
-      },
-      full: {
-        base: "my-0 h-dvh max-w-full rounded-none",
-      },
-    },
     placement: {
-      top: {
-        overlay: "items-start",
-      },
-      center: {
-        overlay: "items-center",
-      },
-      bottom: {
-        overlay: "items-end",
-      },
+      top: "items-start",
+      center: "items-center",
+      bottom: "items-end",
+    },
+    scrollBehavior: {
+      inside: "overflow-hidden",
+      outside: "overflow-auto",
+    },
+    isEntering: {
+      true: "animate-in fade-in duration-200 ease-out",
+    },
+    isExiting: {
+      true: "animate-out fade-out duration-200 ease-in",
     },
   },
   defaultVariants: {
-    scrollBehavior: "outside",
-    size: "md",
     placement: "center",
+    scrollBehavior: "outside",
   },
 })
 
-interface ModalProps extends ModalOverlayProps, VariantProps<typeof modalVariants> {
-  overlayClassName?: string
+const modalVariants = tv({
+  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg",
+  variants: {
+    scrollBehavior: {
+      inside: "max-h-[calc(100%-7.5rem)]",
+      outside: "",
+    },
+    isEntering: {
+      true: "animate-in fade-in zoom-in-95 duration-200 ease-out",
+    },
+    isExiting: {
+      true: "animate-out fade-out zoom-out-95 duration-200 ease-in",
+    },
+    size: {
+      xs: "sm:max-w-xs",
+      sm: "sm:max-w-sm",
+      md: "sm:max-w-md",
+      lg: "sm:max-w-lg",
+      xl: "sm:max-w-xl",
+      "2xl": "sm:max-w-2xl",
+      "3xl": "sm:max-w-3xl",
+      "4xl": "sm:max-w-4xl",
+      "5xl": "sm:max-w-5xl",
+      full: "my-0 h-dvh max-w-full rounded-none",
+    },
+  },
+  defaultVariants: {
+    size: "lg",
+  },
+})
+
+function ModalOverlay({
+  className,
+  placement,
+  scrollBehavior,
+  ...props
+}: React.ComponentProps<typeof AriaModalOverlay> & VariantProps<typeof modalOverlayVariants>) {
+  return (
+    <AriaModalOverlay
+      data-slot="modal-overlay"
+      style={{
+        height: "var(--visual-viewport-height)",
+      }}
+      className={composeRenderProps(className, (className, renderProps) =>
+        modalOverlayVariants({ ...renderProps, placement, scrollBehavior, className }),
+      )}
+      {...props}
+    />
+  )
 }
-const Modal = ({
+
+function Modal({
+  className,
+  size,
+  scrollBehavior,
+  ...props
+}: React.ComponentProps<typeof AriaModal> & VariantProps<typeof modalVariants>) {
+  return (
+    <AriaModal
+      data-slot="modal"
+      className={composeRenderProps(className, (className, renderProps) =>
+        modalVariants({ ...renderProps, size, scrollBehavior, className }),
+      )}
+      {...props}
+    />
+  )
+}
+
+interface ModalContentProps extends ModalOverlayProps, VariantProps<typeof modalVariants> {
+  isDismissable?: boolean
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "full"
+  placement?: "top" | "center" | "bottom"
+  scrollBehavior?: "inside" | "outside"
+  overlayClassName?: ModalOverlayProps["className"]
+}
+function ModalContent({
   className,
   overlayClassName,
   isDismissable = true,
@@ -88,33 +117,25 @@ const Modal = ({
   placement,
   scrollBehavior,
   ...props
-}: ModalProps) => {
-  const slots = useMemo(
-    () =>
-      modalVariants({
-        size,
-        scrollBehavior,
-        placement,
-      }),
-    [placement, scrollBehavior, size],
-  )
-
+}: ModalContentProps) {
   return (
-    <AriaModalOverlay
+    <ModalOverlay
       isDismissable={isDismissable}
-      className={composeRenderProps(overlayClassName, (className) =>
-        cn(slots.overlay(), className),
-      )}
+      className={overlayClassName}
+      placement={placement}
+      scrollBehavior={scrollBehavior}
       {...props}
     >
-      <AriaModal
+      <Modal
         isDismissable={isDismissable}
-        className={composeRenderProps(className, (className) => cn(slots.base(), className))}
+        className={className}
+        size={size}
+        scrollBehavior={scrollBehavior}
         {...props}
       />
-    </AriaModalOverlay>
+    </ModalOverlay>
   )
 }
 
-export { Modal }
-export type { ModalProps }
+export { Modal, ModalContent, ModalOverlay }
+export type { ModalContentProps }

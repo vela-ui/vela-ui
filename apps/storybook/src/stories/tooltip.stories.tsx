@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, componentColors, Tooltip } from "@vela-ui/react"
+import { Button, Tooltip, TooltipTrigger } from "@vela-ui/react"
 
 const meta = {
   title: "Components/Tooltip",
@@ -7,13 +7,12 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
-    color: {
+    placement: {
       control: {
         type: "select",
       },
-      options: componentColors,
+      options: ["top", "bottom", "right", "left"],
     },
     showArrow: {
       control: {
@@ -33,9 +32,9 @@ export const Default: Story = {
     children: "I am a tooltip",
   },
   render: (args) => (
-    <Tooltip.Trigger>
-      <Button>Hover me</Button>
+    <TooltipTrigger delay={100} closeDelay={100}>
+      <Button variant="outline">Hover</Button>
       <Tooltip {...args} />
-    </Tooltip.Trigger>
+    </TooltipTrigger>
   ),
 }

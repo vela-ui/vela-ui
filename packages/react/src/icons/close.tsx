@@ -1,10 +1,4 @@
-import { IconSvgProps } from "./types"
-
-export const CloseIcon = (
-  props: IconSvgProps & {
-    className?: string
-  },
-) => {
+export const CloseIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"

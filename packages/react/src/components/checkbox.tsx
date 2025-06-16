@@ -1,95 +1,74 @@
 "use client"
 
-import type {
-  CheckboxGroupProps as AriaCheckboxGroupProps,
-  CheckboxProps as AriaCheckboxProps,
-} from "react-aria-components"
-import {
-  Checkbox as AriaCheckbox,
-  CheckboxGroup as AriaCheckboxGroup,
-  composeRenderProps,
-} from "react-aria-components"
+import { Checkbox as AriaCheckbox, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
-import { cn, composeTailwindRenderProps } from "../utils/classes"
-import { DataTheme } from "./types"
-
-interface CheckboxGroupProps extends AriaCheckboxGroupProps {
-  ref?: React.Ref<HTMLDivElement>
-}
-
-const CheckboxGroup = ({ ref, className, ...props }: CheckboxGroupProps) => {
-  return (
-    <AriaCheckboxGroup
-      ref={ref}
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
-      {...props}
-    />
-  )
-}
+import { CheckIcon, MinusIcon } from "../icons"
+import { focusRing } from "../lib/classes"
 
 const checkboxVariants = tv({
-  base: "checkbox",
+  base: "group relative flex items-center gap-2 text-sm transition",
   variants: {
-    color: {
-      neutral: "checkbox-neutral",
-      primary: "checkbox-primary",
-      secondary: "checkbox-secondary",
-      accent: "checkbox-accent",
-      info: "checkbox-info",
-      success: "checkbox-success",
-      warning: "checkbox-warning",
-      error: "checkbox-error",
-    },
-    size: {
-      xs: "checkbox-xs",
-      sm: "checkbox-sm",
-      md: "checkbox-md",
-      lg: "checkbox-lg",
-      xl: "checkbox-xl",
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
     },
   },
 })
 
-interface CheckboxProps extends AriaCheckboxProps, VariantProps<typeof checkboxVariants> {
-  ref?: React.Ref<HTMLLabelElement>
-  wrapperClassName?: string
-  dataTheme?: DataTheme
+const checkboxIndicatorVariants = tv({
+  extend: focusRing,
+  base: "peer border-input dark:bg-input/30 flex shrink-0 items-center justify-center rounded-[4px] border shadow-xs transition-shadow [&_svg]:size-full",
+  variants: {
+    size: {
+      sm: "size-4",
+      md: "size-5 p-0.5",
+      lg: "size-6 p-0.5",
+    },
+    isSelected: {
+      true: "bg-primary dark:bg-primary text-primary-foreground border-primary",
+    },
+    isDisabled: {
+      true: "cursor-not-allowed opacity-50",
+    },
+  },
+  defaultVariants: {
+    size: "sm",
+  },
+})
+
+interface CheckboxProps
+  extends React.ComponentProps<typeof AriaCheckbox>,
+    VariantProps<typeof checkboxVariants> {
+  indicatorClassName?: string
+  size?: "sm" | "md" | "lg"
 }
 
-const Checkbox = ({
-  ref,
-  wrapperClassName,
-  className,
-  color,
-  size,
-  children,
-  dataTheme,
-  ...props
-}: CheckboxProps) => (
-  <AriaCheckbox
-    ref={ref}
-    data-theme={dataTheme}
-    className={composeRenderProps(wrapperClassName, (className) =>
-      cn("checkbox-wrapper", className),
-    )}
-    {...props}
-  >
-    {composeRenderProps(children, (children) => (
-      <>
-        <div
-          className={cn(
-            checkboxVariants({
-              color,
+function Checkbox({ className, children, indicatorClassName, size, ...props }: CheckboxProps) {
+  return (
+    <AriaCheckbox
+      className={composeRenderProps(className, (className, renderProps) =>
+        checkboxVariants({ ...renderProps, className }),
+      )}
+      {...props}
+    >
+      {composeRenderProps(children, (children, { isSelected, isIndeterminate, ...renderProps }) => (
+        <>
+          <div
+            data-slot="checkbox-indicator"
+            className={checkboxIndicatorVariants({
+              isSelected: isSelected || isIndeterminate,
               size,
-            }),
-            className,
-          )}
-        />
-        {children}
-      </>
-    ))}
-  </AriaCheckbox>
-)
+              ...renderProps,
+              className: indicatorClassName,
+            })}
+          >
+            {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
+          </div>
+          {children}
+        </>
+      ))}
+    </AriaCheckbox>
+  )
+}
 
-export { Checkbox, CheckboxGroup }
-export type { CheckboxGroupProps, CheckboxProps }
+export { Checkbox }
+export type { CheckboxProps }

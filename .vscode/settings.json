@@ -16,8 +16,8 @@
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "tailwindCSS.experimental.configFile": {
-    "apps/docs/app/app.css": ["apps/docs/app/**/*", "packages/react/**", "packages/theme/src/**"],
-    "apps/storybook/tailwind.config.js": ["apps/storybook/**/*"],
+    "apps/docs/app/app.css": ["apps/docs/app/**/*", "packages/theme/src/**"],
+    "apps/storybook/.storybook/style.css": ["apps/storybook/**/*", "packages/react/src/**"],
     "packages/theme-tw3/src/components/tailwind.config.js": ["packages/theme-tw3/src/**/*"]
   }
 }
