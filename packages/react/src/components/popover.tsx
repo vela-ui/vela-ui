@@ -15,7 +15,7 @@ import { tv } from "tailwind-variants"
 import { cn } from "../lib/utils"
 
 const popoverVariants = tv({
-  base: "bg-popover text-popover-foreground z-50 rounded-md border shadow-md outline-hidden duration-200",
+  base: "bg-popover text-popover-foreground z-50 rounded-md border shadow-md outline-hidden transition duration-200",
   variants: {
     isEntering: {
       true: [
