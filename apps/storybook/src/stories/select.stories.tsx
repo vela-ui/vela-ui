@@ -6,9 +6,24 @@ import {
   SelectItem,
   SelectList,
   SelectPopover,
+  SelectProps,
+  SelectSection,
   SelectTrigger,
   SelectValue,
 } from "@vela-ui/react"
+
+const sizes = ["xs", "sm", "md", "lg"] as const
+
+const options = [
+  {
+    name: "Fruit",
+    children: [{ name: "Apple" }, { name: "Banana" }, { name: "Orange" }, { name: "Grapes" }],
+  },
+  {
+    name: "Vegetable",
+    children: [{ name: "Cabbage" }, { name: "Broccoli" }, { name: "Carrots" }],
+  },
+]
 
 const meta = {
   title: "Components/Select",
@@ -40,6 +55,36 @@ export const Default: Story = {
         </SelectList>
       </SelectPopover>
     </Select>
+  ),
+}
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-4">
+      {sizes.map((size) => (
+        <Select
+          key={size}
+          className="w-[200px]"
+          placeholder="Select an animal"
+          label={`Size = ${size}`}
+          {...args}
+        >
+          <SelectTrigger size={size}>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectPopover>
+            <SelectList>
+              <SelectItem>Aardvark</SelectItem>
+              <SelectItem>Cat</SelectItem>
+              <SelectItem>Dog</SelectItem>
+              <SelectItem>Kangaroo</SelectItem>
+              <SelectItem>Panda</SelectItem>
+              <SelectItem>Snake</SelectItem>
+            </SelectList>
+          </SelectPopover>
+        </Select>
+      ))}
+    </div>
   ),
 }
 
@@ -137,3 +182,22 @@ export const Validation = () => (
     </Button>
   </Form>
 )
+
+export const Dynamic = (args: SelectProps<object>) => {
+  return (
+    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+      <SelectTrigger>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectPopover>
+        <SelectList items={options}>
+          {(section) => (
+            <SelectSection id={section.name} title={section.name} items={section.children}>
+              {(item) => <SelectItem id={item.name}>{item.name}</SelectItem>}
+            </SelectSection>
+          )}
+        </SelectList>
+      </SelectPopover>
+    </Select>
+  )
+}

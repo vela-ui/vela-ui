@@ -3,7 +3,7 @@ import { Button, LinkButton, Loader } from "@vela-ui/react"
 import { HeartIcon } from "lucide-react"
 
 const variants = ["default", "destructive", "outline", "secondary", "ghost", "link"] as const
-const sizes = ["default", "sm", "lg", "icon"] as const
+const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
 const meta = {
   title: "Components/Button",
@@ -62,13 +62,11 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex items-center gap-2">
-      <Button {...args} size="sm">
-        Small
-      </Button>
-      <Button {...args}>Medium</Button>
-      <Button {...args} size="lg">
-        Large
-      </Button>
+      {sizes.map((size) => (
+        <Button key={size} {...args} size={size}>
+          Button ({size})
+        </Button>
+      ))}
     </div>
   ),
 }

@@ -6,18 +6,20 @@ import { focusRing } from "../lib/classes"
 
 const inputVariants = tv({
   extend: focusRing,
-  base: "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+  base: "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex w-full min-w-0 rounded-md border bg-transparent py-1 shadow-xs transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   variants: {
     size: {
-      sm: "h-8",
-      md: "h-9",
-      lg: "h-10",
+      xs: "h-8 px-2 text-xs",
+      sm: "h-9 px-2.5 text-sm",
+      md: "h-10 px-3 text-sm",
+      lg: "h-11 px-4 text-base",
+      xl: "h-12 px-4.5 text-base",
     },
     hasStartContent: {
-      true: "pl-9",
+      true: "pl-10",
     },
     hasEndContent: {
-      true: "pr-9",
+      true: "pr-10",
     },
     isFocused: focusRing.variants.isFocusVisible,
   },

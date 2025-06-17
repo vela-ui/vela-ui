@@ -14,7 +14,7 @@ import {
   SelectValue as AriaSelectValue,
   composeRenderProps,
 } from "react-aria-components"
-import { tv } from "tailwind-variants"
+import { tv, VariantProps } from "tailwind-variants"
 import { ChevronDownIcon } from "../icons"
 import { focusRing } from "../lib/classes"
 import { cn, composeTailwindRenderProps } from "../lib/utils"
@@ -33,9 +33,10 @@ const selectTriggerVariants = tv({
   base: "border-input [&_svg:not([class*='text-'])]:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 group-data-[invalid]:ring-destructive/20 group-data-[invalid]:dark:ring-destructive/40 group-data-[invalid]:border-destructive flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   variants: {
     size: {
-      sm: "h-8",
-      md: "h-9",
-      lg: "h-10",
+      xs: "h-8",
+      sm: "h-9",
+      md: "h-10",
+      lg: "h-11",
     },
     isDisabled: {
       true: "cursor-not-allowed opacity-50",
@@ -84,13 +85,15 @@ function Select<T extends object>({
   )
 }
 
-function SelectTrigger({ className, children, ...props }: AriaButtonProps) {
+type SelectTriggerProps = AriaButtonProps & VariantProps<typeof selectTriggerVariants>
+function SelectTrigger({ className, size, children, ...props }: SelectTriggerProps) {
   return (
     <AriaButton
       data-slot="select-trigger"
       className={composeRenderProps(className, (className, renderProps) =>
         selectTriggerVariants({
           ...renderProps,
+          size,
           className,
         }),
       )}

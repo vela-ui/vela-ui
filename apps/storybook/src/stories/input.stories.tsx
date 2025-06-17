@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { componentSizes, Input, Label } from "@vela-ui/react"
+import { Input, Label } from "@vela-ui/react"
 import { XIcon } from "lucide-react"
+
+const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
 const meta = {
   title: "Components/Input",
@@ -13,7 +15,7 @@ const meta = {
       control: {
         type: "select",
       },
-      options: componentSizes,
+      options: sizes,
     },
     disabled: {
       control: {
@@ -62,9 +64,9 @@ export const Types: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex w-96 flex-col gap-4">
-      <Input {...args} size="sm" placeholder="Small" />
-      <Input {...args} size="md" placeholder="Medium" />
-      <Input {...args} size="lg" placeholder="Large" />
+      {sizes.map((size) => (
+        <Input key={size} {...args} size={size} placeholder={`Size (${size})`} />
+      ))}
     </div>
   ),
 }
