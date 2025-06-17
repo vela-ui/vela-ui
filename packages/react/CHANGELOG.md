@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.2
+
+### Patch Changes
+
+- [#31](https://github.com/vela-ui/vela-ui/pull/31) [`f9eb9d9`](https://github.com/vela-ui/vela-ui/commit/f9eb9d95cf8c9cb803af37d043032b0e86ff96fa) Thanks [@bobbychan](https://github.com/bobbychan)! - Adjust the component size
+
 ## 2.0.1
 
 ### Patch Changes
