@@ -10,7 +10,7 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 
 const modalOverlayVariants = tv({
-  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50",
+  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50 duration-200",
   variants: {
     placement: {
       top: "items-start",
@@ -22,10 +22,10 @@ const modalOverlayVariants = tv({
       outside: "overflow-auto",
     },
     isEntering: {
-      true: "animate-in fade-in duration-200 ease-out",
+      true: "animate-in fade-in-0",
     },
     isExiting: {
-      true: "animate-out fade-out duration-200 ease-in",
+      true: "animate-out fade-out-0",
     },
   },
   defaultVariants: {
@@ -35,17 +35,17 @@ const modalOverlayVariants = tv({
 })
 
 const modalVariants = tv({
-  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg",
+  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg duration-200",
   variants: {
     scrollBehavior: {
       inside: "max-h-[calc(100%-7.5rem)]",
       outside: "",
     },
     isEntering: {
-      true: "animate-in fade-in zoom-in-95 duration-200 ease-out",
+      true: "animate-in fade-in-0 zoom-in-95",
     },
     isExiting: {
-      true: "animate-out fade-out zoom-out-95 duration-200 ease-in",
+      true: "animate-out fade-out-0 zoom-out-95",
     },
     size: {
       xs: "sm:max-w-xs",

@@ -2,13 +2,14 @@ import { Meta, StoryObj } from "@storybook/react"
 import {
   Button,
   Drawer,
-  DrawerCloseIcon,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@vela-ui/react"
+
+const placements = ["top", "bottom", "left", "right"] as const
 
 const meta = {
   title: "Components/Drawer",
@@ -18,7 +19,7 @@ const meta = {
       control: {
         type: "select",
       },
-      options: ["top", "bottom", "start", "end"],
+      options: placements,
     },
     children: {
       control: {
@@ -64,7 +65,6 @@ export const Default: Story = {
             </Button>
             <Button slot="close">Save</Button>
           </DrawerFooter>
-          <DrawerCloseIcon />
         </DrawerContent>
       </Drawer>
     </DrawerTrigger>
@@ -73,8 +73,6 @@ export const Default: Story = {
 
 export const Placements: Story = {
   render: (args) => {
-    const placements = ["top", "bottom", "left", "right"] as const
-
     return (
       <div className="flex items-center gap-4">
         {placements.map((placement) => (
@@ -95,7 +93,6 @@ export const Placements: Story = {
                       Continue
                     </Button>
                   </DrawerFooter>
-                  <DrawerCloseIcon />
                 </DrawerContent>
               </Drawer>
             </DrawerTrigger>
