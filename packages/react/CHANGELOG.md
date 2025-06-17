@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.4
+
+### Patch Changes
+
+- [#35](https://github.com/vela-ui/vela-ui/pull/35) [`9afd471`](https://github.com/vela-ui/vela-ui/commit/9afd4718c2b7c02a32469668ac514791111fccdb) Thanks [@bobbychan](https://github.com/bobbychan)! - fix modal transition
+
 ## 2.0.3
 
 ### Patch Changes
