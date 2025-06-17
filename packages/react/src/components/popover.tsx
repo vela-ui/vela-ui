@@ -15,17 +15,17 @@ import { tv } from "tailwind-variants"
 import { cn } from "../lib/utils"
 
 const popoverVariants = tv({
-  base: "bg-popover text-popover-foreground z-50 rounded-md border shadow-md outline-hidden",
+  base: "bg-popover text-popover-foreground z-50 rounded-md border shadow-md outline-hidden duration-200",
   variants: {
     isEntering: {
       true: [
-        "animate-in fade-in-0 zoom-in-95 duration-200 ease-out",
+        "animate-in fade-in-0 zoom-in-95",
         "data-[placement=left]:slide-in-from-right-2 data-[placement=right]:slide-in-from-left-2 data-[placement=top]:slide-in-from-bottom-2 data-[placement=bottom]:slide-in-from-top-2",
       ],
     },
     isExiting: {
       true: [
-        "animate-out fade-out-0 zoom-out-95 duration-200 ease-in",
+        "animate-out fade-out-0 zoom-out-95",
         "data-[placement=left]:slide-out-to-right-2 data-[placement=right]:slide-out-to-left-2 data-[placement=top]:slide-out-to-bottom-2 data-[placement=bottom]:slide-out-to-top-2",
       ],
     },

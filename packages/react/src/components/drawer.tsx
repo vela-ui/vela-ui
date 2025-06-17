@@ -22,16 +22,16 @@ const drawerOverlayVariants = tv({
   base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50",
   variants: {
     isEntering: {
-      true: "animate-in fade-in duration-300 ease-out",
+      true: "animate-in fade-in-0 duration-300",
     },
     isExiting: {
-      true: "animate-out fade-out duration-200 ease-in",
+      true: "animate-out fade-out-0 duration-200",
     },
   },
 })
 
 const drawerVariants = tv({
-  base: "bg-background fixed z-50 flex h-auto flex-col shadow-lg transition ease-in-out",
+  base: "bg-background fixed z-50 flex h-auto flex-col shadow-lg",
   variants: {
     placement: {
       top: "data-[entering]:slide-in-from-top data-[exiting]:slide-out-to-top inset-x-0 top-0 border-b",
