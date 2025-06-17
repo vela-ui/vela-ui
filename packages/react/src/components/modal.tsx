@@ -35,7 +35,7 @@ const modalOverlayVariants = tv({
 })
 
 const modalVariants = tv({
-  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg duration-200",
+  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg transition duration-200",
   variants: {
     scrollBehavior: {
       inside: "max-h-[calc(100%-7.5rem)]",

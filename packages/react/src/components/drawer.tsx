@@ -31,7 +31,7 @@ const drawerOverlayVariants = tv({
 })
 
 const drawerVariants = tv({
-  base: "bg-background fixed z-50 flex h-auto flex-col shadow-lg",
+  base: "bg-background fixed z-50 flex h-auto flex-col shadow-lg transition",
   variants: {
     placement: {
       top: "data-[entering]:slide-in-from-top data-[exiting]:slide-out-to-top inset-x-0 top-0 border-b",
