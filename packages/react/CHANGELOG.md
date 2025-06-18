@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.5
+
+### Patch Changes
+
+- [#37](https://github.com/vela-ui/vela-ui/pull/37) [`f67ff96`](https://github.com/vela-ui/vela-ui/commit/f67ff961237d790a56fa63b36733b30d383a0ebb) Thanks [@bobbychan](https://github.com/bobbychan)! - add RadioGroupRoot and CheckboxGroupRoot
+
 ## 2.0.4
 
 ### Patch Changes
