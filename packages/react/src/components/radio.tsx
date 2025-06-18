@@ -9,16 +9,28 @@ import {
 import { tv } from "tailwind-variants"
 import { CircleIcon } from "../icons"
 import { focusRing } from "../lib/classes"
-import { composeTailwindRenderProps } from "../lib/utils"
+import { cn, composeTailwindRenderProps } from "../lib/utils"
 import { Description, FieldError, Label } from "./field"
 
-type RadioGroupProps = React.ComponentProps<typeof AriaRadioGroup> & {
+type RadioGroupRootProps = React.ComponentProps<typeof AriaRadioGroup>
+function RadioGroupRoot({ className, ...props }: RadioGroupRootProps) {
+  return (
+    <AriaRadioGroup
+      data-slot="radio-group"
+      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
+      {...props}
+    />
+  )
+}
+
+type RadioGroupProps = RadioGroupRootProps & {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  wrapperClassName?: string
 }
 function RadioGroup({
-  className,
+  wrapperClassName,
   children,
   label,
   description,
@@ -26,17 +38,16 @@ function RadioGroup({
   ...props
 }: RadioGroupProps) {
   return (
-    <AriaRadioGroup
-      data-slot="radio-group"
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
-      {...props}
-    >
+    <RadioGroupRoot {...props}>
       {composeRenderProps(children, (children) => (
         <>
           {label && <Label>{label}</Label>}
           <div
             data-slot="radio-group-wrapper"
-            className="flex gap-2 select-none group-data-[orientation=horizontal]:flex-wrap group-data-[orientation=vertical]:flex-col"
+            className={cn(
+              "flex gap-2 select-none group-data-[orientation=horizontal]:flex-wrap group-data-[orientation=vertical]:flex-col",
+              wrapperClassName,
+            )}
           >
             {children}
           </div>
@@ -44,7 +55,7 @@ function RadioGroup({
           <FieldError>{errorMessage}</FieldError>
         </>
       ))}
-    </AriaRadioGroup>
+    </RadioGroupRoot>
   )
 }
 
@@ -98,7 +109,7 @@ function Radio({ className, children, indicatorClassName, size, ...props }: Radi
             })}
           >
             {isSelected ? (
-              <CircleIcon className="fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+              <CircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-current" />
             ) : null}
           </div>
           {children}
@@ -108,5 +119,5 @@ function Radio({ className, children, indicatorClassName, size, ...props }: Radi
   )
 }
 
-export { Radio, RadioGroup }
-export type { RadioGroupProps, RadioProps }
+export { Radio, RadioGroup, RadioGroupRoot }
+export type { RadioGroupProps, RadioGroupRootProps, RadioProps }

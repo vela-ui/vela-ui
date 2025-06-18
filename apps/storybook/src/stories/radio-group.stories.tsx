@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, Label, Radio, RadioGroup } from "@vela-ui/react"
+import { Button, Radio, RadioGroup, RadioGroupRoot } from "@vela-ui/react"
 import { Form } from "react-aria-components"
 
 const meta = {
@@ -8,13 +8,19 @@ const meta = {
   parameters: {
     layout: "centered",
   },
-  argTypes: {},
+  argTypes: {
+    orientation: {
+      control: {
+        type: "select",
+      },
+      options: ["vertical", "horizontal"],
+    },
+  },
   args: {
-    isDisabled: false,
-    isRequired: false,
+    label: "Favorite sport",
+    description: "Choose your favorite sport",
     children: (
       <>
-        <Label>Favorite sport</Label>
         <Radio value="soccer">Soccer</Radio>
         <Radio value="baseball">Baseball</Radio>
         <Radio value="basketball">Basketball</Radio>
@@ -47,6 +53,14 @@ export const Sizes: Story = {
   ),
 }
 
+export const Disabled: Story = {
+  render: (args) => (
+    <RadioGroup {...args} isDisabled>
+      <Radio value="soccer">Soccer</Radio>
+    </RadioGroup>
+  ),
+}
+
 export const Validation: Story = {
   args: {
     isRequired: true,
@@ -59,10 +73,43 @@ export const Validation: Story = {
   ),
 }
 
-export const Disabled: Story = {
+export const Custom: Story = {
+  args: {
+    className: "gap-4",
+    wrapperClassName: "gap-4",
+    orientation: "horizontal",
+  },
   render: (args) => (
-    <RadioGroup {...args} isDisabled>
-      <Radio value="soccer">Soccer</Radio>
+    <RadioGroup
+      aria-label="Custom"
+      {...args}
+      label="Favorite color"
+      description="Choose your favorite color"
+    >
+      <Radio value="blue" size="lg" indicatorClassName="border-2 border-blue-500 text-blue-500">
+        Blue
+      </Radio>
+      <Radio value="green" size="lg" indicatorClassName="border-2 border-green-500 text-green-500">
+        Green
+      </Radio>
+      <Radio value="red" size="lg" indicatorClassName="border-2 border-red-500 text-red-500">
+        Red
+      </Radio>
     </RadioGroup>
+  ),
+}
+
+export const RootComponent: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div>
+        <h3 className="mb-2 text-sm font-medium">RadioGroupRoot</h3>
+        <RadioGroupRoot aria-label="Favorite sport">
+          <Radio value="soccer">Soccer</Radio>
+          <Radio value="baseball">Baseball</Radio>
+          <Radio value="basketball">Basketball</Radio>
+        </RadioGroupRoot>
+      </div>
+    </div>
   ),
 }

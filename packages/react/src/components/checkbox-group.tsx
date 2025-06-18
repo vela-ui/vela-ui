@@ -5,14 +5,23 @@ import { CheckboxGroup as AriaCheckboxGroup, composeRenderProps } from "react-ar
 import { composeTailwindRenderProps } from "../lib/utils"
 import { Description, FieldError, Label } from "./field"
 
-interface CheckboxGroupProps extends React.ComponentProps<typeof AriaCheckboxGroup> {
+type CheckboxGroupRootProps = React.ComponentProps<typeof AriaCheckboxGroup>
+function CheckboxGroupRoot({ className, ...props }: CheckboxGroupRootProps) {
+  return (
+    <AriaCheckboxGroup
+      data-slot="checkbox-group"
+      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
+      {...props}
+    />
+  )
+}
+
+type CheckboxGroupProps = CheckboxGroupRootProps & {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
 }
-
 function CheckboxGroup({
-  className,
   children,
   label,
   description,
@@ -20,11 +29,7 @@ function CheckboxGroup({
   ...props
 }: CheckboxGroupProps) {
   return (
-    <AriaCheckboxGroup
-      data-slot="checkbox-group"
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-2")}
-      {...props}
-    >
+    <CheckboxGroupRoot {...props}>
       {composeRenderProps(children, (children) => (
         <>
           {label && <Label>{label}</Label>}
@@ -33,9 +38,9 @@ function CheckboxGroup({
           <FieldError>{errorMessage}</FieldError>
         </>
       ))}
-    </AriaCheckboxGroup>
+    </CheckboxGroupRoot>
   )
 }
 
-export { CheckboxGroup }
-export type { CheckboxGroupProps }
+export { CheckboxGroup, CheckboxGroupRoot }
+export type { CheckboxGroupProps, CheckboxGroupRootProps }
