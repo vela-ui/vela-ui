@@ -30,13 +30,13 @@ import { Popover, PopoverProps } from "./popover"
 
 const selectTriggerVariants = tv({
   extend: focusRing,
-  base: "border-input [&_svg:not([class*='text-'])]:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 group-data-[invalid]:ring-destructive/20 group-data-[invalid]:dark:ring-destructive/40 group-data-[invalid]:border-destructive flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  base: "border-input [&_svg:not([class*='text-'])]:text-muted-foreground dark:bg-input/30 dark:hover:bg-input/50 group-data-[invalid]:ring-destructive/20 group-data-[invalid]:dark:ring-destructive/40 group-data-[invalid]:border-destructive flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] [&_svg]:pointer-events-none [&_svg]:shrink-0",
   variants: {
     size: {
-      xs: "h-8",
-      sm: "h-9",
-      md: "h-10",
-      lg: "h-11",
+      xs: "h-8 [&_svg:not([class*='size-'])]:size-3.5",
+      sm: "h-9 [&_svg:not([class*='size-'])]:size-4",
+      md: "h-10 [&_svg:not([class*='size-'])]:size-4",
+      lg: "h-11 [&_svg:not([class*='size-'])]:size-5",
     },
     isDisabled: {
       true: "cursor-not-allowed opacity-50",
@@ -102,7 +102,7 @@ function SelectTrigger({ className, size, children, ...props }: SelectTriggerPro
       {composeRenderProps(children, (children) => (
         <>
           {children}
-          <ChevronDownIcon aria-hidden="true" className="size-4 opacity-50" />
+          <ChevronDownIcon aria-hidden="true" className="opacity-50" />
         </>
       ))}
     </AriaButton>

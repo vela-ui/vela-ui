@@ -33,26 +33,18 @@ const { label, description, fieldError } = fieldVariants()
 
 type LabelProps = React.ComponentProps<typeof AriaLabel>
 function Label({ className, ...props }: LabelProps) {
-  return <AriaLabel data-slot="form-label" className={label({ className })} {...props} />
+  return <AriaLabel data-slot="label" className={label({ className })} {...props} />
 }
 
 type DescriptionProps = Omit<React.ComponentProps<typeof AriaText>, "slot">
 function Description({ className, ...props }: DescriptionProps) {
-  return (
-    <AriaText
-      data-slot="form-description"
-      slot="description"
-      className={description({ className })}
-      {...props}
-    />
-  )
+  return <AriaText slot="description" className={description({ className })} {...props} />
 }
 
 type FieldErrorProps = React.ComponentProps<typeof AriaFieldError>
 function FieldError({ className, ...props }: FieldErrorProps) {
   return (
     <AriaFieldError
-      data-slot="form-message"
       className={composeRenderProps(className, (className) => fieldError({ className }))}
       {...props}
     />
@@ -80,7 +72,6 @@ type FieldGroupProps = React.ComponentProps<typeof AriaGroup> &
 function FieldGroup({ className, ...props }: FieldGroupProps) {
   return (
     <AriaGroup
-      data-slot="form-group"
       className={composeRenderProps(className, (className, renderProps) =>
         fieldGroupVariants({
           ...renderProps,

@@ -31,7 +31,7 @@ const checkboxIndicatorVariants = tv({
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: "md",
   },
 })
 

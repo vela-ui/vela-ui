@@ -82,7 +82,7 @@ const radioIndicatorVariants = tv({
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: "md",
   },
 })
 
