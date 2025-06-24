@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.6
+
+### Patch Changes
+
+- [#39](https://github.com/vela-ui/vela-ui/pull/39) [`6830fe6`](https://github.com/vela-ui/vela-ui/commit/6830fe666f6bd20438db87e44c4018a1b2a2ed76) Thanks [@bobbychan](https://github.com/bobbychan)! - add native select component
+
 ## 2.0.5
 
 ### Patch Changes
