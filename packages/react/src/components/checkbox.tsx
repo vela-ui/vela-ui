@@ -72,4 +72,3 @@ function Checkbox({ className, children, indicatorClassName, size, ...props }: C
 
 export { Checkbox }
 export type { CheckboxProps }
-

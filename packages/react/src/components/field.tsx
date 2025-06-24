@@ -90,6 +90,5 @@ export type {
   FieldGroupProps,
   FieldProps,
   LabelProps,
-  TextProps
+  TextProps,
 }
-

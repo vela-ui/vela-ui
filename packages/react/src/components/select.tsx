@@ -158,7 +158,6 @@ export {
   SelectSection,
   SelectSeparator,
   SelectTrigger,
-  SelectValue
+  SelectValue,
 }
 export type { SelectProps }
-
