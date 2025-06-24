@@ -12,6 +12,7 @@ import {
   Input,
   Label,
   TextField,
+  useDisclosure,
 } from "@vela-ui/react"
 
 const meta = {
@@ -107,4 +108,49 @@ export const Blur: Story = {
       </Dialog>
     </DialogTrigger>
   ),
+}
+
+export const Nested = () => {
+  const state1 = useDisclosure()
+  const state2 = useDisclosure()
+
+  return (
+    <>
+      <Button variant="outline" onPress={state1.onOpen}>
+        Open Dialog
+      </Button>
+      <Dialog isOpen={state1.isOpen} onOpenChange={state1.onOpenChange}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+          </DialogHeader>
+          <div>Content</div>
+          <DialogFooter>
+            <Button onPress={state2.onOpen}>Open Dialog</Button>
+            <Button slot="close" variant="outline">
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog size="sm" isOpen={state2.isOpen} onOpenChange={state2.onOpenChange}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Modal Title</DialogTitle>
+          </DialogHeader>
+          <div>Content</div>
+          <DialogFooter>
+            <Button
+              onPress={() => {
+                state1.onClose()
+                state2.onClose()
+              }}
+            >
+              Close All
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
 }

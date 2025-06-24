@@ -82,7 +82,7 @@ const radioIndicatorVariants = tv({
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: "md",
   },
 })
 
@@ -121,3 +121,4 @@ function Radio({ className, children, indicatorClassName, size, ...props }: Radi
 
 export { Radio, RadioGroup, RadioGroupRoot }
 export type { RadioGroupProps, RadioGroupRootProps, RadioProps }
+
