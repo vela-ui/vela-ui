@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.7
+
+### Patch Changes
+
+- [#41](https://github.com/vela-ui/vela-ui/pull/41) [`bcb6cdc`](https://github.com/vela-ui/vela-ui/commit/bcb6cdc65a9cd6337ab72e22a3e554666c2b1334) Thanks [@bobbychan](https://github.com/bobbychan)! - add avatar component
+
 ## 2.0.6
 
 ### Patch Changes
