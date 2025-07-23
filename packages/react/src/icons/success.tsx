@@ -2,8 +2,8 @@ export const SuccessIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="currentColor"
-      width="24"
-      height="24"
+      width="1em"
+      height="1em"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

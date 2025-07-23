@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Input, Label } from "@vela-ui/react"
-import { XIcon } from "lucide-react"
+import { Input } from "@vela-ui/react"
 
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
@@ -67,21 +66,6 @@ export const Sizes: Story = {
       {sizes.map((size) => (
         <Input key={size} {...args} size={size} placeholder={`Size (${size})`} />
       ))}
-    </div>
-  ),
-}
-
-export const StartAndEndContent: Story = {
-  render: (args) => (
-    <div className="flex w-96 flex-col gap-4">
-      <Label>Please enter your website</Label>
-      <Input
-        {...args}
-        placeholder="yoursite.com"
-        startContent="https://"
-        endContent={<XIcon className="size-4" />}
-        className="pl-18"
-      />
     </div>
   ),
 }
