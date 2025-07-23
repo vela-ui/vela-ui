@@ -1,10 +1,8 @@
 import { tv } from "tailwind-variants"
-import { ChevronDownIcon } from "../icons"
-import { cn } from "../lib/utils"
 
 const selectVariants = tv({
   base: [
-    "border-input dark:bg-input/30 dark:hover:bg-input/50 w-full appearance-none rounded-md border bg-transparent px-3 pr-9 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow]",
+    "border-input dark:bg-input/30 dark:hover:bg-input/50 relative w-full appearance-none rounded-md border bg-transparent px-3 pr-9 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow]",
     "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none",
     "disabled:cursor-not-allowed disabled:opacity-50",
     "aria-invalid:ring-destructive/20 aria-invalid:dark:ring-destructive/40 aria-invalid:border-destructive",
@@ -23,34 +21,26 @@ const selectVariants = tv({
 })
 
 interface NativeSelectProps extends Omit<React.ComponentPropsWithoutRef<"select">, "size"> {
-  wrapperClassName?: string
   className?: string
   placeholder?: string
   size?: "xs" | "sm" | "md" | "lg"
 }
 
-function NativeSelect({
-  className,
-  wrapperClassName,
-  placeholder,
-  size = "md",
-  ...props
-}: NativeSelectProps) {
+const styles = {
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right 0.75rem center",
+  backgroundSize: "1.25em",
+  paddingRight: "2.5rem",
+  backgroundImage:
+    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='oklch(70.8% 0 0)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
+}
+
+function NativeSelect({ className, placeholder, size = "md", ...props }: NativeSelectProps) {
   return (
-    <div className={cn("relative flex h-fit w-full", wrapperClassName)}>
-      <select className={selectVariants({ className, size })} {...props}>
-        {placeholder && <option value="">{placeholder}</option>}
-        {props.children}
-      </select>
-      <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2">
-        <ChevronDownIcon
-          className={cn("text-muted-foreground size-4 opacity-50", {
-            "size-3.5": size === "xs",
-            "size-5": size === "lg",
-          })}
-        />
-      </div>
-    </div>
+    <select className={selectVariants({ className, size })} style={styles} {...props}>
+      {placeholder && <option value="">{placeholder}</option>}
+      {props.children}
+    </select>
   )
 }
 

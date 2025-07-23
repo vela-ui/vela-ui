@@ -1,4 +1,4 @@
-export const CheckIcon = (props: React.ComponentProps<"svg">) => {
+export const ChevronUpIcon = (props: React.ComponentProps<"svg">) => {
   return (
     <svg
       fill="none"
@@ -12,7 +12,7 @@ export const CheckIcon = (props: React.ComponentProps<"svg">) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <path d="M20 6 9 17l-5-5" />
+      <path d="m18 15-6-6-6 6" />
     </svg>
   )
 }
