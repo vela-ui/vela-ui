@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.8
+
+### Patch Changes
+
+- [#43](https://github.com/vela-ui/vela-ui/pull/43) [`ee922ac`](https://github.com/vela-ui/vela-ui/commit/ee922ace1956f4950fb141d0c808d76a2d3d656e) Thanks [@bobbychan](https://github.com/bobbychan)! - Add Card and NumberField components
+
 ## 2.0.7
 
 ### Patch Changes
