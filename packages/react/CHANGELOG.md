@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.9
+
+### Patch Changes
+
+- [#45](https://github.com/vela-ui/vela-ui/pull/45) [`3035bbd`](https://github.com/vela-ui/vela-ui/commit/3035bbd367d0518f2f4445fcf733cf09e5b6b519) Thanks [@bobbychan](https://github.com/bobbychan)! - Add SearchField and TextField components
+
 ## 2.0.8
 
 ### Patch Changes
