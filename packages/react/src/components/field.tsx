@@ -7,7 +7,6 @@ import {
   Label as AriaLabel,
   Text as AriaText,
   composeRenderProps,
-  TextField,
 } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
@@ -84,7 +83,7 @@ function FieldGroup({ className, ...props }: FieldGroupProps) {
   )
 }
 
-export { Description, FieldError, FieldGroup, fieldVariants, Label, TextField }
+export { Description, FieldError, FieldGroup, fieldVariants, Label }
 export type {
   DescriptionProps,
   FieldErrorProps,
