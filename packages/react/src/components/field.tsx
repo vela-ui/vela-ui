@@ -13,6 +13,7 @@ import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
 
 interface FieldProps {
+  placeholder?: string
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)

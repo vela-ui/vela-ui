@@ -63,7 +63,7 @@ export const ReadOnly: Story = {
 export const Validation: Story = {
   render: (args) => (
     <Form className="flex flex-col gap-4">
-      <NumberField label="Invalid" name="width" isRequired {...args} />
+      <NumberField label="Enter Number" name="number" isRequired {...args} />
       <Button type="submit">Submit</Button>
     </Form>
   ),
