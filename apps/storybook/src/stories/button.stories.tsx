@@ -128,7 +128,16 @@ export const WithIcon: Story = {
         {variants
           .filter((variant) => variant !== "link")
           .map((variant) => (
-            <Button key={variant} variant={variant} size="icon" {...args}>
+            <Button key={variant} variant={variant} shape="square" {...args}>
+              <HeartIcon />
+            </Button>
+          ))}
+      </div>
+      <div className="flex items-center gap-2">
+        {variants
+          .filter((variant) => variant !== "link")
+          .map((variant) => (
+            <Button key={variant} variant={variant} shape="circle" {...args}>
               <HeartIcon />
             </Button>
           ))}

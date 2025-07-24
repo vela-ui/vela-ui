@@ -37,9 +37,9 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const StartAndEndContent: Story = {
+export const WithElement: Story = {
   args: {
-    children: <Input placeholder="yoursite.com" className="pr-10 pl-18" />,
+    children: <Input placeholder="yoursite.com" className="pl-16" />,
     startElement: "https://",
     endElement: <CloseIcon />,
   },
@@ -51,7 +51,7 @@ export const StartAndEndContent: Story = {
   ),
 }
 
-export const StartAndEndAddon: Story = {
+export const WithAddon: Story = {
   args: {
     children: <Input placeholder="yoursite.com" />,
     startAddon: "https://",

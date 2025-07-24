@@ -16,7 +16,7 @@ const buttonVariants = tv({
 
 const numberFieldVariants = tv({
   slots: {
-    root: "flex flex-col gap-2",
+    root: "group flex flex-col gap-2",
     group: "relative isolate z-0",
     control: "absolute end-0 top-0 z-10 m-px flex h-[calc(100%-2px)] flex-col border-s-1",
   },
@@ -38,9 +38,7 @@ const { root, group, control } = numberFieldVariants()
 
 type NumberFieldProps = FieldProps &
   React.ComponentProps<typeof AriaNumberField> &
-  VariantProps<typeof numberFieldVariants> & {
-    placeholder?: string
-  }
+  VariantProps<typeof numberFieldVariants>
 
 function NumberField({
   label,

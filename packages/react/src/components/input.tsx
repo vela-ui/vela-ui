@@ -4,7 +4,6 @@ import { Children, cloneElement } from "react"
 import { Group as AriaGroup, Input as AriaInput, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
-import { cn } from "../lib/utils"
 
 const inputVariants = tv({
   extend: focusRing,
@@ -17,14 +16,66 @@ const inputVariants = tv({
       lg: "h-11 px-4 text-base",
       xl: "h-12 px-4.5 text-base",
     },
-    hasStartContent: {
-      true: "pl-10",
-    },
-    hasEndContent: {
-      true: "pr-10",
-    },
     isFocused: focusRing.variants.isFocusVisible,
+    hasStartElement: {
+      true: "",
+    },
+    hasEndElement: {
+      true: "",
+    },
   },
+  compoundVariants: [
+    {
+      hasStartElement: true,
+      size: "xs",
+      className: "pl-8",
+    },
+    {
+      hasStartElement: true,
+      size: "sm",
+      className: "pl-9",
+    },
+    {
+      hasStartElement: true,
+      size: "md",
+      className: "pl-10",
+    },
+    {
+      hasStartElement: true,
+      size: "lg",
+      className: "pl-11",
+    },
+    {
+      hasStartElement: true,
+      size: "xl",
+      className: "pl-12",
+    },
+    {
+      hasEndElement: true,
+      size: "xs",
+      className: "pr-8",
+    },
+    {
+      hasEndElement: true,
+      size: "sm",
+      className: "pr-9",
+    },
+    {
+      hasEndElement: true,
+      size: "md",
+      className: "pr-10",
+    },
+    {
+      hasEndElement: true,
+      size: "lg",
+      className: "pr-11",
+    },
+    {
+      hasEndElement: true,
+      size: "xl",
+      className: "pr-12",
+    },
+  ],
   defaultVariants: {
     size: "md",
   },
@@ -34,7 +85,7 @@ interface InputProps
   extends Omit<React.ComponentProps<typeof AriaInput>, "color" | "size">,
     VariantProps<typeof inputVariants> {}
 
-function Input({ className, size, ...props }: InputProps) {
+function Input({ className, size, hasStartElement, hasEndElement, ...props }: InputProps) {
   return (
     <AriaInput
       data-slot="input"
@@ -42,6 +93,8 @@ function Input({ className, size, ...props }: InputProps) {
         inputVariants({
           ...renderProps,
           size,
+          hasStartElement,
+          hasEndElement,
           className,
         }),
       )}
@@ -59,14 +112,44 @@ const inputGroupVariants = tv({
       "has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-se-none has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-ee-none",
     ],
     addon:
-      "border-input bg-accent flex w-auto items-center self-stretch rounded-md border px-3 text-sm whitespace-nowrap",
+      "border-input bg-accent flex w-auto items-center self-stretch rounded-md border px-3 whitespace-nowrap",
     element: "text-muted-foreground absolute inset-y-0 z-50 flex items-center px-3",
+  },
+  variants: {
+    size: {
+      xs: {
+        root: "text-xs",
+        addon: "px-2.5",
+        element: "px-2.5",
+      },
+      sm: {
+        root: "text-sm",
+      },
+      md: {
+        root: "text-sm",
+      },
+      lg: {
+        root: "text-base",
+        addon: "px-3.5",
+        element: "px-3.5",
+      },
+      xl: {
+        root: "text-base",
+        addon: "px-4",
+        element: "px-4",
+      },
+    },
+  },
+  defaultVariants: {
+    size: "md",
   },
 })
 
 const { root, addon, element } = inputGroupVariants()
 
-interface InputGroupProps extends React.ComponentProps<typeof AriaGroup> {
+interface InputGroupProps
+  extends React.ComponentProps<typeof AriaGroup>,
+    VariantProps<typeof inputGroupVariants> {
   /**
    * The children to render inside the group
    */
@@ -95,6 +178,7 @@ const InputGroup = ({
   endElement,
   startAddon,
   endAddon,
+  size,
   className,
   ...props
 }: InputGroupProps) => {
@@ -103,30 +187,45 @@ const InputGroup = ({
   return (
     <AriaGroup
       data-slot="input-group"
-      className={composeRenderProps(className, (className) => root({ className }))}
+      className={composeRenderProps(className, (className) => root({ size, className }))}
       {...props}
     >
-      {startElement && <InputElement className="left-0">{startElement}</InputElement>}
-      {startAddon && <InputAddon>{startAddon}</InputAddon>}
+      {startElement && !startAddon && (
+        <InputElement size={size} className="left-0">
+          {startElement}
+        </InputElement>
+      )}
+      {startAddon && <InputAddon size={size}>{startAddon}</InputAddon>}
       {cloneElement(child, {
-        className: cn({
-          "pl-10": startElement,
-          "pr-10": endElement,
-        }),
+        hasStartElement: !!startElement,
+        hasEndElement: !!endElement,
+        size,
         ...child.props,
       })}
-      {endElement && <InputElement className="right-0">{endElement}</InputElement>}
-      {endAddon && <InputAddon>{endAddon}</InputAddon>}
+      {endElement && !endAddon && (
+        <InputElement size={size} className="right-0">
+          {endElement}
+        </InputElement>
+      )}
+      {endAddon && <InputAddon size={size}>{endAddon}</InputAddon>}
     </AriaGroup>
   )
 }
 
-function InputAddon({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="input-addon" className={addon({ className })} {...props} />
+function InputAddon({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<"div"> & { size: InputGroupProps["size"] }) {
+  return <div data-slot="input-addon" className={addon({ size, className })} {...props} />
 }
 
-function InputElement({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="input-element" className={element({ className })} {...props} />
+function InputElement({
+  className,
+  size,
+  ...props
+}: React.ComponentProps<"div"> & { size: InputGroupProps["size"] }) {
+  return <div data-slot="input-element" className={element({ size, className })} {...props} />
 }
 
 export { Input, InputGroup }
