@@ -5,14 +5,7 @@ import { CircleAlertIcon, CircleCheckIcon } from "lucide-react"
 const meta = {
   title: "Components/Alert",
   component: Alert,
-  argTypes: {
-    variant: {
-      control: {
-        type: "select",
-      },
-      options: ["default", "destructive"],
-    },
-  },
+  argTypes: {},
 } satisfies Meta<typeof Alert>
 
 export default meta
