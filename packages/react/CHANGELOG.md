@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.10
+
+### Patch Changes
+
+- [#47](https://github.com/vela-ui/vela-ui/pull/47) [`dd8e522`](https://github.com/vela-ui/vela-ui/commit/dd8e522b41217e391d380365da1337c5c1b7068a) Thanks [@bobbychan](https://github.com/bobbychan)! - Add ToggleButton and ToggleButtonGroup components
+
 ## 2.0.9
 
 ### Patch Changes
