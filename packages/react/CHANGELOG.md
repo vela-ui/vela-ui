@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.11
+
+### Patch Changes
+
+- [#49](https://github.com/vela-ui/vela-ui/pull/49) [`f18c122`](https://github.com/vela-ui/vela-ui/commit/f18c1227362cdf430e38a4c03e912170576fd97c) Thanks [@bobbychan](https://github.com/bobbychan)! - Add Combobox component
+
 ## 2.0.10
 
 ### Patch Changes
