@@ -25,6 +25,8 @@ const options = [
   },
 ]
 
+const items = ["Aardvark", "Cat", "Dog", "Kangaroo", "Panda", "Snake"]
+
 const meta = {
   title: "Components/Select",
   component: Select,
@@ -40,18 +42,15 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: (args) => (
-    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+    <Select className="w-64" placeholder="Select an animal" label="Favorite Animal" {...args}>
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
       <SelectPopover>
         <SelectList>
-          <SelectItem>Aardvark</SelectItem>
-          <SelectItem>Cat</SelectItem>
-          <SelectItem>Dog</SelectItem>
-          <SelectItem>Kangaroo</SelectItem>
-          <SelectItem>Panda</SelectItem>
-          <SelectItem>Snake</SelectItem>
+          {items.map((item) => (
+            <SelectItem key={item}>{item}</SelectItem>
+          ))}
         </SelectList>
       </SelectPopover>
     </Select>
@@ -64,7 +63,7 @@ export const Sizes: Story = {
       {sizes.map((size) => (
         <Select
           key={size}
-          className="w-[200px]"
+          className="w-64"
           placeholder="Select an animal"
           label={`Size = ${size}`}
           {...args}
@@ -74,12 +73,9 @@ export const Sizes: Story = {
           </SelectTrigger>
           <SelectPopover>
             <SelectList>
-              <SelectItem>Aardvark</SelectItem>
-              <SelectItem>Cat</SelectItem>
-              <SelectItem>Dog</SelectItem>
-              <SelectItem>Kangaroo</SelectItem>
-              <SelectItem>Panda</SelectItem>
-              <SelectItem>Snake</SelectItem>
+              {items.map((item) => (
+                <SelectItem key={item}>{item}</SelectItem>
+              ))}
             </SelectList>
           </SelectPopover>
         </Select>
@@ -93,18 +89,15 @@ export const Disabled: Story = {
     isDisabled: true,
   },
   render: (args) => (
-    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+    <Select className="w-64" placeholder="Select an animal" label="Favorite Animal" {...args}>
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
       <SelectPopover>
         <SelectList>
-          <SelectItem>Aardvark</SelectItem>
-          <SelectItem>Cat</SelectItem>
-          <SelectItem>Dog</SelectItem>
-          <SelectItem>Kangaroo</SelectItem>
-          <SelectItem>Panda</SelectItem>
-          <SelectItem>Snake</SelectItem>
+          {items.map((item) => (
+            <SelectItem key={item}>{item}</SelectItem>
+          ))}
         </SelectList>
       </SelectPopover>
     </Select>
@@ -116,7 +109,7 @@ export const DisabledItems: Story = {
     disabledKeys: ["dog", "panda"],
   },
   render: (args) => (
-    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+    <Select className="w-64" placeholder="Select an animal" label="Favorite Animal" {...args}>
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
@@ -136,7 +129,7 @@ export const DisabledItems: Story = {
 
 export const Links: Story = {
   render: (args) => (
-    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+    <Select className="w-64" placeholder="Select an animal" label="Favorite Animal" {...args}>
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>
@@ -168,12 +161,9 @@ export const Validation = () => (
       </SelectTrigger>
       <SelectPopover>
         <SelectList>
-          <SelectItem>Aardvark</SelectItem>
-          <SelectItem>Cat</SelectItem>
-          <SelectItem>Dog</SelectItem>
-          <SelectItem>Kangaroo</SelectItem>
-          <SelectItem>Panda</SelectItem>
-          <SelectItem>Snake</SelectItem>
+          {items.map((item) => (
+            <SelectItem key={item}>{item}</SelectItem>
+          ))}
         </SelectList>
       </SelectPopover>
     </Select>
@@ -185,7 +175,7 @@ export const Validation = () => (
 
 export const Dynamic = (args: SelectProps<object>) => {
   return (
-    <Select className="w-[200px]" placeholder="Select an animal" label="Favorite Animal" {...args}>
+    <Select className="w-64" placeholder="Select an animal" label="Favorite Animal" {...args}>
       <SelectTrigger>
         <SelectValue />
       </SelectTrigger>

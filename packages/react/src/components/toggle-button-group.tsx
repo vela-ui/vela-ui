@@ -19,7 +19,7 @@ const toggleButtonGroupVariants = tv({
     },
     orientation: {
       horizontal: "flex-row",
-      vertical: "flex-col",
+      vertical: "flex-col [&_button]:w-full",
     },
   },
   compoundVariants: [
@@ -32,8 +32,7 @@ const toggleButtonGroupVariants = tv({
     {
       variant: "outline",
       orientation: "vertical",
-      className:
-        "[&_button]:-mt-px [&_button]:w-full [&_button]:first:rounded-t-md [&_button]:last:rounded-b-md",
+      className: "[&_button]:-mt-px [&_button]:first:rounded-t-md [&_button]:last:rounded-b-md",
     },
   ],
   defaultVariants: {

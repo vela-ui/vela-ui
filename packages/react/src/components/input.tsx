@@ -112,8 +112,9 @@ const inputGroupVariants = tv({
       "has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-se-none has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-ee-none",
     ],
     addon:
-      "border-input bg-accent flex w-auto items-center self-stretch rounded-md border px-3 whitespace-nowrap",
-    element: "text-muted-foreground absolute inset-y-0 z-50 flex items-center px-3",
+      "border-input bg-accent flex w-auto items-center self-stretch rounded-md border whitespace-nowrap",
+    element:
+      "text-muted-foreground absolute inset-y-0 z-50 flex items-center has-[button]:px-0 [&_button]:scale-75",
   },
   variants: {
     size: {
@@ -124,9 +125,13 @@ const inputGroupVariants = tv({
       },
       sm: {
         root: "text-sm",
+        addon: "px-3",
+        element: "px-3",
       },
       md: {
         root: "text-sm",
+        addon: "px-3",
+        element: "px-3",
       },
       lg: {
         root: "text-base",

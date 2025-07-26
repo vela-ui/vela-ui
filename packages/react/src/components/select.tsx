@@ -47,12 +47,6 @@ const selectTriggerVariants = tv({
   },
 })
 
-const SelectSection = DropdownSection
-const SelectSeparator = DropdownSeparator
-const SelectLabel = DropdownLabel
-const SelectDescription = DropdownDescription
-const SelectItem = DropdownItem
-
 interface SelectProps<T extends object> extends AriaSelectProps<T> {
   label?: string
   description?: string
@@ -66,21 +60,23 @@ function Select<T extends object>({
   description,
   errorMessage,
   className,
+  children,
   ...props
 }: SelectProps<T>) {
   return (
     <AriaSelect
+      data-slot="select"
       {...props}
       className={composeTailwindRenderProps(className, "group flex w-full flex-col gap-2")}
     >
-      {(values) => (
+      {composeRenderProps(children, (children) => (
         <>
           {label && <Label>{label}</Label>}
-          {typeof props.children === "function" ? props.children(values) : props.children}
+          {children}
           {description && <Description>{description}</Description>}
           <FieldError>{errorMessage}</FieldError>
         </>
-      )}
+      ))}
     </AriaSelect>
   )
 }
@@ -140,13 +136,20 @@ function SelectPopover({ className, ...props }: PopoverProps) {
 function SelectList<T extends object>({ className, ...props }: AriaListBoxProps<T>) {
   return (
     <AriaListBox
-      className={composeRenderProps(className, (className) =>
-        cn("max-h-[inherit] min-w-[inherit] overflow-auto p-1 outline-hidden", className),
+      className={composeTailwindRenderProps(
+        className,
+        "max-h-[inherit] min-w-[inherit] overflow-auto p-1 outline-hidden",
       )}
       {...props}
     />
   )
 }
+
+const SelectSection = DropdownSection
+const SelectSeparator = DropdownSeparator
+const SelectLabel = DropdownLabel
+const SelectDescription = DropdownDescription
+const SelectItem = DropdownItem
 
 export {
   Select,

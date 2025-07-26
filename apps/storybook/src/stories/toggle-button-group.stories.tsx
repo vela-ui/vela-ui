@@ -60,6 +60,20 @@ export const Default: Story = {
   ),
 }
 
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-4">
+      {sizes.map((size) => (
+        <ToggleButtonGroup key={size} {...args} size={size} variant="outline">
+          <ToggleButton id="left">Left {size}</ToggleButton>
+          <ToggleButton id="center">Center {size}</ToggleButton>
+          <ToggleButton id="right">Right {size}</ToggleButton>
+        </ToggleButtonGroup>
+      ))}
+    </div>
+  ),
+}
+
 export const Vertical: Story = {
   args: {
     variant: "outline",
