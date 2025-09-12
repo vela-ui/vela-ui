@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.13
+
+### Patch Changes
+
+- [#55](https://github.com/vela-ui/vela-ui/pull/55) [`62c64ff`](https://github.com/vela-ui/vela-ui/commit/62c64ffb82d5d76fe82f601ad3be72e8abf64ea0) Thanks [@bobbychan](https://github.com/bobbychan)! - update tailwind-variants v3
+
 ## 2.0.12
 
 ### Patch Changes
