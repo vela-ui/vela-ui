@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Button as AriaButton,
   Group as AriaGroup,
@@ -40,19 +42,9 @@ type NumberFieldProps = FieldProps &
   React.ComponentProps<typeof AriaNumberField> &
   VariantProps<typeof numberFieldVariants>
 
-function NumberField({
-  label,
-  description,
-  errorMessage,
-  size,
-  className,
-  ...props
-}: NumberFieldProps) {
+function NumberField({ label, description, errorMessage, size, ...props }: NumberFieldProps) {
   return (
-    <AriaNumberField
-      {...props}
-      className={composeRenderProps(className, (className) => root({ className }))}
-    >
+    <NumberFieldRoot {...props}>
       {label && <Label>{label}</Label>}
       <AriaGroup className={group()}>
         <Input size={size} />
@@ -70,9 +62,19 @@ function NumberField({
       </AriaGroup>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>
-    </AriaNumberField>
+    </NumberFieldRoot>
   )
 }
 
-export { NumberField }
-export type { NumberFieldProps }
+type NumberFieldRootProps = React.ComponentProps<typeof AriaNumberField>
+function NumberFieldRoot({ className, ...props }: NumberFieldRootProps) {
+  return (
+    <AriaNumberField
+      className={composeRenderProps(className, (className) => root({ className }))}
+      {...props}
+    />
+  )
+}
+
+export { NumberField, NumberFieldRoot }
+export type { NumberFieldProps, NumberFieldRootProps }

@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, Form, NumberField } from "@vela-ui/react"
+import {
+  Button,
+  Form,
+  Input,
+  InputGroup,
+  Label,
+  NumberField,
+  NumberFieldRoot,
+} from "@vela-ui/react"
+import { MinusIcon, PlusIcon } from "lucide-react"
 
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
@@ -66,5 +75,39 @@ export const Validation: Story = {
       <NumberField label="Enter Number" name="number" isRequired {...args} />
       <Button type="submit">Submit</Button>
     </Form>
+  ),
+}
+
+export const Custom: Story = {
+  args: {
+    defaultValue: 1000,
+  },
+  render: (args) => (
+    <div className="flex flex-col gap-4">
+      <NumberFieldRoot {...args}>
+        <Label>Custom</Label>
+        <InputGroup>
+          <Button data-slot="input-addon" variant="outline" shape="square" slot="decrement">
+            <MinusIcon />
+          </Button>
+          <Input className="w-24 text-center" />
+          <Button data-slot="input-addon" variant="outline" shape="square" slot="increment">
+            <PlusIcon />
+          </Button>
+        </InputGroup>
+      </NumberFieldRoot>
+      <NumberFieldRoot {...args}>
+        <Label>Custom</Label>
+        <InputGroup className="gap-2">
+          <Button variant="outline" shape="circle" slot="decrement">
+            <MinusIcon />
+          </Button>
+          <Input className="w-24 text-center" />
+          <Button variant="outline" shape="circle" slot="increment">
+            <PlusIcon />
+          </Button>
+        </InputGroup>
+      </NumberFieldRoot>
+    </div>
   ),
 }

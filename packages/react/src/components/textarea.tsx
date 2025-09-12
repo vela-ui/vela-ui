@@ -1,3 +1,5 @@
+"use client"
+
 import { TextArea as AriaTextArea, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
