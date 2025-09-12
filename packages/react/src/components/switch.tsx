@@ -1,3 +1,5 @@
+"use client"
+
 import { Switch as AriaSwitch, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 

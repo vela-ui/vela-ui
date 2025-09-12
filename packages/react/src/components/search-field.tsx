@@ -1,3 +1,5 @@
+"use client"
+
 import { SearchField as AriaSearchField, composeRenderProps } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"

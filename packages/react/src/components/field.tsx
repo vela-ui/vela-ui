@@ -8,8 +8,7 @@ import {
   Text as AriaText,
   composeRenderProps,
 } from "react-aria-components"
-import { tv, VariantProps } from "tailwind-variants"
-import { focusRing } from "../lib/classes"
+import { tv } from "tailwind-variants"
 
 interface FieldProps {
   placeholder?: string
@@ -51,44 +50,7 @@ function FieldError({ className, ...props }: FieldErrorProps) {
   )
 }
 
-const fieldGroupVariants = tv({
-  extend: focusRing,
-  base: "group border-input relative flex h-10 items-center overflow-hidden rounded-lg border shadow-xs",
-  variants: {
-    isFocusWithin: {
-      true: "border-ring",
-    },
-    isInvalid: {
-      true: "border-destructive",
-    },
-    isDisabled: {
-      true: "opacity-50",
-    },
-  },
-})
+const Group = AriaGroup
 
-type FieldGroupProps = React.ComponentProps<typeof AriaGroup> &
-  VariantProps<typeof fieldGroupVariants>
-function FieldGroup({ className, ...props }: FieldGroupProps) {
-  return (
-    <AriaGroup
-      className={composeRenderProps(className, (className, renderProps) =>
-        fieldGroupVariants({
-          ...renderProps,
-          className,
-        }),
-      )}
-      {...props}
-    />
-  )
-}
-
-export { Description, FieldError, FieldGroup, fieldVariants, Label }
-export type {
-  DescriptionProps,
-  FieldErrorProps,
-  FieldGroupProps,
-  FieldProps,
-  LabelProps,
-  TextProps,
-}
+export { Description, FieldError, fieldVariants, Group, Label }
+export type { DescriptionProps, FieldErrorProps, FieldProps, LabelProps, TextProps }

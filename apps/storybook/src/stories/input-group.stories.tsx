@@ -10,6 +10,12 @@ const meta = {
     layout: "centered",
   },
   argTypes: {
+    size: {
+      control: {
+        type: "select",
+      },
+      options: ["xs", "sm", "md", "lg", "xl"],
+    },
     startElement: {
       control: {
         type: "text",

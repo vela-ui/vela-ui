@@ -1,6 +1,6 @@
 "use client"
 
-import { Children, cloneElement } from "react"
+import { cloneElement, isValidElement } from "react"
 import { Group as AriaGroup, Input as AriaInput, composeRenderProps } from "react-aria-components"
 import { tv, VariantProps } from "tailwind-variants"
 import { focusRing } from "../lib/classes"
@@ -106,7 +106,7 @@ function Input({ className, size, hasStartElement, hasEndElement, ...props }: In
 const inputGroupVariants = tv({
   slots: {
     root: [
-      "relative isolate flex w-full flex-row items-center justify-start !gap-0",
+      "relative isolate flex w-full flex-row items-center justify-start gap-0",
       "has-[[data-slot=input-addon]]:[&_:not(:first-child)]:-ml-px",
       "has-[[data-slot=input-addon]]:[&_:not(:first-child)]:rounded-ss-none has-[[data-slot=input-addon]]:[&_:not(:first-child)]:rounded-es-none",
       "has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-se-none has-[[data-slot=input-addon]]:[&_:not(:last-child)]:rounded-ee-none",
@@ -156,10 +156,6 @@ interface InputGroupProps
   extends React.ComponentProps<typeof AriaGroup>,
     VariantProps<typeof inputGroupVariants> {
   /**
-   * The children to render inside the group
-   */
-  children: React.ReactElement<InputProps>
-  /**
    * The start element to render the inner left of the group
    */
   startElement?: React.ReactNode
@@ -187,32 +183,36 @@ const InputGroup = ({
   className,
   ...props
 }: InputGroupProps) => {
-  const child = Children.only<React.ReactElement<InputProps>>(children)
-
   return (
     <AriaGroup
       data-slot="input-group"
       className={composeRenderProps(className, (className) => root({ size, className }))}
       {...props}
     >
-      {startElement && !startAddon && (
-        <InputElement size={size} className="left-0">
-          {startElement}
-        </InputElement>
-      )}
-      {startAddon && <InputAddon size={size}>{startAddon}</InputAddon>}
-      {cloneElement(child, {
-        hasStartElement: !!startElement,
-        hasEndElement: !!endElement,
-        size,
-        ...child.props,
-      })}
-      {endElement && !endAddon && (
-        <InputElement size={size} className="right-0">
-          {endElement}
-        </InputElement>
-      )}
-      {endAddon && <InputAddon size={size}>{endAddon}</InputAddon>}
+      {composeRenderProps(children, (children) => (
+        <>
+          {startElement && !startAddon && (
+            <InputElement size={size} className="left-0">
+              {startElement}
+            </InputElement>
+          )}
+          {startAddon && <InputAddon size={size}>{startAddon}</InputAddon>}
+          {isValidElement(children) && children.type === Input
+            ? cloneElement(children as React.ReactElement<InputProps>, {
+                hasStartElement: !!startElement,
+                hasEndElement: !!endElement,
+                size,
+                ...(children.props || {}),
+              })
+            : children}
+          {endElement && !endAddon && (
+            <InputElement size={size} className="right-0">
+              {endElement}
+            </InputElement>
+          )}
+          {endAddon && <InputAddon size={size}>{endAddon}</InputAddon>}
+        </>
+      ))}
     </AriaGroup>
   )
 }

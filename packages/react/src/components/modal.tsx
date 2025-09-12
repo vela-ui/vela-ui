@@ -10,7 +10,7 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 
 const modalOverlayVariants = tv({
-  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50 duration-200",
+  base: "fixed inset-0 z-50 flex w-full items-center justify-center bg-black/50",
   variants: {
     placement: {
       top: "items-start",
@@ -22,10 +22,10 @@ const modalOverlayVariants = tv({
       outside: "overflow-auto",
     },
     isEntering: {
-      true: "animate-in fade-in-0",
+      true: "animate-in fade-in duration-300 ease-out",
     },
     isExiting: {
-      true: "animate-out fade-out-0",
+      true: "animate-out fade-out duration-200 ease-in",
     },
   },
   defaultVariants: {
@@ -35,17 +35,17 @@ const modalOverlayVariants = tv({
 })
 
 const modalVariants = tv({
-  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg transition duration-200",
+  base: "bg-background my-16 w-full max-w-[calc(100%-2rem)] rounded-lg border shadow-lg transition",
   variants: {
     scrollBehavior: {
       inside: "max-h-[calc(100%-7.5rem)]",
       outside: "",
     },
     isEntering: {
-      true: "animate-in fade-in-0 zoom-in-95",
+      true: "animate-in zoom-in-95 duration-300 ease-out",
     },
     isExiting: {
-      true: "animate-out fade-out-0 zoom-out-95",
+      true: "animate-out zoom-out-95 duration-200 ease-in",
     },
     size: {
       xs: "sm:max-w-xs",
@@ -113,6 +113,8 @@ function ModalContent({
   className,
   overlayClassName,
   isDismissable = true,
+  isOpen,
+  onOpenChange,
   size,
   placement,
   scrollBehavior,
@@ -121,18 +123,14 @@ function ModalContent({
   return (
     <ModalOverlay
       isDismissable={isDismissable}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
       className={overlayClassName}
       placement={placement}
       scrollBehavior={scrollBehavior}
       {...props}
     >
-      <Modal
-        isDismissable={isDismissable}
-        className={className}
-        size={size}
-        scrollBehavior={scrollBehavior}
-        {...props}
-      />
+      <Modal className={className} size={size} scrollBehavior={scrollBehavior} {...props} />
     </ModalOverlay>
   )
 }

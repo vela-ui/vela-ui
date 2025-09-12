@@ -1,3 +1,5 @@
+"use client"
+
 import { TextField as AriaTextField, composeRenderProps } from "react-aria-components"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
