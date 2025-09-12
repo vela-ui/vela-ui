@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.12
+
+### Patch Changes
+
+- [#51](https://github.com/vela-ui/vela-ui/pull/51) [`20cf6d4`](https://github.com/vela-ui/vela-ui/commit/20cf6d423ad4b111d2fe34492896037ca0ce7280) Thanks [@bobbychan](https://github.com/bobbychan)! - Add Disclosure component
+
 ## 2.0.11
 
 ### Patch Changes
