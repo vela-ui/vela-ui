@@ -173,15 +173,15 @@
 
 .btn-outline {
   &:not(
-      .btn-active,
-      :hover,
-      :active:focus,
-      :focus-visible,
-      :disabled,
-      [disabled],
-      .btn-disabled,
-      :checked
-    ) {
+    .btn-active,
+    :hover,
+    :active:focus,
+    :focus-visible,
+    :disabled,
+    [disabled],
+    .btn-disabled,
+    :checked
+  ) {
     --btn-shadow: "";
     --btn-bg: #0000;
     --btn-fg: var(--btn-color);
@@ -210,15 +210,15 @@
 
 .btn-dash {
   &:not(
-      .btn-active,
-      :hover,
-      :active:focus,
-      :focus-visible,
-      :disabled,
-      [disabled],
-      .btn-disabled,
-      :checked
-    ) {
+    .btn-active,
+    :hover,
+    :active:focus,
+    :focus-visible,
+    :disabled,
+    [disabled],
+    .btn-disabled,
+    :checked
+  ) {
     --btn-shadow: "";
     border-style: dashed;
     --btn-bg: #0000;

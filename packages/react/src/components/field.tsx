@@ -3,7 +3,6 @@
 import type { TextFieldProps, TextProps, ValidationResult } from "react-aria-components"
 import {
   FieldError as AriaFieldError,
-  Group as AriaGroup,
   Label as AriaLabel,
   Text as AriaText,
   composeRenderProps,
@@ -50,7 +49,5 @@ function FieldError({ className, ...props }: FieldErrorProps) {
   )
 }
 
-const Group = AriaGroup
-
-export { Description, FieldError, fieldVariants, Group, Label }
+export { Description, FieldError, fieldVariants, Label }
 export type { DescriptionProps, FieldErrorProps, FieldProps, LabelProps, TextProps }
