@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Badge, Button } from "@vela-ui/react"
 import { HeartIcon } from "lucide-react"
 
-const variants = ["default", "secondary", "destructive", "outline"] as const
+const variants = ["primary", "secondary", "destructive", "outline"] as const
 
 const meta = {
   title: "Components/Badge",

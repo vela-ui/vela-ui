@@ -7,7 +7,7 @@ const badgeVariants = tv({
   base: "inline-flex w-fit shrink-0 items-center justify-center gap-1 overflow-hidden rounded-md border px-2 py-0.5 text-xs font-medium whitespace-nowrap transition-[color,box-shadow] [&>svg]:pointer-events-none [&>svg]:size-3",
   variants: {
     variant: {
-      default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90 border-transparent",
+      primary: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90 border-transparent",
       secondary:
         "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90 border-transparent",
       destructive:
@@ -16,7 +16,7 @@ const badgeVariants = tv({
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: "primary",
   },
 })
 
