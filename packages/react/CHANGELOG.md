@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.15
+
+### Patch Changes
+
+- [#64](https://github.com/vela-ui/vela-ui/pull/64) [`c8aac94`](https://github.com/vela-ui/vela-ui/commit/c8aac944f06065a30f3067fd90a7c23d408c8065) Thanks [@bobbychan](https://github.com/bobbychan)! - Update button and badge props
+
 ## 2.0.14
 
 ### Patch Changes
