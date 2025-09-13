@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.14
+
+### Patch Changes
+
+- [#62](https://github.com/vela-ui/vela-ui/pull/62) [`6fe76c6`](https://github.com/vela-ui/vela-ui/commit/6fe76c6512461126d87593e47185c2aaf9c45f48) Thanks [@bobbychan](https://github.com/bobbychan)! - Add isBlurred props to ModalOverlay
+
 ## 2.0.13
 
 ### Patch Changes
