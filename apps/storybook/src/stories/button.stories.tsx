@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Button, LinkButton, Loader } from "@vela-ui/react"
 import { HeartIcon } from "lucide-react"
 
-const variants = ["default", "destructive", "outline", "secondary", "ghost", "link"] as const
+const variants = ["primary", "secondary", "destructive", "outline", "ghost", "link"] as const
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
 const meta = {
