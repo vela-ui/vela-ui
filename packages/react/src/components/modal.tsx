@@ -21,6 +21,9 @@ const modalOverlayVariants = tv({
       inside: "overflow-hidden",
       outside: "overflow-auto",
     },
+    isBlurred: {
+      true: "backdrop-blur-md backdrop-saturate-150",
+    },
     isEntering: {
       true: "animate-in fade-in duration-300 ease-out",
     },
@@ -31,6 +34,7 @@ const modalOverlayVariants = tv({
   defaultVariants: {
     placement: "center",
     scrollBehavior: "outside",
+    isBlurred: false,
   },
 })
 
@@ -69,6 +73,7 @@ function ModalOverlay({
   className,
   placement,
   scrollBehavior,
+  isBlurred,
   ...props
 }: React.ComponentProps<typeof AriaModalOverlay> & VariantProps<typeof modalOverlayVariants>) {
   return (
@@ -78,7 +83,7 @@ function ModalOverlay({
         height: "var(--visual-viewport-height)",
       }}
       className={composeRenderProps(className, (className, renderProps) =>
-        modalOverlayVariants({ ...renderProps, placement, scrollBehavior, className }),
+        modalOverlayVariants({ ...renderProps, placement, scrollBehavior, isBlurred, className }),
       )}
       {...props}
     />
@@ -107,6 +112,7 @@ interface ModalContentProps extends ModalOverlayProps, VariantProps<typeof modal
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "full"
   placement?: "top" | "center" | "bottom"
   scrollBehavior?: "inside" | "outside"
+  isBlurred?: boolean
   overlayClassName?: ModalOverlayProps["className"]
 }
 function ModalContent({
@@ -118,6 +124,7 @@ function ModalContent({
   size,
   placement,
   scrollBehavior,
+  isBlurred,
   ...props
 }: ModalContentProps) {
   return (
@@ -128,6 +135,7 @@ function ModalContent({
       className={overlayClassName}
       placement={placement}
       scrollBehavior={scrollBehavior}
+      isBlurred={isBlurred}
       {...props}
     >
       <Modal className={className} size={size} scrollBehavior={scrollBehavior} {...props} />

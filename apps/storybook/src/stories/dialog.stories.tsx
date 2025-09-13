@@ -82,7 +82,7 @@ export const Blur: Story = {
   args: {
     placement: "top",
     size: "sm",
-    overlayClassName: "backdrop-blur-md backdrop-saturate-150",
+    isBlurred: true,
   },
   render: (args) => (
     <DialogTrigger>
