@@ -11,8 +11,10 @@ const buttonVariants = tv({
   base: "inline-flex shrink-0 items-center justify-center rounded-md font-medium whitespace-nowrap transition-all [&_svg]:pointer-events-none [&_svg]:shrink-0",
   variants: {
     variant: {
+      neutral: "bg-neutral text-neutral-foreground hover:bg-neutral/90 shadow-xs",
       primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-xs",
       secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-xs",
+      accent: "bg-accent text-accent-foreground hover:bg-accent/80 shadow-xs",
       destructive:
         "bg-destructive hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 text-white shadow-xs",
       outline:
