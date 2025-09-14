@@ -1,7 +1,6 @@
 "use client"
 
 import {
-  Button as AriaButton,
   Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
   Heading as AriaHeading,
@@ -9,7 +8,8 @@ import {
   composeRenderProps,
 } from "react-aria-components"
 import { CloseIcon } from "../icons"
-import { cn, composeTailwindRenderProps } from "../lib/utils"
+import { cn } from "../lib/utils"
+import { Button, ButtonProps } from "./button"
 import type { ModalContentProps as DialogProps } from "./modal"
 import { ModalContent } from "./modal"
 
@@ -81,24 +81,35 @@ const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof 
   />
 )
 
-const DialogCloseIcon = ({ className, ...props }: React.ComponentProps<typeof AriaButton>) => (
-  <AriaButton
+const DialogCloseIcon = ({
+  className,
+  shape = "circle",
+  variant = "ghost",
+  size = "xs",
+  ...props
+}: React.ComponentProps<typeof Button>) => (
+  <Button
     aria-label="Close"
     slot="close"
     data-slot="dialog-close"
-    className={composeTailwindRenderProps(
-      className,
-      "ring-offset-background focus:ring-ring absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-    )}
+    className={cn("absolute top-2 right-2", className)}
+    shape={shape}
+    variant={variant}
+    size={size}
     {...props}
   >
     <CloseIcon />
     <span className="sr-only">Close</span>
-  </AriaButton>
+  </Button>
 )
+
+const DialogClose = ({ className, variant = "outline", ...props }: ButtonProps) => {
+  return <Button slot="close" className={className} variant={variant} {...props} />
+}
 
 export {
   Dialog,
+  DialogClose,
   DialogCloseIcon,
   DialogContent,
   DialogDescription,
