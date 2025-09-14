@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.16
+
+### Patch Changes
+
+- [#66](https://github.com/vela-ui/vela-ui/pull/66) [`a7ab034`](https://github.com/vela-ui/vela-ui/commit/a7ab034ddd58ef9d76bee507dd92b986c1ff5f8a) Thanks [@bobbychan](https://github.com/bobbychan)! - Add shape props to LinkButton
+
 ## 2.0.15
 
 ### Patch Changes
