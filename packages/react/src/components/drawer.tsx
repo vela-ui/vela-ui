@@ -9,6 +9,7 @@ import {
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 import {
+  DialogClose,
   DialogCloseIcon,
   DialogContent,
   DialogDescription,
@@ -103,8 +104,11 @@ const DrawerDescription = DialogDescription
 
 const DrawerCloseIcon = DialogCloseIcon
 
+const DrawerClose = DialogClose
+
 export {
   Drawer,
+  DrawerClose,
   DrawerCloseIcon,
   DrawerContent,
   DrawerDescription,
