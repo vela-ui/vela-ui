@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.17
+
+### Patch Changes
+
+- [#68](https://github.com/vela-ui/vela-ui/pull/68) [`77efbed`](https://github.com/vela-ui/vela-ui/commit/77efbed9aa2845f4a536e594757a3267c5eebdff) Thanks [@bobbychan](https://github.com/bobbychan)! - Update DrawerFooter style
+
 ## 2.0.16
 
 ### Patch Changes
