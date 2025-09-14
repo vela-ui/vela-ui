@@ -37,7 +37,7 @@ function Link({ className, variant, ...props }: LinkProps) {
 
 type LinkButtonProps = React.ComponentProps<typeof AriaLink> &
   Omit<VariantProps<typeof buttonVariants>, "isPending">
-function LinkButton({ className, variant, size, ...props }: LinkButtonProps) {
+function LinkButton({ className, variant, size, shape, ...props }: LinkButtonProps) {
   return (
     <AriaLink
       data-slot="link"
@@ -46,6 +46,7 @@ function LinkButton({ className, variant, size, ...props }: LinkButtonProps) {
           ...renderProps,
           variant,
           size,
+          shape,
           className,
         }),
       )}
