@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.18
+
+### Patch Changes
+
+- [#70](https://github.com/vela-ui/vela-ui/pull/70) [`b5a41bd`](https://github.com/vela-ui/vela-ui/commit/b5a41bd16537ff4df199a48f6d092f27c5749ad7) Thanks [@bobbychan](https://github.com/bobbychan)! - Update DialogCloseIcon style
+
 ## 2.0.17
 
 ### Patch Changes
