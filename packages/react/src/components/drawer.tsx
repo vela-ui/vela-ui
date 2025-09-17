@@ -20,13 +20,16 @@ import {
 } from "."
 
 const drawerOverlayVariants = tv({
-  base: "fixed top-0 left-0 isolate z-50 flex w-full items-center justify-center bg-black/50",
+  base: "fixed inset-0 z-50 flex w-full items-center justify-center bg-black/50",
   variants: {
+    isBlurred: {
+      true: "backdrop-blur-md backdrop-saturate-150",
+    },
     isEntering: {
-      true: "animate-in fade-in-0 duration-300",
+      true: "animate-in fade-in duration-300 ease-out",
     },
     isExiting: {
-      true: "animate-out fade-out-0 duration-200",
+      true: "animate-out fade-out duration-200 ease-in",
     },
   },
 })
@@ -51,6 +54,7 @@ const drawerVariants = tv({
   },
   defaultVariants: {
     placement: "right",
+    isBlurred: false,
   },
 })
 
@@ -58,12 +62,14 @@ interface DrawerProps
   extends React.ComponentProps<typeof AriaModalOverlay>,
     VariantProps<typeof drawerVariants> {
   overlayClassName?: ModalOverlayProps["className"]
+  isBlurred?: boolean
 }
 const Drawer = ({
   className,
   overlayClassName,
   isDismissable = true,
   placement,
+  isBlurred,
   ...props
 }: DrawerProps) => {
   return (
@@ -74,7 +80,7 @@ const Drawer = ({
       }}
       isDismissable={isDismissable}
       className={composeRenderProps(overlayClassName, (className, renderProps) =>
-        drawerOverlayVariants({ ...renderProps, className }),
+        drawerOverlayVariants({ ...renderProps, isBlurred, className }),
       )}
       {...props}
     >

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react"
 import { Loader } from "@vela-ui/react"
 
 const variants = ["default", "ring", "spin"] as const
-const sizes = ["sm", "md", "lg", "xl"] as const
+const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 
 const meta = {
   title: "Components/Loader",

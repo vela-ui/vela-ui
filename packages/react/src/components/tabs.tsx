@@ -15,7 +15,7 @@ const tabsVariants = tv({
   slots: {
     root: "group/tabs",
     list: "relative isolate inline-flex",
-    tab: "text-foreground/75 relative inline-flex cursor-pointer items-center justify-center gap-2 px-3 py-1 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+    tab: "text-foreground/75 relative inline-flex cursor-pointer items-center justify-center gap-2 px-3 py-1 whitespace-nowrap [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
     panel: "",
   },
   variants: {
@@ -46,12 +46,12 @@ const tabsVariants = tv({
     orientation: {
       horizontal: {
         root: "block",
-        list: "flex-row",
+        list: "flex-row overflow-x-scroll",
         panel: "w-full pt-4",
       },
       vertical: {
         root: "flex",
-        list: "flex-col",
+        list: "flex-col overflow-y-scroll",
         panel: "ps-4",
       },
     },

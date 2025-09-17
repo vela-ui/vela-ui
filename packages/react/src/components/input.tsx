@@ -7,7 +7,7 @@ import { focusRing } from "../lib/classes"
 
 const inputVariants = tv({
   extend: focusRing,
-  base: "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input relative flex w-full min-w-0 rounded-md border bg-transparent py-1 shadow-xs transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+  base: "file:text-foreground placeholder:text-muted-foreground dark:bg-input/30 border-input relative flex w-full min-w-0 rounded-md border bg-transparent py-1 shadow-xs transition-[color,box-shadow] file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   variants: {
     size: {
       xs: "h-8 px-2 text-xs",

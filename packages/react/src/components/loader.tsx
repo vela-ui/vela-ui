@@ -7,14 +7,15 @@ const loaderVariants = tv({
   base: "relative",
   variants: {
     size: {
+      xs: "size-3",
       sm: "size-4",
-      md: "size-6",
+      md: "size-5",
       lg: "size-8",
       xl: "size-10",
     },
   },
   defaultVariants: {
-    size: "sm",
+    size: "md",
   },
 })
 

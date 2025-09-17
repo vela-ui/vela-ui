@@ -9,7 +9,7 @@ const switchVariants = tv({
     indicator:
       "inline-flex shrink-0 cursor-pointer rounded-full shadow-xs transition-all outline-none",
     thumb:
-      "bg-background pointer-events-none block scale-80 rounded-full ring-0 transition-transform",
+      "bg-background pointer-events-none block scale-75 rounded-full ring-0 transition-transform",
   },
   variants: {
     size: {
