@@ -46,32 +46,30 @@ export const Default: Story = {
       <Button variant="outline">Open Dialog</Button>
       <Dialog {...args}>
         <DialogContent role="alertdialog">
-          <Form>
-            <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
-              <DialogDescription>
-                Make changes to your profile here. Click save when you&apos;re done.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4">
-              <TextField className="grid gap-3" isRequired autoFocus value="Pedro Duarte">
-                <Label>Name</Label>
-                <Input name="name" />
-              </TextField>
-              <TextField className="grid gap-3" value="@peduarte">
-                <Label>Username</Label>
-                <Input name="username" />
-              </TextField>
-            </div>
-            <DialogFooter>
-              <Button slot="close" variant="outline">
-                Cancel
-              </Button>
-              <Button slot="close" onPress={() => console.log("xxx")}>
-                Save changes
-              </Button>
-            </DialogFooter>
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you&apos;re done.
+            </DialogDescription>
+          </DialogHeader>
+          <Form className="grid gap-4">
+            <TextField className="grid gap-3" isRequired autoFocus value="Pedro Duarte">
+              <Label>Name</Label>
+              <Input name="name" />
+            </TextField>
+            <TextField className="grid gap-3" value="@peduarte">
+              <Label>Username</Label>
+              <Input name="username" />
+            </TextField>
           </Form>
+          <DialogFooter>
+            <Button slot="close" variant="outline">
+              Cancel
+            </Button>
+            <Button slot="close" onPress={() => console.log("xxx")}>
+              Save changes
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </DialogTrigger>
