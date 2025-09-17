@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.20
+
+### Patch Changes
+
+- [#74](https://github.com/vela-ui/vela-ui/pull/74) [`6d91019`](https://github.com/vela-ui/vela-ui/commit/6d91019454e4a7760e1c07c243d4c1f68f3df143) Thanks [@bobbychan](https://github.com/bobbychan)! - Style adjustment
+
 ## 2.0.19
 
 ### Patch Changes
