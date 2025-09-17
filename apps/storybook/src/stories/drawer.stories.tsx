@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react"
 import {
   Button,
   Drawer,
+  DrawerBody,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
@@ -55,10 +56,10 @@ export const Default: Story = {
           <DrawerHeader>
             <DrawerTitle>Drawer Title</DrawerTitle>
           </DrawerHeader>
-          <div>
+          <DrawerBody>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua.
-          </div>
+          </DrawerBody>
           <DrawerFooter>
             <Button slot="close" variant="outline">
               Cancel
@@ -84,7 +85,7 @@ export const Placements: Story = {
                   <DrawerHeader>
                     <DrawerTitle>Delete file</DrawerTitle>
                   </DrawerHeader>
-                  <div>{content}</div>
+                  <DrawerBody>{content}</DrawerBody>
                   <DrawerFooter>
                     <Button slot="close" variant="outline">
                       Cancel

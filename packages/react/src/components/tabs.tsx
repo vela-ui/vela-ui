@@ -46,12 +46,12 @@ const tabsVariants = tv({
     orientation: {
       horizontal: {
         root: "block",
-        list: "flex-row overflow-x-scroll",
+        list: "flex-row overflow-x-auto overflow-y-hidden",
         panel: "w-full pt-4",
       },
       vertical: {
         root: "flex",
-        list: "flex-col overflow-y-scroll",
+        list: "flex-col overflow-x-hidden overflow-y-auto",
         panel: "ps-4",
       },
     },

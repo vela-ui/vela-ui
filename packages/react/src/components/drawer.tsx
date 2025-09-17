@@ -18,6 +18,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "."
+import { cn } from "../lib/utils"
 
 const drawerOverlayVariants = tv({
   base: "fixed inset-0 z-50 flex w-full items-center justify-center bg-black/50",
@@ -96,6 +97,12 @@ const Drawer = ({
   )
 }
 
+const DrawerBody = ({ className, ...props }: React.ComponentProps<"div">) => {
+  return (
+    <div data-slot="drawer-body" className={cn("flex-1 overflow-auto", className)} {...props} />
+  )
+}
+
 const DrawerTrigger = DialogTrigger
 
 const DrawerContent = DialogContent
@@ -114,6 +121,7 @@ const DrawerClose = DialogClose
 
 export {
   Drawer,
+  DrawerBody,
   DrawerClose,
   DrawerCloseIcon,
   DrawerContent,

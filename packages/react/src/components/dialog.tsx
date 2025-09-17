@@ -30,7 +30,10 @@ const DialogContent = ({
     <AriaDialog
       role={role}
       data-slot="dialog-content"
-      className={cn("relative flex h-full w-full flex-col p-6 outline-hidden", className)}
+      className={cn(
+        "relative flex h-full max-h-dvh w-full flex-col gap-4 p-6 outline-hidden",
+        className,
+      )}
       {...props}
     >
       {composeRenderProps(children, (children) => (
@@ -47,7 +50,7 @@ const DialogHeader = ({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("mb-4 flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
       {...props}
     />
   )
@@ -57,7 +60,7 @@ const DialogFooter = ({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn("mt-4 flex flex-row justify-end gap-2", className)}
+      className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   )
@@ -67,7 +70,7 @@ const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof AriaHe
   <AriaHeading
     slot="title"
     data-slot="dialog-title"
-    className={cn("text-lg leading-none font-semibold", className)}
+    className={cn("text-lg leading-6 font-semibold", className)}
     {...props}
   />
 )
@@ -118,3 +121,5 @@ export {
   DialogTitle,
   DialogTrigger,
 }
+
+export type { DialogProps }
