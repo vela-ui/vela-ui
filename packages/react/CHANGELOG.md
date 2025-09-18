@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.21
+
+### Patch Changes
+
+- [#76](https://github.com/vela-ui/vela-ui/pull/76) [`21e69c8`](https://github.com/vela-ui/vela-ui/commit/21e69c8266b1f1c9dcff670efc67d6c36364af50) Thanks [@bobbychan](https://github.com/bobbychan)! - Update dialog styles
+
 ## 2.0.20
 
 ### Patch Changes
