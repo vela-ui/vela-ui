@@ -48,6 +48,10 @@ const content = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.`
 
 export const Default: Story = {
+  args: {
+    showCloseButton: false,
+    isBlurred: true,
+  },
   render: (args) => (
     <DrawerTrigger>
       <Button variant="outline">Open Drawer</Button>

@@ -160,6 +160,7 @@ export {
   DialogClose,
   DialogCloseIcon,
   DialogContent,
+  DialogContext,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -168,4 +169,4 @@ export {
   useDialogContext,
 }
 
-export type { DialogProps }
+export type { DialogContextValue, DialogProps }
