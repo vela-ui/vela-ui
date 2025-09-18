@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.22
+
+### Patch Changes
+
+- [#78](https://github.com/vela-ui/vela-ui/pull/78) [`7e2d69a`](https://github.com/vela-ui/vela-ui/commit/7e2d69a05fee621300ca754023f8a5746f34c57b) Thanks [@bobbychan](https://github.com/bobbychan)! - Update drawer styles
+
 ## 2.0.21
 
 ### Patch Changes
