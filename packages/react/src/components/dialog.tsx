@@ -1,5 +1,6 @@
 "use client"
 
+import { createContext, useContext, useMemo } from "react"
 import {
   Dialog as AriaDialog,
   DialogTrigger as AriaDialogTrigger,
@@ -10,22 +11,66 @@ import {
 import { CloseIcon } from "../icons"
 import { cn } from "../lib/utils"
 import { Button, ButtonProps } from "./button"
-import type { ModalContentProps as DialogProps } from "./modal"
+import type { ModalContentProps } from "./modal"
 import { ModalContent } from "./modal"
 
 const DialogTrigger = AriaDialogTrigger
 
-const Dialog = (props: DialogProps) => <ModalContent {...props} />
+interface DialogProps extends ModalContentProps {
+  role?: "dialog" | "alertdialog"
+  showCloseButton?: boolean
+}
+
+interface DialogContextValue {
+  role?: "dialog" | "alertdialog"
+  isDismissable?: boolean
+  showCloseButton?: boolean
+}
+
+const DEFAULT_DIALOG_CTX: DialogContextValue = {
+  role: "dialog",
+  isDismissable: true,
+  showCloseButton: true,
+}
+const DialogContext = createContext<DialogContextValue>(DEFAULT_DIALOG_CTX)
+
+const useDialogContext = () => {
+  const context = useContext(DialogContext)
+  return context
+}
+
+const Dialog = ({
+  role = "dialog",
+  showCloseButton = true,
+  isDismissable: isDismissableProp,
+  ...props
+}: DialogProps) => {
+  const isDismissable = isDismissableProp ?? role !== "alertdialog"
+
+  const value: DialogContextValue = useMemo(
+    () => ({
+      role,
+      showCloseButton,
+      isDismissable,
+    }),
+    [role, showCloseButton, isDismissable],
+  )
+
+  return (
+    <DialogContext.Provider value={value}>
+      <ModalContent isDismissable={isDismissable} {...props} />
+    </DialogContext.Provider>
+  )
+}
 
 const DialogContent = ({
-  role = "dialog",
   className,
   children,
-  showCloseButton = true,
   ...props
-}: React.ComponentProps<typeof AriaDialog> & {
-  showCloseButton?: boolean
-}) => {
+}: React.ComponentProps<typeof AriaDialog>) => {
+  const { role, isDismissable, showCloseButton } = useDialogContext()
+  const showCloseIcon = showCloseButton && isDismissable
+
   return (
     <AriaDialog
       role={role}
@@ -39,7 +84,7 @@ const DialogContent = ({
       {composeRenderProps(children, (children) => (
         <>
           {children}
-          {showCloseButton && <DialogCloseIcon />}
+          {showCloseIcon && <DialogCloseIcon />}
         </>
       ))}
     </AriaDialog>
@@ -50,7 +95,7 @@ const DialogHeader = ({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-2 text-left", className)}
       {...props}
     />
   )
@@ -60,7 +105,7 @@ const DialogFooter = ({ className, ...props }: React.ComponentProps<"div">) => {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
+      className={cn("flex flex-row justify-end gap-2", className)}
       {...props}
     />
   )
@@ -77,6 +122,7 @@ const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof AriaHe
 
 const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof AriaText>) => (
   <AriaText
+    elementType="p"
     slot="description"
     data-slot="dialog-description"
     className={cn("text-muted-foreground text-sm", className)}
@@ -94,7 +140,6 @@ const DialogCloseIcon = ({
   <Button
     aria-label="Close"
     slot="close"
-    data-slot="dialog-close"
     className={cn("absolute top-2 right-2", className)}
     shape={shape}
     variant={variant}
@@ -120,6 +165,7 @@ export {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  useDialogContext,
 }
 
 export type { DialogProps }

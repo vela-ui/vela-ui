@@ -69,6 +69,8 @@ const Drawer = ({
   className,
   overlayClassName,
   isDismissable = true,
+  isOpen,
+  onOpenChange,
   placement,
   isBlurred,
   ...props
@@ -79,6 +81,8 @@ const Drawer = ({
       style={{
         height: "var(--visual-viewport-height)",
       }}
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
       isDismissable={isDismissable}
       className={composeRenderProps(overlayClassName, (className, renderProps) =>
         drawerOverlayVariants({ ...renderProps, isBlurred, className }),
@@ -87,7 +91,6 @@ const Drawer = ({
     >
       <AriaModal
         data-slot="drawer"
-        isDismissable={isDismissable}
         className={composeRenderProps(className, (className, renderProps) =>
           drawerVariants({ ...renderProps, placement, className }),
         )}

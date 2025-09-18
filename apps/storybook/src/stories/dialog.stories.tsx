@@ -45,7 +45,7 @@ export const Default: Story = {
     <DialogTrigger>
       <Button variant="outline">Open Dialog</Button>
       <Dialog {...args}>
-        <DialogContent role="alertdialog">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
@@ -81,12 +81,13 @@ export const Blur: Story = {
     placement: "top",
     size: "sm",
     isBlurred: true,
+    role: "alertdialog",
   },
   render: (args) => (
     <DialogTrigger>
       <Button variant="outline">Open Dialog</Button>
       <Dialog {...args}>
-        <DialogContent role="alertdialog">
+        <DialogContent>
           <DialogHeader>
             <DialogTitle>Modal Title</DialogTitle>
           </DialogHeader>
