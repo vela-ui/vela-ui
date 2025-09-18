@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import type { ModalOverlayProps } from "react-aria-components"
 import {
   Modal as AriaModal,
@@ -12,6 +13,8 @@ import {
   DialogClose,
   DialogCloseIcon,
   DialogContent,
+  DialogContext,
+  DialogContextValue,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -64,10 +67,12 @@ interface DrawerProps
     VariantProps<typeof drawerVariants> {
   overlayClassName?: ModalOverlayProps["className"]
   isBlurred?: boolean
+  showCloseButton?: boolean
 }
 const Drawer = ({
   className,
   overlayClassName,
+  showCloseButton = true,
   isDismissable = true,
   isOpen,
   onOpenChange,
@@ -75,28 +80,38 @@ const Drawer = ({
   isBlurred,
   ...props
 }: DrawerProps) => {
+  const value: DialogContextValue = useMemo(
+    () => ({
+      showCloseButton,
+      isDismissable,
+    }),
+    [showCloseButton, isDismissable],
+  )
+
   return (
-    <AriaModalOverlay
-      data-slot="drawer-overlay"
-      style={{
-        height: "var(--visual-viewport-height)",
-      }}
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      isDismissable={isDismissable}
-      className={composeRenderProps(overlayClassName, (className, renderProps) =>
-        drawerOverlayVariants({ ...renderProps, isBlurred, className }),
-      )}
-      {...props}
-    >
-      <AriaModal
-        data-slot="drawer"
-        className={composeRenderProps(className, (className, renderProps) =>
-          drawerVariants({ ...renderProps, placement, className }),
+    <DialogContext.Provider value={value}>
+      <AriaModalOverlay
+        data-slot="drawer-overlay"
+        style={{
+          height: "var(--visual-viewport-height)",
+        }}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        isDismissable={isDismissable}
+        className={composeRenderProps(overlayClassName, (className, renderProps) =>
+          drawerOverlayVariants({ ...renderProps, isBlurred, className }),
         )}
         {...props}
-      />
-    </AriaModalOverlay>
+      >
+        <AriaModal
+          data-slot="drawer"
+          className={composeRenderProps(className, (className, renderProps) =>
+            drawerVariants({ ...renderProps, placement, className }),
+          )}
+          {...props}
+        />
+      </AriaModalOverlay>
+    </DialogContext.Provider>
   )
 }
 
