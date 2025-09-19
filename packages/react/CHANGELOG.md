@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.23
+
+### Patch Changes
+
+- [#80](https://github.com/vela-ui/vela-ui/pull/80) [`ae0d957`](https://github.com/vela-ui/vela-ui/commit/ae0d957a6ebdbab9fb557bcfb0df4aeed7d25db1) Thanks [@bobbychan](https://github.com/bobbychan)! - Adjust radio style
+
 ## 2.0.22
 
 ### Patch Changes
