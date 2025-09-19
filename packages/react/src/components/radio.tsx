@@ -6,6 +6,7 @@ import {
   RadioGroup as AriaRadioGroup,
   composeRenderProps,
 } from "react-aria-components"
+import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
 import { CircleIcon } from "../icons"
 import { focusRing } from "../lib/classes"
@@ -70,27 +71,51 @@ const radioVariants = tv({
 
 const radioIndicatorVariants = tv({
   extend: focusRing,
-  base: "border-input text-primary dark:bg-input/30 relative flex aspect-square shrink-0 items-center justify-center rounded-full border shadow-xs transition-[color,box-shadow]",
+  base: "relative flex aspect-square shrink-0 items-center justify-center rounded-full border bg-transparent shadow-xs transition duration-[250ms] ease-out",
   variants: {
+    variant: {
+      default: "text-white",
+      outline: "text-primary dark:bg-input/30",
+    },
     size: {
       sm: "size-4 [&_svg]:size-2",
       md: "size-5 [&_svg]:size-2.5",
       lg: "size-6 [&_svg]:size-3",
     },
+    isSelected: {
+      true: "",
+    },
+    isPressed: {
+      true: "scale-95",
+    },
     isDisabled: {
       true: "cursor-not-allowed opacity-50",
     },
   },
+  compoundVariants: [
+    {
+      variant: "default",
+      isSelected: true,
+      className: "bg-primary border-transparent",
+    },
+    {
+      variant: "outline",
+      isSelected: true,
+      className: "border-primary",
+    },
+  ],
   defaultVariants: {
+    variant: "default",
     size: "md",
   },
 })
 
-type RadioProps = React.ComponentProps<typeof AriaRadio> & {
+interface RadioProps
+  extends React.ComponentProps<typeof AriaRadio>,
+    VariantProps<typeof radioIndicatorVariants> {
   indicatorClassName?: string
-  size?: "sm" | "md" | "lg"
 }
-function Radio({ className, children, indicatorClassName, size, ...props }: RadioProps) {
+function Radio({ className, children, indicatorClassName, size, variant, ...props }: RadioProps) {
   return (
     <AriaRadio
       className={composeRenderProps(className, (className, renderProps) =>
@@ -104,13 +129,18 @@ function Radio({ className, children, indicatorClassName, size, ...props }: Radi
             data-slot="radio-indicator"
             className={radioIndicatorVariants({
               size,
+              variant,
+              isSelected,
               ...renderProps,
               className: indicatorClassName,
             })}
           >
-            {isSelected ? (
-              <CircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-current" />
-            ) : null}
+            <CircleIcon
+              className={cn(
+                "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-current transition-[scale,opacity] duration-[250ms] ease-out",
+                isSelected ? "scale-100 opacity-100" : "scale-0 opacity-0",
+              )}
+            />
           </div>
           {children}
         </>
