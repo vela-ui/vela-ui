@@ -1,5 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Button, Checkbox, CheckboxGroup, CheckboxGroupRoot, Form } from "@vela-ui/react"
+import {
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  CheckboxGroupRoot,
+  Form,
+  Input,
+  Label,
+} from "@vela-ui/react"
 
 const meta = {
   title: "Components/CheckboxGroup",
@@ -100,4 +108,23 @@ export const RootComponent: Story = {
       </div>
     </div>
   ),
+}
+
+export function FormIntegration() {
+  return (
+    <Form className="flex flex-col gap-6">
+      <div className="grid gap-2">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" type="email" placeholder="m@example.com" required />
+      </div>
+
+      <CheckboxGroup label="Preferences" description="Select your preferences">
+        <Checkbox value="newsletter">Subscribe to newsletter</Checkbox>
+        <Checkbox value="notifications">Enable notifications</Checkbox>
+        <Checkbox value="marketing">Receive marketing emails</Checkbox>
+      </CheckboxGroup>
+
+      <Button type="submit">Submit</Button>
+    </Form>
+  )
 }

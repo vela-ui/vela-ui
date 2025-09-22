@@ -14,7 +14,7 @@ const inputVariants = tv({
       sm: "h-9 px-2.5 text-sm",
       md: "h-10 px-3 text-sm",
       lg: "h-11 px-4 text-base",
-      xl: "h-12 px-4.5 text-base",
+      xl: "h-12 px-[1.125rem] text-base",
     },
     isFocused: focusRing.variants.isFocusVisible,
     hasStartElement: {
