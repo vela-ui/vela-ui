@@ -71,7 +71,7 @@ const radioVariants = tv({
 
 const radioIndicatorVariants = tv({
   extend: focusRing,
-  base: "relative flex aspect-square shrink-0 items-center justify-center rounded-full border bg-transparent shadow-xs transition duration-[250ms] ease-out",
+  base: "relative flex aspect-square shrink-0 items-center justify-center rounded-full border bg-transparent shadow-xs transition duration-250 ease-out motion-reduce:transition-none",
   variants: {
     variant: {
       default: "text-white",
@@ -137,7 +137,7 @@ function Radio({ className, children, indicatorClassName, size, variant, ...prop
           >
             <CircleIcon
               className={cn(
-                "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 fill-current transition-[scale,opacity] duration-[250ms] ease-out",
+                "fill-current transition-[transform,scale,opacity] duration-250 ease-out motion-reduce:transition-none",
                 isSelected ? "scale-100 opacity-100" : "scale-0 opacity-0",
               )}
             />
