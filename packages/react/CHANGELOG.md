@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.25
+
+### Patch Changes
+
+- [#84](https://github.com/vela-ui/vela-ui/pull/84) [`79242d0`](https://github.com/vela-ui/vela-ui/commit/79242d035808f6d450c413b0232ae2ec5e0c72dc) Thanks [@bobbychan](https://github.com/bobbychan)! - Update Tabs style
+
 ## 2.0.24
 
 ### Patch Changes
