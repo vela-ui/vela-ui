@@ -79,7 +79,7 @@ const tabsVariants = tv({
       variant: "underline",
       className: {
         list: "border-b",
-        tab: "-mb-px border-b-2",
+        tab: "border-b-2",
       },
     },
     {
@@ -87,7 +87,7 @@ const tabsVariants = tv({
       variant: "underline",
       className: {
         list: "border-r",
-        tab: "-mr-px border-r-2",
+        tab: "border-r-2",
       },
     },
   ],
