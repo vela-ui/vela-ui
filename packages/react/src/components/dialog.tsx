@@ -25,12 +25,14 @@ interface DialogContextValue {
   role?: "dialog" | "alertdialog"
   isDismissable?: boolean
   showCloseButton?: boolean
+  scrollBehavior?: "outside" | "inside"
 }
 
 const DEFAULT_DIALOG_CTX: DialogContextValue = {
   role: "dialog",
   isDismissable: true,
   showCloseButton: true,
+  scrollBehavior: "outside",
 }
 const DialogContext = createContext<DialogContextValue>(DEFAULT_DIALOG_CTX)
 
@@ -43,6 +45,7 @@ const Dialog = ({
   role = "dialog",
   showCloseButton = true,
   isDismissable: isDismissableProp,
+  scrollBehavior,
   ...props
 }: DialogProps) => {
   const isDismissable = isDismissableProp ?? role !== "alertdialog"
@@ -52,13 +55,14 @@ const Dialog = ({
       role,
       showCloseButton,
       isDismissable,
+      scrollBehavior,
     }),
-    [role, showCloseButton, isDismissable],
+    [role, showCloseButton, isDismissable, scrollBehavior],
   )
 
   return (
     <DialogContext.Provider value={value}>
-      <ModalContent isDismissable={isDismissable} {...props} />
+      <ModalContent isDismissable={isDismissable} scrollBehavior={scrollBehavior} {...props} />
     </DialogContext.Provider>
   )
 }
@@ -75,10 +79,7 @@ const DialogContent = ({
     <AriaDialog
       role={role}
       data-slot="dialog-content"
-      className={cn(
-        "relative flex h-full max-h-dvh w-full flex-col gap-4 p-6 outline-hidden",
-        className,
-      )}
+      className={cn("relative flex h-full w-full flex-col gap-4 p-6 outline-hidden", className)}
       {...props}
     >
       {composeRenderProps(children, (children) => (
@@ -88,6 +89,18 @@ const DialogContent = ({
         </>
       ))}
     </AriaDialog>
+  )
+}
+
+const DialogBody = ({ className, ...props }: React.ComponentProps<"div">) => {
+  const { scrollBehavior } = useDialogContext()
+
+  return (
+    <div
+      data-slot="dialog-body"
+      className={cn("flex-1", scrollBehavior === "inside" ? "overflow-auto" : "", className)}
+      {...props}
+    />
   )
 }
 
@@ -157,6 +170,7 @@ const DialogClose = ({ className, variant = "outline", ...props }: ButtonProps) 
 
 export {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogCloseIcon,
   DialogContent,

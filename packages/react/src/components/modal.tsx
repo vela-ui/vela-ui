@@ -14,11 +14,11 @@ const modalOverlayVariants = tv({
   variants: {
     placement: {
       top: "items-start",
-      center: "items-center",
-      bottom: "items-end",
+      center: "items-center [&>div]:m-auto",
+      bottom: "items-end [&>div]:mt-auto",
     },
     scrollBehavior: {
-      inside: "overflow-hidden",
+      inside: "items-stretch overflow-hidden",
       outside: "overflow-auto",
     },
     isBlurred: {
@@ -32,7 +32,7 @@ const modalOverlayVariants = tv({
     },
   },
   defaultVariants: {
-    placement: "center",
+    placement: "top",
     scrollBehavior: "outside",
     isBlurred: false,
   },

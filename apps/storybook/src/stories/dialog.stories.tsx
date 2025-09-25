@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react"
 import {
   Button,
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -36,6 +37,9 @@ const meta = {
 export default meta
 
 type Story = StoryObj<typeof meta>
+
+const content =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 
 export const Default: Story = {
   args: {
@@ -91,10 +95,7 @@ export const Blur: Story = {
           <DialogHeader>
             <DialogTitle>Modal Title</DialogTitle>
           </DialogHeader>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar risus non risus
-            hendrerit venenatis. Pellentesque sit amet hendrerit risus, sed porttitor quam.
-          </div>
+          <div>{content}</div>
           <DialogFooter>
             <Button slot="close" variant="outline">
               Cancel
@@ -123,7 +124,7 @@ export const Nested = () => {
           <DialogHeader>
             <DialogTitle>Dialog Title</DialogTitle>
           </DialogHeader>
-          <div>Content</div>
+          <div>{content}</div>
           <DialogFooter>
             <Button onPress={state2.onOpen}>Open Dialog</Button>
             <Button slot="close" variant="outline">
@@ -137,7 +138,7 @@ export const Nested = () => {
           <DialogHeader>
             <DialogTitle>Modal Title</DialogTitle>
           </DialogHeader>
-          <div>Content</div>
+          <div>{content}</div>
           <DialogFooter>
             <Button
               onPress={() => {
@@ -151,5 +152,51 @@ export const Nested = () => {
         </DialogContent>
       </Dialog>
     </>
+  )
+}
+
+export const OutsideScroll = () => {
+  return (
+    <DialogTrigger>
+      <Button variant="outline">Open Dialog</Button>
+      <Dialog placement="top">
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+          </DialogHeader>
+          <DialogBody>
+            {Array.from({ length: 30 }).map((_, index) => (
+              <div key={index}>{content}</div>
+            ))}
+          </DialogBody>
+          <DialogFooter>
+            <Button slot="close">Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </DialogTrigger>
+  )
+}
+
+export const InsideScroll = () => {
+  return (
+    <DialogTrigger>
+      <Button variant="outline">Open Dialog</Button>
+      <Dialog scrollBehavior="inside">
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+          </DialogHeader>
+          <DialogBody>
+            {Array.from({ length: 30 }).map((_, index) => (
+              <div key={index}>{content}</div>
+            ))}
+          </DialogBody>
+          <DialogFooter>
+            <Button slot="close">Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </DialogTrigger>
   )
 }
