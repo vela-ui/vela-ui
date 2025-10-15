@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { Avatar, AvatarFallback, AvatarImage } from "@vela-ui/react"
 
-const sizes = ["sm", "md", "lg"] as const
+const sizes = ["xs", "sm", "md", "lg", "xl"] as const
 const shapes = ["circle", "square"] as const
 
 const meta = {

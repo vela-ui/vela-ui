@@ -4,7 +4,7 @@ import { Separator as AriaSeparator } from "react-aria-components"
 import { tv } from "tailwind-variants"
 
 const separatorVariants = tv({
-  base: "bg-border shrink-0",
+  base: "bg-border shrink-0 border-none",
   variants: {
     orientation: {
       horizontal: "h-px w-full",
