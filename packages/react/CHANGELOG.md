@@ -1,5 +1,13 @@
 # @vela-ui/react
 
+## 2.0.29
+
+### Patch Changes
+
+- [#92](https://github.com/vela-ui/vela-ui/pull/92) [`fdc9abb`](https://github.com/vela-ui/vela-ui/commit/fdc9abbdb1745de79d103f86872b3fb8b2a1ea88) Thanks [@bobbychan](https://github.com/bobbychan)! - Fix: remove package
+
+- [#92](https://github.com/vela-ui/vela-ui/pull/92) [`1a50894`](https://github.com/vela-ui/vela-ui/commit/1a5089471b6fe74cf124c0f51d620d653832224f) Thanks [@bobbychan](https://github.com/bobbychan)! - Add use client
+
 ## 2.0.28
 
 ### Patch Changes
