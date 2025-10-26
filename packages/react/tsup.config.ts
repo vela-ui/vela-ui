@@ -4,4 +4,10 @@ export default defineConfig({
   clean: true,
   target: "es2019",
   format: ["cjs", "esm"],
+  external: ["react"],
+  esbuildOptions: (options) => {
+    options.banner = {
+      js: "use client",
+    }
+  },
 })
