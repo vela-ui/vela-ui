@@ -14,8 +14,8 @@ const modalOverlayVariants = tv({
   variants: {
     placement: {
       top: "items-start",
-      center: "items-center [&>div]:m-auto",
-      bottom: "items-end [&>div]:mt-auto",
+      center: "items-center",
+      bottom: "items-end",
     },
     scrollBehavior: {
       inside: "items-stretch overflow-hidden",
@@ -31,6 +31,18 @@ const modalOverlayVariants = tv({
       true: "animate-out fade-out duration-200 ease-in",
     },
   },
+  compoundVariants: [
+    {
+      placement: "center",
+      scrollBehavior: "outside",
+      className: "[&>div]:m-auto",
+    },
+    {
+      placement: "bottom",
+      scrollBehavior: "outside",
+      className: "[&>div]:mt-auto",
+    },
+  ],
   defaultVariants: {
     placement: "top",
     scrollBehavior: "outside",

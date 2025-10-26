@@ -1,3 +1,5 @@
+"use client"
+
 /**
  * @see https://github.com/radix-ui/primitives/blob/main/packages/react/avatar/src/avatar.tsx
  */
