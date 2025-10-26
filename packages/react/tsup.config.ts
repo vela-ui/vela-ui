@@ -5,9 +5,10 @@ export default defineConfig({
   target: "es2019",
   format: ["cjs", "esm"],
   external: ["react"],
-  esbuildOptions: (options) => {
+  minify: true,
+  esbuildOptions(options) {
     options.banner = {
-      js: "use client",
+      js: '"use client"',
     }
   },
 })
