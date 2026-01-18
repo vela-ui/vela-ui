@@ -1,5 +1,11 @@
 # @vela-ui/react
 
+## 2.0.30
+
+### Patch Changes
+
+- [#94](https://github.com/vela-ui/vela-ui/pull/94) [`7472c12`](https://github.com/vela-ui/vela-ui/commit/7472c12abea7ea53887c7d2b029bafb453e0d891) Thanks [@bobbychan](https://github.com/bobbychan)! - Fix separator type
+
 ## 2.0.29
 
 ### Patch Changes
