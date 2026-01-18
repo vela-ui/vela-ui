@@ -1,7 +1,7 @@
 "use client"
 
 import { Separator as AriaSeparator } from "react-aria-components"
-import { tv } from "tailwind-variants"
+import { tv, VariantProps } from "tailwind-variants"
 
 const separatorVariants = tv({
   base: "bg-border shrink-0 border-none",
@@ -16,11 +16,10 @@ const separatorVariants = tv({
   },
 })
 
-function Separator({
-  orientation,
-  className,
-  ...props
-}: React.ComponentProps<typeof AriaSeparator>) {
+type SeparatorProps = React.ComponentProps<typeof AriaSeparator> &
+  VariantProps<typeof separatorVariants>
+
+function Separator({ orientation, className, ...props }: SeparatorProps) {
   return (
     <AriaSeparator
       data-slot="separator"
